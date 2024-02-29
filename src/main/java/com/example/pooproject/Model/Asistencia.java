@@ -7,6 +7,16 @@ public class Asistencia {
     LocalDate fecha;
     Boolean asiste;
 
+    public Asistencia() {
+    }
+
+    public Asistencia(String dniMiembro, LocalDate fecha, Boolean asiste) {
+        this.dniMiembro = dniMiembro;
+        this.fecha = fecha;
+        this.asiste = asiste;
+    }
+    
+
     public String getDniMiembro() {
         return dniMiembro;
     }

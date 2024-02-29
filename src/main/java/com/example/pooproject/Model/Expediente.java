@@ -9,6 +9,18 @@ public class Expediente {
     LocalDate fechaIngreso;
     Boolean estado;
 
+    public Expediente() {
+    }
+
+    public Expediente(String nroExpediente, String iniciante, String texto, LocalDate fechaIngreso, Boolean estado) {
+        this.nroExpediente = nroExpediente;
+        this.iniciante = iniciante;
+        this.texto = texto;
+        this.fechaIngreso = fechaIngreso;
+        this.estado = estado;
+    }
+
+    
     public String getNroExpediente() {
         return nroExpediente;
     }

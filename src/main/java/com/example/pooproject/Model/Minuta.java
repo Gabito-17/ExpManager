@@ -9,6 +9,18 @@ public class Minuta {
     String resumen;
     String decision;
 
+    public Minuta() {
+    }
+
+    public Minuta(int nroMinuta, LocalDate fecha, String lugar, String resumen, String decision) {
+        this.nroMinuta = nroMinuta;
+        this.fecha = fecha;
+        this.lugar = lugar;
+        this.resumen = resumen;
+        this.decision = decision;
+    }
+    
+
     public int getNroMinuta() {
         return nroMinuta;
     }

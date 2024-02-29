@@ -8,6 +8,19 @@ public class Miembro {
     String departamento;
     String cargo;
 
+    public Miembro() {
+    }
+
+    public Miembro(String nombre, String apellido, int dni, String email, String departamento, String cargo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.email = email;
+        this.departamento = departamento;
+        this.cargo = cargo;
+    }
+    
+
     public String getNombre() {
         return nombre;
     }

@@ -7,6 +7,16 @@ public class Orden {
     int nroReunion;
     LocalDate fecha;
 
+    public Orden() {
+    }
+
+    public Orden(int nroOrden, int nroReunion, LocalDate fecha) {
+        this.nroOrden = nroOrden;
+        this.nroReunion = nroReunion;
+        this.fecha = fecha;
+    }
+        
+
     public int getNroOrden() {
         return nroOrden;
     }

@@ -7,6 +7,16 @@ public class Reunion {
     LocalDate fecha;
     int orden;
 
+    public Reunion() {
+    }
+
+    public Reunion(int nroReunion, LocalDate fecha, int orden) {
+        this.nroReunion = nroReunion;
+        this.fecha = fecha;
+        this.orden = orden;
+    }
+    
+
     public int getNroReunion() {
         return nroReunion;
     }

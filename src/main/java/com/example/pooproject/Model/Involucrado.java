@@ -4,6 +4,15 @@ public class Involucrado {
     int idInvolucrado;
     String nombre;
 
+    public Involucrado() {
+    }
+
+    public Involucrado(int idInvolucrado, String nombre) {
+        this.idInvolucrado = idInvolucrado;
+        this.nombre = nombre;
+    }
+    
+
     public int getIdInvolucrado() {
         return idInvolucrado;
     }
