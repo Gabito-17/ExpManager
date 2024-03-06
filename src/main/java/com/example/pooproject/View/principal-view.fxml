@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pooproject.Controller.PrincipalViewController">
+   <children>
+      <Text layoutX="86.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido" wrappingWidth="428.669921875">
+         <font>
+            <Font size="84.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
