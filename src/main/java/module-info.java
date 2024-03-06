@@ -3,7 +3,7 @@ module com.example.pooproject {
     requires javafx.fxml;
     requires java.sql;
 
-
+    exports com.example.pooproject.Controller;
     opens com.example.pooproject to javafx.fxml;
     exports com.example.pooproject;
 }
