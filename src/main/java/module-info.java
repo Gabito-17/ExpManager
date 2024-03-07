@@ -6,4 +6,5 @@ module com.example.pooproject {
     exports com.example.pooproject.Controller;
     opens com.example.pooproject to javafx.fxml;
     exports com.example.pooproject;
+    opens com.example.pooproject.Controller to javafx.fxml;
 }

@@ -1,6 +1,5 @@
-package com.example.pooproject;
+package com.example.pooproject.Controller;
 
-import com.example.pooproject.Controller.PrincipalViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HelloController {
+public class LoginController {
     @FXML
     private Label welcomeText;
     @FXML
@@ -25,12 +24,14 @@ public class HelloController {
     TextField textPassword;
     @FXML
     Button botonLogin;
+
     @FXML
+    //Abrir la ventana Principal, cerrar la ventana Login
     protected void loginStage(ActionEvent event) {
         System.out.println("Esto funciona");
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("principal-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/pooproject/View/principal-view.fxml"));
             Parent root = loader.load();
             PrincipalViewController controlador = loader.getController();
             Scene scene = new Scene(root);
@@ -44,7 +45,7 @@ public class HelloController {
 
         }
         catch (IOException ex){
-            Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -17,7 +17,7 @@ import static com.example.pooproject.db.ConexionBaseDatos.conectar;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/com/example/pooproject/View/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Inicio de Sesión");
         stage.setScene(scene);
