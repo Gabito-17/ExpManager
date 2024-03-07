@@ -7,13 +7,14 @@
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_paquete.Controller">
+<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pooproject.Controller.LayoutController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="582.0" prefWidth="214.0" spacing="10" BorderPane.alignment="CENTER">
@@ -84,7 +85,7 @@
                <Font name="Palatino Linotype Bold" size="16.0" />
             </font>
          </Label>
-            <Button fx:id="btnMenuInicio" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="INICIO" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuInicio" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#showInicio" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="INICIO" textFill="WHITE" VBox.vgrow="ALWAYS">
             <font>
                <Font name="Cambria" size="18.0" />
             </font>
@@ -200,10 +201,6 @@
       </Label>
    </bottom>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e5f4f4;" BorderPane.alignment="CENTER">
-         <opaqueInsets>
-            <Insets left="10.0" />
-         </opaqueInsets>
-      </Pane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e5f4f4;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

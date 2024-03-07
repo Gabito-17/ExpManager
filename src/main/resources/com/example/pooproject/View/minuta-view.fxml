@@ -201,6 +201,9 @@
       </Label>
    </bottom>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e5f4f4;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e5f4f4;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="245.0" layoutY="277.0" text="BIENVENIDO AL MENU DE MINUTAS" />
+         </children></AnchorPane>
    </center>
 </BorderPane>
