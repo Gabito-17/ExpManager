@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pooproject.Controller.PrincipalViewController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pooproject.Controller.PrincipalViewController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="582.0" prefWidth="214.0" spacing="10" BorderPane.alignment="CENTER">
@@ -55,22 +55,21 @@
                      </Label>
                      <HBox alignment="CENTER" prefHeight="42.0" prefWidth="100.0">
                         <children>
-                           <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                 <Image url="@../image/configuracion.png" />
-                              </image>
-                              <HBox.margin>
-                                 <Insets right="10.0" />
-                              </HBox.margin>
-                           </ImageView>
-                           <ImageView accessibleRole="BUTTON" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                 <Image url="@../image/cerrar-sesion.png" />
-                              </image>
-                              <HBox.margin>
-                                 <Insets left="10.0" />
-                              </HBox.margin>
-                           </ImageView>
+                           <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #568c8d;" text="Salir" textFill="WHITE">
+                              <graphic>
+                                 <ImageView accessibleRole="BUTTON" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/cerrar-sesion.png" />
+                                    </image>
+                                 </ImageView>
+                              </graphic>
+                              <font>
+                                 <Font name="Cambria" size="15.0" />
+                              </font>
+                              <cursor>
+                                 <Cursor fx:constant="HAND" />
+                              </cursor>
+                           </Button>
                         </children>
                      </HBox>
                   </children>
@@ -117,7 +116,7 @@
             <VBox.margin>
                <Insets top="-6.0" />
             </VBox.margin></Button>
-            <Button fx:id="btnMenuMiembros" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembros" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="MIEMBROS DEL CONSEJO" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuMiembros" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembros" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #73aaaa;" text="MIEMBROS DEL CONSEJO" textFill="WHITE" VBox.vgrow="ALWAYS">
             <font>
                <Font name="Cambria" size="18.0" />
             </font>

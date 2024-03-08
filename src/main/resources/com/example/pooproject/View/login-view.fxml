@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -38,7 +39,7 @@
                      <Insets top="10.0" />
                   </VBox.margin>
                </Label>
-               <TextField fx:id="textPassword" promptText="Ingrese la contraseña" />
+               <PasswordField fx:id="textPassword" promptText="Ingrese la contraseña" />
                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                   <children>
                       <Button fx:id="btnExit" onAction="#closeStage" prefWidth="70.0" text="Salir">
@@ -49,7 +50,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="btnLogin" onAction="#loginStage"  mnemonicParsing="false" prefWidth="70.0" text="Ingresar" textAlignment="CENTER">
+                     <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#loginStage" prefWidth="70.0" text="Ingresar" textAlignment="CENTER">
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
