@@ -23,32 +23,38 @@ public class LoginController {
     @FXML
     TextField textPassword;
     @FXML
+    private Label errorText;
+    @FXML
     Button botonLogin;
 
     @FXML
     //Abrir la ventana Principal, cerrar la ventana Login
     protected void loginStage(ActionEvent event) {
         System.out.println("Esto funciona");
+        if (textPassword.getText().toLowerCase().equals("admin") & textUser.getText().toLowerCase().equals("admin")) {
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/pooproject/View/principal-view.fxml"));
-            Parent root = loader.load();
-            PrincipalViewController controlador = loader.getController();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/pooproject/View/principal-view.fxml"));
+                Parent root = loader.load();
+                PrincipalViewController controlador = loader.getController();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
 
-            stage.setScene(scene);
-            stage.show();
+                stage.setScene(scene);
+                stage.show();
 
-            stage.setOnCloseRequest(e -> controlador.closeWindow());
-            closeStage(event);
+                stage.setOnCloseRequest(e -> controlador.closeWindow());
+                closeStage(event);
 
-        }
-        catch (IOException ex){
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            errorText.setText("Usuario o contraseña invalidos");
+            textPassword.setText("");
+            textUser.setText("");
         }
     }
-
     public void closeStage(ActionEvent actionEvent) {
         ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }

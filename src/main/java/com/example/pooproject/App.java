@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static com.example.pooproject.db.ConexionBaseDatos.conectar;
-
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
