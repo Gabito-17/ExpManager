@@ -32,7 +32,7 @@ public class LoginController {
     protected void loginStage(ActionEvent event) {
         System.out.println("Esto funciona");
         if (textPassword.getText().toLowerCase().equals("admin") & textUser.getText().toLowerCase().equals("admin")) {
-
+ g
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/pooproject/View/principal-view.fxml"));
                 Parent root = loader.load();
