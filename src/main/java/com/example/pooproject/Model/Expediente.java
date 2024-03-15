@@ -1,12 +1,22 @@
 package com.example.pooproject.Model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
+@Entity
 public class Expediente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     String nroExpediente;
+    @Basic
     String iniciante;
+    @Basic
     String texto;
-    LocalDate fechaIngreso;
+    @Temporal(TemporalType.DATE)
+    Date fechaIngreso;
+    @Basic
     Boolean estado;
 
     public Expediente() {
@@ -20,7 +30,7 @@ public class Expediente {
         this.estado = estado;
     }
 
-    
+
     public String getNroExpediente() {
         return nroExpediente;
     }

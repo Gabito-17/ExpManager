@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pooproject.Controller.PrincipalViewController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pooproject.Controller.PrincipalViewController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="582.0" prefWidth="214.0" spacing="10" BorderPane.alignment="CENTER">
@@ -200,9 +200,9 @@
       </Label>
    </bottom>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e5f4f4;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="868.0" style="-fx-background-color: #e5f4f4;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="239.0" layoutY="268.0" text="BIENVENIDO AL MENU DE ASISTENCIA" />
+            <Label layoutX="311.0" layoutY="14.0" text="ASISTENCIA" />
          </children></AnchorPane>
    </center>
 </BorderPane>

@@ -2,8 +2,10 @@ package com.example.pooproject;
 
 import com.example.pooproject.db.ConexionBaseDatos;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,13 +17,12 @@ import java.sql.Statement;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        Connection conexion = ConexionBaseDatos.conectar();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/com/example/pooproject/View/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Inicio de Sesión");
         stage.setScene(scene);
         stage.show();
-        Connection conexion = ConexionBaseDatos.conectar();
-
 
         try {
             Statement statement = conexion.createStatement();
@@ -38,8 +39,8 @@ public class App extends Application {
         catch (SQLException e){
             e.printStackTrace();
         }
-    }
 
+    }
 
     public static void main(String[] args) {
         launch();

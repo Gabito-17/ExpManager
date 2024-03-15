@@ -1,19 +1,12 @@
 package com.example.pooproject.Controller;
 
+import com.example.pooproject.Services.Enrutador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class LoginController {
     @FXML
@@ -24,37 +17,19 @@ public class LoginController {
     TextField textPassword;
     @FXML
     private Label errorText;
-    @FXML
-    Button botonLogin;
 
     @FXML
     //Abrir la ventana Principal, cerrar la ventana Login
-    protected void loginStage(ActionEvent event) {
+    protected void menuInicio(ActionEvent event) {
         System.out.println("Esto funciona");
-        if (textPassword.getText().toLowerCase().equals("admin") & textUser.getText().toLowerCase().equals("admin")) {
- g
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/pooproject/View/principal-view.fxml"));
-                Parent root = loader.load();
-                PrincipalViewController controlador = loader.getController();
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-
-                stage.setScene(scene);
-                stage.show();
-
-                stage.setOnCloseRequest(e -> controlador.closeWindow());
-                closeStage(event);
-
-            } catch (IOException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            errorText.setText("Usuario o contraseña invalidos");
-            textPassword.setText("");
-            textUser.setText("");
-        }
-    }
+        //if (textPassword.getText().toLowerCase().equals("admin") & textUser.getText().toLowerCase().equals("admin")) {
+        Enrutador.cambiarVentana(event, "/com/example/pooproject/View/principal-view.fxml");
+        } //else {
+           // errorText.setText("Usuario o contraseña invalidos");
+           // textPassword.setText("");
+           // textUser.setText("");
+       // }
+    //}
     public void closeStage(ActionEvent actionEvent) {
         ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
