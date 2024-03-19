@@ -1,4 +1,4 @@
-package com.example.pooproject.Model;
+package com.example.pooproject.modelo;
 
 import java.time.LocalDate;
 
@@ -15,7 +15,7 @@ public class Orden {
         this.nroReunion = nroReunion;
         this.fecha = fecha;
     }
-        
+
 
     public int getNroOrden() {
         return nroOrden;

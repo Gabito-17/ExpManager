@@ -1,4 +1,4 @@
-package com.example.pooproject.Model;
+package com.example.pooproject.modelo;
 
 import java.time.LocalDate;
 
@@ -15,7 +15,7 @@ public class Asistencia {
         this.fecha = fecha;
         this.asiste = asiste;
     }
-    
+
 
     public String getDniMiembro() {
         return dniMiembro;

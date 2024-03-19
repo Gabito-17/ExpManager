@@ -1,21 +1,27 @@
-package com.example.pooproject.Model;
+package com.example.pooproject.modelo;
 
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@Table(name = "reunion", schema = "public")
 public class Reunion {
+    @Id
     int nroReunion;
-    LocalDate fecha;
+    @Temporal(TemporalType.DATE)
+    Date fecha;
+    @Column
     int orden;
 
     public Reunion() {
     }
 
-    public Reunion(int nroReunion, LocalDate fecha, int orden) {
+    public Reunion(int nroReunion, Date fecha, int orden) {
         this.nroReunion = nroReunion;
         this.fecha = fecha;
         this.orden = orden;
     }
-    
+
 
     public int getNroReunion() {
         return nroReunion;
@@ -25,11 +31,11 @@ public class Reunion {
         this.nroReunion = nroReunion;
     }
 
-    public LocalDate getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

@@ -1,4 +1,4 @@
-package com.example.pooproject.Model;
+package com.example.pooproject.modelo;
 
 import java.util.Date;
 
@@ -7,7 +7,6 @@ public class Acciones {
     String cambio;
 
 
-    
     public Acciones() {
     }
 
@@ -15,7 +14,7 @@ public class Acciones {
         this.fecha = fecha;
         this.cambio = cambio;
     }
-    
+
 
     public Date getFecha() {
         return fecha;

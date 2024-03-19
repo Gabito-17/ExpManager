@@ -1,28 +1,30 @@
-package com.example.pooproject.Model;
+package com.example.pooproject.modelo;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Table(name = "expediente", schema = "public")
 public class Expediente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    String nroExpediente;
+    @Column(name = "nroExpediente")
+    int nroExpediente;
     @Basic
+    @Column(name = "iniciante")
     String iniciante;
-    @Basic
+    @Column(name = "estado")
+    Boolean estado;
+    @Column(name = "texto")
     String texto;
     @Temporal(TemporalType.DATE)
+    @Column(name = "fecha_ingreso")
     Date fechaIngreso;
-    @Basic
-    Boolean estado;
 
     public Expediente() {
     }
 
-    public Expediente(String nroExpediente, String iniciante, String texto, LocalDate fechaIngreso, Boolean estado) {
+    public Expediente(int nroExpediente, String iniciante, String texto, Date fechaIngreso, Boolean estado) {
         this.nroExpediente = nroExpediente;
         this.iniciante = iniciante;
         this.texto = texto;
@@ -31,11 +33,11 @@ public class Expediente {
     }
 
 
-    public String getNroExpediente() {
+    public int getNroExpediente() {
         return nroExpediente;
     }
 
-    public void setNroExpediente(String nroExpediente) {
+    public void setNroExpediente(int nroExpediente) {
         this.nroExpediente = nroExpediente;
     }
 
@@ -55,11 +57,11 @@ public class Expediente {
         this.texto = texto;
     }
 
-    public LocalDate getFechaIngreso() {
+    public Date getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(LocalDate fechaIngreso) {
+    public void setFechaIngreso(Date fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 

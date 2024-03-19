@@ -1,4 +1,4 @@
-package com.example.pooproject.Model;
+package com.example.pooproject.modelo;
 
 public class Involucrado {
     int idInvolucrado;
@@ -11,7 +11,7 @@ public class Involucrado {
         this.idInvolucrado = idInvolucrado;
         this.nombre = nombre;
     }
-    
+
 
     public int getIdInvolucrado() {
         return idInvolucrado;

@@ -1,4 +1,4 @@
-package com.example.pooproject.Model;
+package com.example.pooproject.modelo;
 
 import java.time.LocalDate;
 
@@ -19,7 +19,7 @@ public class Minuta {
         this.resumen = resumen;
         this.decision = decision;
     }
-    
+
 
     public int getNroMinuta() {
         return nroMinuta;
@@ -60,5 +60,5 @@ public class Minuta {
     public void setDecision(String decision) {
         this.decision = decision;
     }
-    
+
 }

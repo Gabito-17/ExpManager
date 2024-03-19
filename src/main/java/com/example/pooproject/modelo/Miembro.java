@@ -1,4 +1,4 @@
-package com.example.pooproject.Model;
+package com.example.pooproject.modelo;
 
 public class Miembro {
     String nombre;
@@ -19,7 +19,7 @@ public class Miembro {
         this.departamento = departamento;
         this.cargo = cargo;
     }
-    
+
 
     public String getNombre() {
         return nombre;
