@@ -6,6 +6,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>edu.unam.pooproject.modelo.Expediente</class>
         <class>edu.unam.pooproject.modelo.Reunion</class>
+        <class>edu.unam.pooproject.modelo.Miembro</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/prueba"/>

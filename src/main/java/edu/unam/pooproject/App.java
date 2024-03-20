@@ -1,6 +1,8 @@
 package edu.unam.pooproject;
 
 import edu.unam.pooproject.Repositorio.ExpedienteRepositorio;
+import edu.unam.pooproject.Repositorio.MiembroRepositorio;
+import edu.unam.pooproject.modelo.Miembro;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -30,6 +32,11 @@ public class App extends Application {
         //Expediente exp1 = new Expediente(4, "hola", "String texto", new Date(), true);
         //control.create(exp);
         //control.create(exp1);
+        //MiembroRepositorio miembro = new MiembroRepositorio(emf);
+        //Miembro m = new Miembro("hola", "hola", 3, "hola", "hola", "hola");
+        //Miembro m1 = new Miembro("hola2", "hola2", 4, "hola2", "hola2", "hola2");
+        //miembro.create(m);
+        //miembro.create(m1);
 
     }
 }
