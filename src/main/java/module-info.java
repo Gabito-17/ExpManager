@@ -5,9 +5,9 @@ module com.example.pooproject {
     requires java.persistence;
     requires org.hibernate.orm.core;
 
-    exports com.example.pooproject.Controller;
-    opens com.example.pooproject to javafx.fxml;
-    opens com.example.pooproject.modelo;
-    exports com.example.pooproject;
-    opens com.example.pooproject.Controller to javafx.fxml;
+    exports edu.unam.pooproject.Controller;
+    opens edu.unam.pooproject to javafx.fxml;
+    opens edu.unam.pooproject.modelo;
+    exports edu.unam.pooproject;
+    opens edu.unam.pooproject.Controller to javafx.fxml;
 }
