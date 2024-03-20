@@ -9,10 +9,10 @@ import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.List;
 
-public class ExpedienteJPAController implements Serializable {
+public class ExpedienteRepositorio implements Serializable {
     private EntityManagerFactory emf = null;
 
-    public ExpedienteJPAController(EntityManagerFactory emf) {
+    public ExpedienteRepositorio(EntityManagerFactory emf) {
         this.emf = emf;
     }
 

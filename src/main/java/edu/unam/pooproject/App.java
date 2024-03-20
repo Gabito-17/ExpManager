@@ -1,6 +1,6 @@
 package edu.unam.pooproject;
 
-import edu.unam.pooproject.Repositorio.ExpedienteJPAController;
+import edu.unam.pooproject.Repositorio.ExpedienteRepositorio;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,7 +25,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PooProject");
-        ExpedienteJPAController control = new ExpedienteJPAController(emf);
+        ExpedienteRepositorio control = new ExpedienteRepositorio(emf);
         //Expediente exp = new Expediente(3, "hola", "String texto", new Date(), false);
         //Expediente exp1 = new Expediente(4, "hola", "String texto", new Date(), true);
         //control.create(exp);

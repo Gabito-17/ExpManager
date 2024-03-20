@@ -1,6 +1,6 @@
 package edu.unam.pooproject.Controller;
 
-import edu.unam.pooproject.Repositorio.ExpedienteJPAController;
+import edu.unam.pooproject.Repositorio.ExpedienteRepositorio;
 import edu.unam.pooproject.Services.Enrutador;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +27,7 @@ public class ExpedienteController {
     TextArea texto;
     ObservableList<String> estadoList = FXCollections.observableArrayList("Alta", "Baja");
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("PooProject");
-    ExpedienteJPAController control = new ExpedienteJPAController(emf);
+    ExpedienteRepositorio control = new ExpedienteRepositorio(emf);
 
     //ComboBox "estado" del expediente
     @FXML
@@ -50,7 +50,7 @@ public class ExpedienteController {
 
     public void cargarCampos(ActionEvent event) throws Exception {
         resultadoText.setText(idExpediente.getText() + idIniciante.getText() + texto.getText());
-        control.destroy(1);
+        control.destroy(3);
     }
 
     //Cerrar Sesion y ubicar en ventana "Login"
