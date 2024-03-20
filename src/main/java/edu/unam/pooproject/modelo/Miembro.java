@@ -1,12 +1,22 @@
 package edu.unam.pooproject.modelo;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name= "miembro", schema="public")
 public class Miembro {
-    String nombre;
-    String apellido;
+
+    @Id
+    @Column(name = "dni")
     int dni;
+    @Basic
+    @Column(name = "nombre")
+    String nombre;
+    @Column(name = "apellido")
+    String apellido;
+    @Column(name = "email")
     String email;
-    String departamento;
-    String cargo;
 
     public Miembro() {
     }
@@ -16,8 +26,6 @@ public class Miembro {
         this.apellido = apellido;
         this.dni = dni;
         this.email = email;
-        this.departamento = departamento;
-        this.cargo = cargo;
     }
 
 
@@ -53,19 +61,4 @@ public class Miembro {
         this.email = email;
     }
 
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
 }
