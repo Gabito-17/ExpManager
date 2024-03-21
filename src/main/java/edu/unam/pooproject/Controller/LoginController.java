@@ -21,9 +21,9 @@ public class LoginController {
     @FXML
     //Abrir la ventana Principal, cerrar la ventana Login
     protected void menuInicio(ActionEvent event) {
-        System.out.println("Esto funciona");
         //if (textPassword.getText().toLowerCase().equals("admin") & textUser.getText().toLowerCase().equals("admin")) {
         Enrutador.cambiarVentana(event, "/View/principal-view.fxml");
+        System.out.println("Redireccionando al menu inicio");
     } //else {
 
     // errorText.setText("Usuario o contraseña invalidos");

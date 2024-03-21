@@ -4,31 +4,29 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "reunion", schema = "public")
+@Table(name = "reuniones", schema = "public")
 public class Reunion {
     @Id
-    int nroReunion;
+    @Column(name = "idReunion")
+    int idReunion;
     @Temporal(TemporalType.DATE)
     Date fecha;
-    @Column
-    int orden;
 
     public Reunion() {
     }
 
-    public Reunion(int nroReunion, Date fecha, int orden) {
-        this.nroReunion = nroReunion;
+    public Reunion(int nroReunion, Date fecha) {
+        this.idReunion = nroReunion;
         this.fecha = fecha;
-        this.orden = orden;
     }
 
 
     public int getNroReunion() {
-        return nroReunion;
+        return idReunion;
     }
 
     public void setNroReunion(int nroReunion) {
-        this.nroReunion = nroReunion;
+        this.idReunion = nroReunion;
     }
 
     public Date getFecha() {
@@ -39,11 +37,11 @@ public class Reunion {
         this.fecha = fecha;
     }
 
-    public int getOrden() {
+    /*public List<Expediente> getOrden() {
         return orden;
     }
 
-    public void setOrden(int orden) {
+    public void setOrden(List<Expediente> orden) {
         this.orden = orden;
-    }
+    }*/
 }

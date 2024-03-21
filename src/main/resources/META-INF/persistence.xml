@@ -6,13 +6,15 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>edu.unam.pooproject.modelo.Expediente</class>
         <class>edu.unam.pooproject.modelo.Reunion</class>
+        <class>edu.unam.pooproject.modelo.Involucrado</class>
+        <class>edu.unam.pooproject.modelo.Acciones</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/prueba"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="Gabito1235"/>
-            <property name="hibernate.hbm2ddl.auto" value="none"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -1,8 +1,18 @@
 package edu.unam.pooproject.modelo;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "involucrados", schema = "public")
 public class Involucrado {
+    @Id
+    @Column(name = "idInvolucrado")
     int idInvolucrado;
+    @Basic
+    @Column(name = "nombre")
     String nombre;
+    @Column(name = "apellido")
+    String apellido;
 
     public Involucrado() {
     }

@@ -4,28 +4,29 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "expediente", schema = "public")
+@Table(name = "expedientes", schema = "public")
 public class Expediente {
 
     @Id
     @Column(name = "nroExpediente")
-    int nroExpediente;
+    int idExpediente;
     @Basic
     @Column(name = "iniciante")
     String iniciante;
-    @Column(name = "estado")
-    Boolean estado;
     @Column(name = "texto")
     String texto;
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_ingreso")
     Date fechaIngreso;
+    @Column(name = "estado")
+    Boolean estado;
+
 
     public Expediente() {
     }
 
     public Expediente(int nroExpediente, String iniciante, String texto, Date fechaIngreso, Boolean estado) {
-        this.nroExpediente = nroExpediente;
+        this.idExpediente = nroExpediente;
         this.iniciante = iniciante;
         this.texto = texto;
         this.fechaIngreso = fechaIngreso;
@@ -34,11 +35,11 @@ public class Expediente {
 
 
     public int getNroExpediente() {
-        return nroExpediente;
+        return idExpediente;
     }
 
     public void setNroExpediente(int nroExpediente) {
-        this.nroExpediente = nroExpediente;
+        this.idExpediente = nroExpediente;
     }
 
     public String getIniciante() {

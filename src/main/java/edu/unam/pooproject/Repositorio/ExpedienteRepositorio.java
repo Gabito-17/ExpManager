@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ExpedienteRepositorio implements Serializable {
-    private EntityManagerFactory emf = null;
+    private EntityManagerFactory emf;
 
     public ExpedienteRepositorio(EntityManagerFactory emf) {
         this.emf = emf;
@@ -20,20 +20,19 @@ public class ExpedienteRepositorio implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Expediente expediente) {
-        EntityManager em = null;
+    public void crearExpediente(Expediente expediente) {
+        EntityManager em;
         try {
             em = getEntityManager();
-            EntityTransaction etx = em.getTransaction();
-            etx.begin();
+            em.getTransaction().begin();
             em.persist(expediente);
-            etx.commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            System.out.println("Error al crear y guardar el expediente en la base de datos" + e.getMessage());
         }
     }
+
 
     public void edit(Expediente expediente) throws Exception {
         EntityManager em = null;
@@ -114,5 +113,7 @@ public class ExpedienteRepositorio implements Serializable {
             em.close();
         }
     }
+
 }
+
 
