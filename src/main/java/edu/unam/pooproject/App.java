@@ -1,17 +1,14 @@
 package edu.unam.pooproject;
 
-import edu.unam.pooproject.Repositorio.ExpedienteRepositorio;
+import edu.unam.pooproject.db.Conexion;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 public class App extends Application {
     public static void main(String[] args) throws Exception {
-
+        Conexion.crearEntityManagerFactory();
         launch();
 
     }
@@ -24,12 +21,14 @@ public class App extends Application {
         stage.setTitle("Inicio de Sesión");
         stage.setScene(scene);
         stage.show();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PooProject");
-        ExpedienteRepositorio control = new ExpedienteRepositorio(emf);
-        //Expediente exp = new Expediente(3, "hola", "String texto", new Date(), false);
-        //Expediente exp1 = new Expediente(4, "hola", "String texto", new Date(), true);
-        //control.create(exp);
-        //control.create(exp1);
 
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        if (Conexion.getEntityManagerFactory() != null && Conexion.getEntityManagerFactory().isOpen()) {
+            Conexion.getEntityManagerFactory().close(); // Cierra el EMF
+        }
     }
 }
