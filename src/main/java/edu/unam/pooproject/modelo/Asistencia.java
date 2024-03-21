@@ -2,36 +2,37 @@ package edu.unam.pooproject.modelo;
 
 import java.time.LocalDate;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "asistencia", schema = "public")
 public class Asistencia {
-    String dniMiembro;
-    LocalDate fecha;
+
+    @Id
+    @Column(name = "idAsistencia")
+    int idAsistencia;
+    @Basic
+    @Column(name = "fecha")
     Boolean asiste;
 
     public Asistencia() {
     }
 
-    public Asistencia(String dniMiembro, LocalDate fecha, Boolean asiste) {
-        this.dniMiembro = dniMiembro;
-        this.fecha = fecha;
+    public Asistencia(int idAsistencia, LocalDate fecha, Boolean asiste) {
+        this.idAsistencia = idAsistencia;
         this.asiste = asiste;
     }
 
 
-    public String getDniMiembro() {
-        return dniMiembro;
+    public int getIdAsistencia() {
+        return idAsistencia;
     }
 
-    public void setDniMiembro(String dniMiembro) {
-        this.dniMiembro = dniMiembro;
+    public void setIdAsistencia(int idAsistencia) {
+        this.idAsistencia = idAsistencia;
     }
 
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
 
     public Boolean getAsiste() {
         return asiste;
