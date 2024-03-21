@@ -4,9 +4,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "acciones", schema = "public")
+@Table(name = "accion", schema = "public")
 
-public class Acciones {
+public class Accion {
     @Id
     @Column(name = "idAccion")
     int idAccion;
@@ -18,11 +18,11 @@ public class Acciones {
     @Column(name = "cambio")
     String cambio;
 
-    
-    public Acciones() {
+
+    public Accion() {
     }
 
-    public Acciones(Date fecha, String cambio) {
+    public Accion(Date fecha, String cambio) {
         this.fecha = fecha;
         this.cambio = cambio;
     }
