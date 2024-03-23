@@ -1,5 +1,6 @@
 package edu.unam.pooproject.Repositorio;
 
+import edu.unam.pooproject.db.Conexion;
 import edu.unam.pooproject.modelo.Expediente;
 
 import javax.persistence.EntityManager;
@@ -10,34 +11,32 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ExpedienteRepositorio implements Serializable {
-    private EntityManagerFactory emf;
+
+    EntityManagerFactory emfE;
 
     public ExpedienteRepositorio(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        this.emfE = emf;
     }
 
     public void crearExpediente(Expediente expediente) {
-        EntityManager em;
         try {
-            em = getEntityManager();
+            EntityManager em = emfE.createEntityManager();
             em.getTransaction().begin();
             em.persist(expediente);
             em.getTransaction().commit();
             em.close();
+
         } catch (Exception e) {
             System.out.println("Error al crear y guardar el expediente en la base de datos" + e.getMessage());
         }
+
     }
 
 
     public void edit(Expediente expediente) throws Exception {
-        EntityManager em = null;
+        EntityManager em = Conexion.crearEntityManager();
+
         try {
-            em = getEntityManager();
             EntityTransaction etx = em.getTransaction();
             etx.begin();
             em.merge(expediente);
@@ -52,15 +51,16 @@ public class ExpedienteRepositorio implements Serializable {
     }
 
     public void destroy(int nroExpediente) throws Exception {
-        EntityManager em = null;
+        EntityManager em = Conexion.crearEntityManager();
+
         try {
-            em = getEntityManager();
+            em = Conexion.crearEntityManager();
             EntityTransaction etx = em.getTransaction();
             etx.begin();
             Expediente expediente;
             try {
                 expediente = em.getReference(Expediente.class, nroExpediente);
-                expediente.getNroExpediente(); // Lanza una excepción si no se encuentra el expediente
+                expediente.getId(); // Lanza una excepción si no se encuentra el expediente
             } catch (Exception ex) {
                 throw new Exception("El expediente con el número " + nroExpediente + " no existe.", ex);
             }
@@ -82,7 +82,7 @@ public class ExpedienteRepositorio implements Serializable {
     }
 
     private List<Expediente> findExpedienteEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = Conexion.crearEntityManager();
         try {
             Query q = em.createQuery("select object(o) from Expediente as o");
             if (!all) {
@@ -96,7 +96,7 @@ public class ExpedienteRepositorio implements Serializable {
     }
 
     public Expediente findExpediente(String nroExpediente) {
-        EntityManager em = getEntityManager();
+        EntityManager em = Conexion.crearEntityManager();
         try {
             return em.find(Expediente.class, nroExpediente);
         } finally {
@@ -105,7 +105,7 @@ public class ExpedienteRepositorio implements Serializable {
     }
 
     public int getExpedienteCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = Conexion.crearEntityManager();
         try {
             Query q = em.createQuery("select count(o) from Expediente as o");
             return ((Long) q.getSingleResult()).intValue();

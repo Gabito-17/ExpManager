@@ -7,7 +7,7 @@ module com.example.pooproject {
 
     exports edu.unam.pooproject.Controller;
     opens edu.unam.pooproject to javafx.fxml;
-    opens edu.unam.pooproject.modelo;
     exports edu.unam.pooproject;
     opens edu.unam.pooproject.Controller to javafx.fxml;
+    opens edu.unam.pooproject.modelo;
 }

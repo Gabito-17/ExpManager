@@ -1,19 +1,20 @@
 package edu.unam.pooproject.Repositorio;
 
-import java.io.Serializable;
+import edu.unam.pooproject.modelo.Miembro;
+import edu.unam.pooproject.modelo.Persona;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.io.Serializable;
 import java.util.List;
 
-import edu.unam.pooproject.modelo.Miembro;
+public class PersonaRepositorio implements Serializable {
 
-public class MiembroRepositorio implements Serializable {
-    
-    private EntityManagerFactory emf = null;
+    private EntityManagerFactory emf;
 
-    public MiembroRepositorio(EntityManagerFactory emf) {
+    public PersonaRepositorio(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -21,13 +22,13 @@ public class MiembroRepositorio implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Miembro miembro) {
+    public void create(Persona persona) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             EntityTransaction etx = em.getTransaction();
             etx.begin();
-            em.persist(miembro);
+            em.persist(persona);
             etx.commit();
         } finally {
             if (em != null) {
@@ -36,13 +37,13 @@ public class MiembroRepositorio implements Serializable {
         }
     }
 
-    public void edit(Miembro miembro) throws Exception {
+    public void edit(Persona persona) throws Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             EntityTransaction etx = em.getTransaction();
             etx.begin();
-            em.merge(miembro);
+            em.merge(persona);
             etx.commit();
         } catch (Exception ex) {
             throw new Exception("Error al actualizar el miembro.", ex);

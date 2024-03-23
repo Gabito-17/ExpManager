@@ -1,31 +1,26 @@
 package edu.unam.pooproject.modelo;
 
-import java.util.Date;
-
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "minuta", schema = "public")
 public class Minuta {
 
     @Id
-    @Column(name = "idMinuta")
-    int idMinuta;
-    @Basic
-    @Column(name = "fecha")
-    Date fecha;
-    @Column(name = "lugar")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+
+    LocalDate fecha;
     String lugar;
-    @Column(name = "resumen")
     String resumen;
-    @Column(name = "decision")
     String decision;
 
     public Minuta() {
     }
 
-    public Minuta(int idMinuta, Date fecha, String lugar, String resumen, String decision) {
-        this.idMinuta = idMinuta;
+    public Minuta(int idMinuta, LocalDate fecha, String lugar, String resumen, String decision) {
+        this.id = idMinuta;
         this.fecha = fecha;
         this.lugar = lugar;
         this.resumen = resumen;
@@ -34,18 +29,18 @@ public class Minuta {
 
 
     public int getIdMinuta() {
-        return idMinuta;
+        return id;
     }
 
     public void setIdMinuta(int idMinuta) {
-        this.idMinuta = idMinuta;
+        this.id = idMinuta;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

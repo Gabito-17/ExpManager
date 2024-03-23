@@ -3,7 +3,9 @@ package edu.unam.pooproject.Controller;
 import edu.unam.pooproject.Repositorio.ExpedienteRepositorio;
 import edu.unam.pooproject.Services.Enrutador;
 import edu.unam.pooproject.db.Conexion;
+import edu.unam.pooproject.modelo.Accion;
 import edu.unam.pooproject.modelo.Expediente;
+import edu.unam.pooproject.modelo.Iniciante;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,14 +14,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ExpedienteController {
+    List<Accion> acciones = new ArrayList<Accion>();
     //Informacion del expediente
-    @FXML
-    private TextField idExpediente;
     @FXML
     private TextField idIniciante;
     @FXML
@@ -32,8 +33,8 @@ public class ExpedienteController {
     private Label idInicianteLabel;
     @FXML
     private Label resultadoText;
-
-
+    @FXML
+    private ComboBox<Iniciante> comboBox;
     private ObservableList<String> estadoList = FXCollections.observableArrayList("Alta", "Baja");
     //ComboBox "estado" del expediente
     @FXML
@@ -49,26 +50,23 @@ public class ExpedienteController {
     //Limpiar todos los inputs
     @FXML
     public void limpiarCampos(ActionEvent event) {
-        idExpediente.clear();
         idIniciante.clear();
         fechaIngresoExpediente.setValue(null);
         textoExpediente.clear();
     }
 
-    public void guardarExpediente(ActionEvent event) throws Exception {
-        String idExp = idExpediente.getText();
+    @FXML
+    public void cargarExpediente(ActionEvent event) throws Exception {
         LocalDate fecha = fechaIngresoExpediente.getValue();
         String idInc = idIniciante.getText();
+        Expediente expediente = new Expediente();
+        expediente.setEstado(true);
+        expediente.setFechaIngreso(fecha);
+        expediente.setTexto(textoExpediente.getText());
+        expedienteRepositorio.crearExpediente(expediente);
+        resultadoText.setText("Expediente Cargado");
 
-        if (idExp.matches("\\d+")) {
-            Expediente expediente = new Expediente(Integer.parseInt(idExp), idIniciante.getText(), textoExpediente.getText(), Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant()), true);
-            expedienteRepositorio.crearExpediente(expediente);
-            resultadoText.setText("Expediente Cargado");
 
-        } else {
-            nroExpedienteLabel.setText("Debe ser numero entero");
-            System.out.println("El Debe contener solo digitos numericos");
-        }
     }
 
     //Cerrar Sesion y ubicar en ventana "Login"

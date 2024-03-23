@@ -1,53 +1,37 @@
 package edu.unam.pooproject.modelo;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "expedientes", schema = "public")
+@Table(name = "expediente", schema = "public")
 public class Expediente {
-
     @Id
-    @Column(name = "nroExpediente")
-    int idExpediente;
-    @Basic
-    @Column(name = "iniciante")
-    String iniciante;
-    @Column(name = "texto")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
     String texto;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "fecha_ingreso")
-    Date fechaIngreso;
-    @Column(name = "estado")
+    LocalDate fechaIngreso;
     Boolean estado;
-
+    @ManyToOne
+    @JoinColumn(name = "iniciante_id")
+    private Iniciante iniciante;
 
     public Expediente() {
     }
 
-    public Expediente(int nroExpediente, String iniciante, String texto, Date fechaIngreso, Boolean estado) {
-        this.idExpediente = nroExpediente;
-        this.iniciante = iniciante;
+    public Expediente(final String texto, final LocalDate fechaIngreso, final Boolean estado, final Iniciante iniciante) {
         this.texto = texto;
         this.fechaIngreso = fechaIngreso;
         this.estado = estado;
-    }
-
-
-    public int getNroExpediente() {
-        return idExpediente;
-    }
-
-    public void setNroExpediente(int nroExpediente) {
-        this.idExpediente = nroExpediente;
-    }
-
-    public String getIniciante() {
-        return iniciante;
-    }
-
-    public void setIniciante(String iniciante) {
         this.iniciante = iniciante;
+    }
+
+    public void setIniciante(final Iniciante iniciante) {
+        this.iniciante = iniciante;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTexto() {
@@ -58,11 +42,11 @@ public class Expediente {
         this.texto = texto;
     }
 
-    public Date getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 

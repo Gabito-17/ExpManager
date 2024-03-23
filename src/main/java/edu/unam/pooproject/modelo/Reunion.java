@@ -1,47 +1,39 @@
 package edu.unam.pooproject.modelo;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "reuniones", schema = "public")
+@Table(name = "reunion", schema = "public")
 public class Reunion {
     @Id
-    @Column(name = "idReunion")
-    int idReunion;
-    @Temporal(TemporalType.DATE)
-    Date fecha;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+    LocalDate fecha;
 
     public Reunion() {
     }
 
-    public Reunion(int nroReunion, Date fecha) {
-        this.idReunion = nroReunion;
+    public Reunion(int nroReunion, LocalDate fecha) {
+        this.id = nroReunion;
         this.fecha = fecha;
     }
 
 
     public int getNroReunion() {
-        return idReunion;
+        return id;
     }
 
     public void setNroReunion(int nroReunion) {
-        this.idReunion = nroReunion;
+        this.id = nroReunion;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
-    /*public List<Expediente> getOrden() {
-        return orden;
-    }
-
-    public void setOrden(List<Expediente> orden) {
-        this.orden = orden;
-    }*/
 }

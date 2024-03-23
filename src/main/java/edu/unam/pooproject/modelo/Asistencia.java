@@ -1,8 +1,7 @@
 package edu.unam.pooproject.modelo;
 
-import java.time.LocalDate;
-
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 @Entity
@@ -10,27 +9,26 @@ import javax.persistence.*;
 public class Asistencia {
 
     @Id
-    @Column(name = "idAsistencia")
-    int idAsistencia;
-    @Basic
-    @Column(name = "fecha")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+    LocalDate fecha;
     Boolean asiste;
 
     public Asistencia() {
     }
 
     public Asistencia(int idAsistencia, LocalDate fecha, Boolean asiste) {
-        this.idAsistencia = idAsistencia;
+        this.id = idAsistencia;
         this.asiste = asiste;
     }
 
 
-    public int getIdAsistencia() {
-        return idAsistencia;
+    public int getId() {
+        return id;
     }
 
-    public void setIdAsistencia(int idAsistencia) {
-        this.idAsistencia = idAsistencia;
+    public void setId(int idAsistencia) {
+        this.id = idAsistencia;
     }
 
 

@@ -1,16 +1,18 @@
 package edu.unam.pooproject.Controller;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import edu.unam.pooproject.Repositorio.MiembroRepositorio;
+import edu.unam.pooproject.Repositorio.PersonaRepositorio;
 import edu.unam.pooproject.Services.Enrutador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class MiembroController {
-    
+
     //Informacion del miembro
     @FXML
     TextField txtDniMiembro;
@@ -25,8 +27,8 @@ public class MiembroController {
     @FXML
     TextArea txtTexto;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("PooProject");
-    MiembroRepositorio control = new MiembroRepositorio(emf);
-    
+    PersonaRepositorio control = new PersonaRepositorio(emf);
+
     //Limpiar todos los inputs
     @FXML
     public void limpiarCampos() {
@@ -83,7 +85,6 @@ public class MiembroController {
     public void menuMinuta(ActionEvent event) {
         Enrutador.cambiarVentana(event, "/View/minuta-view.fxml");
     }
-
 
 
 }
