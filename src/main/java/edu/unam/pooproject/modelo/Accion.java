@@ -10,10 +10,13 @@ public class Accion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
+    @Column(name = "fecha")
     LocalDate fecha;
-
+    @Column(name = "cambio")
     String cambio;
+    @ManyToOne
+    @JoinColumn(name = "expediente_id")
+    private Expediente expediente;
 
     public Accion() {
     }

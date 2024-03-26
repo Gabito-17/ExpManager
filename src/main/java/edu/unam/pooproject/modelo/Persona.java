@@ -10,9 +10,13 @@ public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int dni;
+    @Column(name = "nombre")
     String nombre;
+    @Column(name = "apellido")
     String apellido;
+    @Column(name = "fechanacimiento")
     LocalDate fechaNacimiento;
+    @Column(name = "email")
     String email;
 
     public Persona() {

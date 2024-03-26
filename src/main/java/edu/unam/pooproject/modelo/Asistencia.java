@@ -7,12 +7,16 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "asistencia", schema = "public")
 public class Asistencia {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @Column(name = "fecha")
     LocalDate fecha;
+    @Column(name = "asiste")
     Boolean asiste;
+    @ManyToOne
+    @JoinColumn(name = "reunion_id")
+    private Reunion reunion;
 
     public Asistencia() {
     }

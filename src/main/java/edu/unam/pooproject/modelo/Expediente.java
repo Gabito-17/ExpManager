@@ -2,6 +2,7 @@ package edu.unam.pooproject.modelo;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "expediente", schema = "public")
@@ -9,12 +10,25 @@ public class Expediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @Column(name = "texto")
     String texto;
+    @Column(name = "fechaingreso")
     LocalDate fechaIngreso;
+    @Column(name = "estado")
     Boolean estado;
     @ManyToOne
     @JoinColumn(name = "iniciante_id")
     private Iniciante iniciante;
+    @OneToMany(mappedBy = "expediente")
+    private List<Accion> acciones;
+
+    @ManyToMany
+    @JoinTable(
+            name = "expediente_involucrado",
+            joinColumns = @JoinColumn(name = "expediente_id"),
+            inverseJoinColumns = @JoinColumn(name = "involucrado_id")
+    )
+    private List<Involucrado> involucrados;
 
     public Expediente() {
     }

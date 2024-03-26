@@ -11,9 +11,13 @@ public class Minuta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
+    @Column(name = "fecha")
     LocalDate fecha;
+    @Column(name = "lugar")
     String lugar;
+    @Column(name = "resumen")
     String resumen;
+    @Column(name = "decision")
     String decision;
 
     public Minuta() {
