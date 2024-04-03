@@ -17,11 +17,21 @@ public class Reunion {
 
     @ManyToMany
     @JoinTable(
+            name = "reunion_minuta",
+            joinColumns = @JoinColumn(name = "minuta_id"),
+            inverseJoinColumns = @JoinColumn(name = "reunion_id")
+    )
+    private List<Minuta> minutas;
+
+    @ManyToMany
+    @JoinTable(
             name = "reunion_miembro",
             joinColumns = @JoinColumn(name = "reunion_id"),
             inverseJoinColumns = @JoinColumn(name = "miembro_id")
     )
     private List<Miembro> miembros;
+
+
 
     public Reunion() {
     }

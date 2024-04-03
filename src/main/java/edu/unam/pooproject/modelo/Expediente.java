@@ -29,6 +29,13 @@ public class Expediente {
             inverseJoinColumns = @JoinColumn(name = "involucrado_id")
     )
     private List<Involucrado> involucrados;
+    @ManyToMany
+    @JoinTable(
+            name = "expediente_minuta",
+            joinColumns = @JoinColumn(name = "expediente_id"),
+            inverseJoinColumns = @JoinColumn(name = "minuta_id")
+    )
+    private List<Minuta> minutas;
 
     public Expediente() {
     }

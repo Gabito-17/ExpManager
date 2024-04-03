@@ -2,6 +2,7 @@ package edu.unam.pooproject.modelo;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "minuta", schema = "public")
@@ -19,6 +20,14 @@ public class Minuta {
     String resumen;
     @Column(name = "decision")
     String decision;
+    @ManyToMany(mappedBy = "minutas")
+    private List<Expediente> expedientes;
+
+    @ManyToMany(mappedBy = "minutas")
+    private List<Reunion> reuniones;
+
+
+
 
     public Minuta() {
     }
