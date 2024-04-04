@@ -50,6 +50,7 @@ public class MiembroController {
         Enrutador.cambiarVentana(event, "/View/login-view.fxml");
     }
 
+    //Cambios de ventana
     //Ubicar en ventana "Inicio"
     @FXML
     public void menuInicio(ActionEvent event) {
@@ -86,5 +87,33 @@ public class MiembroController {
         Enrutador.cambiarVentana(event, "/View/minuta-view.fxml");
     }
 
+
+    //Acciones del formulario
+    //cargar (o modificar) un registro
+    //verifica el id, si ya existe debe modificarlo, de lo contrario crea uno nuevo
+    @FXML
+    public void cargarRegistro(ActionEvent event) {
+
+    }
+
+    //limpiar campos
+    @FXML
+    public void limpiarCampos(ActionEvent event) {
+
+    }
+
+    //modificar registro
+    //toma el registro seleccionado en la tabla y rellena los campos en la pantalla de carga para poder modificarlo. El id no debe ser modificable
+    @FXML
+    public void modificar(ActionEvent event) {
+
+    }
+
+    //eliminar registro
+    //toma el registro seleccionado en la tabla y pide confirmacion para eliminarlo
+    @FXML
+    public void eliminar(ActionEvent event) {
+
+    }
 
 }

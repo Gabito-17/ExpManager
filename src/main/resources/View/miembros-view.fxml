@@ -224,8 +224,8 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <TextField fx:id="txtDniMiembro" promptText="Ingresar el DNI" GridPane.columnIndex="1" />
-                              <TextField fx:id="txtApellidoMiembro" promptText="Ingresar el Apellido" GridPane.columnIndex="4" />
+                              <TextField fx:id="txtDni" promptText="Ingresar el DNI" GridPane.columnIndex="1" />
+                              <TextField fx:id="txtApellido" promptText="Ingresar el Apellido" GridPane.columnIndex="4" />
                               <Label text="DNI:">
                                  <font>
                                     <Font size="14.0" />
@@ -246,8 +246,8 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtNombreMiembro" promptText="Ingresar el Nombre" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                              <TextField fx:id="txtEmailMiembro" promptText="Ingresar el E-mail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="txtNombre" promptText="Ingresar el Nombre" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <TextField fx:id="txtEmail" promptText="Ingresar el E-mail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label text="Fecha&#10;Nacimiento:&#10;" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="14.0" />
@@ -258,11 +258,11 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <DatePicker fx:id="dateNacimientoMiembro" prefHeight="26.0" prefWidth="205.0" promptText="Seleccionar fecha" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <DatePicker fx:id="dateNacimiento" prefHeight="26.0" prefWidth="205.0" promptText="Seleccionar fecha" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
-                        <Button fx:id="btnCargar" layoutX="561.0" layoutY="116.0" mnemonicParsing="false" text="Cargar" />
-                        <Button fx:id="btnLimpiarCampos" layoutX="444.0" layoutY="116.0" mnemonicParsing="false" text="Limpiar Campos" />
+                        <Button fx:id="btnCargar" layoutX="561.0" layoutY="116.0" mnemonicParsing="false" onAction="#cargarRegistro" text="Cargar" />
+                        <Button fx:id="btnLimpiarCampos" layoutX="444.0" layoutY="116.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar Campos" />
                      </children>
                   </AnchorPane>
                   <Label layoutX="239.0" layoutY="21.0" text="MIEMBROS DEL CONCEJO">
@@ -281,8 +281,8 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Button fx:id="btnEliminar" layoutX="587.0" layoutY="519.0" mnemonicParsing="false" text="Eliminar" />
-                  <Button fx:id="btnModificar" layoutX="493.0" layoutY="519.0" mnemonicParsing="false" text="Modificar" />
+                  <Button fx:id="btnEliminar" layoutX="587.0" layoutY="519.0" mnemonicParsing="false" onAction="#eliminar" text="Eliminar" />
+                  <Button fx:id="btnModificar" layoutX="493.0" layoutY="519.0" mnemonicParsing="false" onAction="#modificar" text="Modificar" />
                </children>
             </AnchorPane>
          </children>
