@@ -298,7 +298,8 @@
                                       </columns>
                                     </TableView>
                                     <Button fx:id="btnCargar" layoutX="620.0" layoutY="334.0" mnemonicParsing="false" text="Cargar" />
-                                    <Button fx:id="btnLimpiar" layoutX="503.0" layoutY="334.0" mnemonicParsing="false" text="Limpiar Campos" />
+                                    <Button fx:id="btnLimpiar" layoutX="24.0" layoutY="334.0" mnemonicParsing="false" text="Limpiar Campos" />
+                                    <Button fx:id="btnCargar1" layoutX="543.0" layoutY="334.0" mnemonicParsing="false" text="Modificar" />
                                  </children>
                               </AnchorPane>
                         </content>
@@ -312,7 +313,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TableView fx:id="tvExpediente1" layoutX="7.0" layoutY="375.0" prefHeight="178.0" prefWidth="677.0">
+                                    <TableView fx:id="tvExpediente1" layoutX="18.0" layoutY="375.0" prefHeight="178.0" prefWidth="648.0">
                                        <columns>
                                           <TableColumn prefWidth="104.66670227050781" text="Nro" />
                                           <TableColumn minWidth="0.0" prefWidth="98.66665649414062" text="Fecha" />
@@ -353,13 +354,13 @@
                                     </Label>
                                     <Text fx:id="txTitulo" layoutX="346.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="282.80340576171875" />
                                     <TextArea fx:id="taNotaR" layoutX="310.0" layoutY="110.0" prefHeight="221.0" prefWidth="356.0" />
-                                    <TableView fx:id="tvInvolucrados" layoutX="35.0" layoutY="182.0" prefHeight="148.0" prefWidth="253.0">
+                                    <TableView fx:id="tvInvolucrados" layoutX="18.0" layoutY="182.0" prefHeight="148.0" prefWidth="253.0">
                                       <columns>
                                         <TableColumn prefWidth="104.66670227050781" text="Nombre" />
                                         <TableColumn prefWidth="147.33331298828125" text="DNI" />
                                       </columns>
                                     </TableView>
-                                    <Button fx:id="btnEliminar" layoutX="586.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Eliminar" />
+                                    <Button fx:id="btnEliminar" layoutX="544.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Eliminar Expediente" />
                                     <Label fx:id="txIniciante" layoutX="75.0" layoutY="120.0" prefHeight="27.0" prefWidth="209.0" underline="true">
                                        <font>
                                           <Font size="11.0" />
