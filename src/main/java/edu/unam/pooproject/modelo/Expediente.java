@@ -10,8 +10,10 @@ public class Expediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    @Column(name = "texto")
-    String texto;
+    @Column(name = "titulo")
+    String titulo;
+    @Column(name = "nota")
+    String nota;
     @Column(name = "fechaingreso")
     LocalDate fechaIngreso;
     @Column(name = "estado")
@@ -40,8 +42,8 @@ public class Expediente {
     public Expediente() {
     }
 
-    public Expediente(final String texto, final LocalDate fechaIngreso, final Boolean estado, final Iniciante iniciante) {
-        this.texto = texto;
+    public Expediente(final String nota, final LocalDate fechaIngreso, final Boolean estado, final Iniciante iniciante) {
+        this.nota = nota;
         this.fechaIngreso = fechaIngreso;
         this.estado = estado;
         this.iniciante = iniciante;
@@ -50,17 +52,19 @@ public class Expediente {
     public void setIniciante(final Iniciante iniciante) {
         this.iniciante = iniciante;
     }
-
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
     public int getId() {
         return id;
     }
 
-    public String getTexto() {
-        return texto;
+    public String getNota() {
+        return nota;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setNota(String nota) {
+        this.nota = nota;
     }
 
     public LocalDate getFechaIngreso() {

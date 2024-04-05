@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +25,12 @@ public class ExpedienteController {
     @FXML
     private TextField idIniciante;
     @FXML
-    private DatePicker fechaIngresoExpediente;
+    private Label lblFecha;
     @FXML
-    private TextArea textoExpediente;
+    private TextField txtTitulo;
+
+    @FXML
+    private TextArea taNota;
     @FXML
     private Label nroExpedienteLabel;
     @FXML
@@ -42,6 +46,13 @@ public class ExpedienteController {
     //Cargar y mostrar ComboBoxEstado del expediente
     private ExpedienteRepositorio expedienteRepositorio = new ExpedienteRepositorio(Conexion.getEntityManagerFactory());
 
+    public void initialize(){
+        LocalDate fechaActual = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaString = formatter.format(fechaActual);
+        lblFecha.setText(fechaString);
+    }
+
     @FXML
     public void mostrarCombo(Event event) {
         comboBoxEstado.setItems(estadoList);
@@ -50,26 +61,22 @@ public class ExpedienteController {
     //Limpiar todos los inputs
     @FXML
     public void limpiarCampos(ActionEvent event) {
-        idIniciante.clear();
-        fechaIngresoExpediente.setValue(null);
-        textoExpediente.clear();
+        txtTitulo.clear();
+        taNota.clear();
     }
 
     @FXML
     public void cargarExpediente(ActionEvent event) throws Exception {
-        LocalDate fecha = fechaIngresoExpediente.getValue();
-        String idInc = idIniciante.getText();
+        LocalDate fecha = LocalDate.now();
         Expediente expediente = new Expediente();
         expediente.setEstado(true);
+        expediente.setTitulo(txtTitulo.getText());
+        expediente.setNota(taNota.getText());
         expediente.setFechaIngreso(fecha);
-        expediente.setTexto(textoExpediente.getText());
         expedienteRepositorio.crearExpediente(expediente);
-        resultadoText.setText("Expediente Cargado");
-
-
     }
 
-    //Cerrar Sesion y ubicar en ventana "Login"
+    //Ubicar en ventana "Login"
     @FXML
     public void cerrarSesion(ActionEvent event) {
         Enrutador.cambiarVentana(event, "/View/login-view.fxml");

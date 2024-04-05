@@ -26,7 +26,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unam.pooproject.Controller.ExpedienteController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unam.pooproject.Controller.ExpedienteController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="582.0" prefWidth="214.0" spacing="10" BorderPane.alignment="CENTER">
@@ -213,15 +213,15 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="559.0" prefWidth="419.0">
                                  <children>
-                                    <Label layoutX="256.0" layoutY="14.0" prefHeight="27.0" prefWidth="176.0" text="CARGAR EXPEDIENTE">
+                                    <Label layoutX="256.0" layoutY="14.0" prefHeight="27.0" prefWidth="199.0" text="CARGAR EXPEDIENTE">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
                                     <GridPane layoutX="24.0" layoutY="68.0" prefHeight="259.0" prefWidth="287.0">
                                       <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.66665649414062" minWidth="10.0" prefWidth="96.00001017252605" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.33334350585938" minWidth="10.0" prefWidth="191.33332316080725" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.66665649414062" minWidth="10.0" prefWidth="109.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.33334350585938" minWidth="10.0" prefWidth="178.0" />
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints maxHeight="86.66667175292969" minHeight="6.666646321614579" prefHeight="21.333325703938797" vgrow="SOMETIMES" />
@@ -267,7 +267,7 @@
                                           </VBox>
                                           <VBox prefHeight="69.0" prefWidth="103.0" GridPane.rowIndex="2">
                                              <children>
-                                                <Label prefHeight="27.0" prefWidth="115.0" text="Añadir Involucrado:" underline="true">
+                                                <Label prefHeight="27.0" prefWidth="141.0" text="Añadir Involucrado:" underline="true">
                                                    <font>
                                                       <Font size="11.0" />
                                                    </font>
@@ -281,7 +281,7 @@
                                           <Font size="11.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="txtTitulo" alignment="CENTER_RIGHT" layoutX="388.0" layoutY="92.0" prefHeight="25.0" prefWidth="283.0" />
+                                    <TextField fx:id="txtTitulo" layoutX="388.0" layoutY="92.0" prefHeight="25.0" prefWidth="283.0" />
                                     <TextArea fx:id="taNota" layoutX="385.0" layoutY="145.0" prefHeight="181.0" prefWidth="287.0" />
                                     <Label layoutX="388.0" layoutY="68.0" prefHeight="27.0" prefWidth="48.0" text="Titulo:">
                                        <font>
@@ -297,9 +297,9 @@
                                           <TableColumn prefWidth="120.00002034505212" text="Estado" />
                                       </columns>
                                     </TableView>
-                                    <Button fx:id="btnCargar" layoutX="620.0" layoutY="334.0" mnemonicParsing="false" text="Cargar" />
-                                    <Button fx:id="btnLimpiar" layoutX="24.0" layoutY="334.0" mnemonicParsing="false" text="Limpiar Campos" />
-                                    <Button fx:id="btnCargar1" layoutX="543.0" layoutY="334.0" mnemonicParsing="false" text="Modificar" />
+                                    <Button fx:id="btnCargar" layoutX="607.0" layoutY="334.0" mnemonicParsing="false" onAction="#cargarExpediente" text="Cargar" />
+                                    <Button fx:id="btnLimpiar" layoutX="24.0" layoutY="334.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar Campos" />
+                                    <Button fx:id="btnCargar1" layoutX="517.0" layoutY="334.0" mnemonicParsing="false" text="Modificar" />
                                  </children>
                               </AnchorPane>
                         </content>
@@ -308,7 +308,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label layoutX="289.0" layoutY="14.0" prefHeight="27.0" prefWidth="109.0" text="EXPEDIENTE" textAlignment="CENTER">
+                                    <Label layoutX="289.0" layoutY="14.0" prefHeight="27.0" prefWidth="116.0" text="EXPEDIENTE" textAlignment="CENTER">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -322,7 +322,7 @@
                                           <TableColumn minWidth="0.0" prefWidth="130.00002034505212" text="Estado" />
                                        </columns>
                                     </TableView>
-                                    <Label layoutX="18.0" layoutY="120.0" prefHeight="27.0" prefWidth="50.0" text="Iniciante:" underline="true">
+                                    <Label layoutX="18.0" layoutY="120.0" prefHeight="27.0" prefWidth="56.0" text="Iniciante:" underline="true">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -332,7 +332,7 @@
                                           <Font size="11.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="18.0" layoutY="155.0" prefHeight="27.0" prefWidth="73.0" text="Involucrados:" underline="true">
+                                    <Label layoutX="18.0" layoutY="155.0" prefHeight="27.0" prefWidth="80.0" text="Involucrados:" underline="true">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
