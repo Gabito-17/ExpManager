@@ -105,7 +105,7 @@ public class Persona {
     }
 
     public String getNombreCompleto() {
-        return nombre + " " + apellido;
+        return apellido + " " + nombre;
     }
 }
 

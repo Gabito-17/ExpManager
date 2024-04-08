@@ -7,6 +7,7 @@ import edu.unam.pooproject.db.Conexion;
 import edu.unam.pooproject.modelo.Expediente;
 import edu.unam.pooproject.modelo.Persona;
 import edu.unam.pooproject.repositorio.Repositorio;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,7 +44,7 @@ public class ExpedienteController {
     private TableView<Expediente> tvExpedientes;
 
     @FXML
-    private TableColumn<Expediente, String> colNumero;
+    private TableColumn<Expediente, Integer> colId;
     @FXML
     private TableColumn<Expediente, String> colIniciante;
     @FXML
@@ -63,12 +64,10 @@ public class ExpedienteController {
     public void initialize() {
         this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.personaServicio = new PersonaServicio(this.repositorio);
-
-        this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.expedienteServicio = new ExpedienteServicio(this.repositorio);
 
         // Configurar las columnas del TableView para que muestren los datos de Expediente
-        colNumero.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        colId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         colTitulo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitulo()));
         colFechaIngreso.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaIngreso().toString()));
         colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado().toString()));
@@ -170,7 +169,6 @@ public class ExpedienteController {
             taNota.setText(expedienteSeleccionado.getNota());
             cmbIniciantes.getSelectionModel().select(expedienteSeleccionado.getIniciante());
             listaInvolucrados.clear();
-            listaInvolucrados.addAll(expedienteSeleccionado.getInvolucradosPorNombre());
             lstInvolucrados.setItems(listaInvolucrados);
             lblFechaIngreso.setText(expedienteSeleccionado.getFechaIngreso().toString());
         }
@@ -307,12 +305,12 @@ public class ExpedienteController {
         limpiarCampos();
     }
 
-    public boolean expedienteExiste(String dni) {
+    public boolean expedienteExiste(Integer id) {
         // Llama al método del servicio de persona para buscar a la persona por su DNI
-        Persona personaExistente = personaServicio.buscarPorDni(dni);
+        Expediente expedienteExistente = expedienteServicio.buscarPorId(id);
 
         // Si la persona existe (es diferente de null), devuelve true; de lo contrario, devuelve false
-        return personaExistente != null;
+        return expedienteExistente != null;
     }
 
     //Ubicar en ventana "Inicio"

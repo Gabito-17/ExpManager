@@ -1,0 +1,33 @@
+INSERT INTO persona (dni, nombre, apellido, fechanacimiento, esmiembro, email)
+VALUES
+    ('12345678', 'Juan', 'García', '1990-05-15', true, 'juan@example.com'),
+    ('23456789', 'María', 'Martínez', '1985-08-20', false, 'maria@example.com'),
+    ('34567890', 'Pedro', 'Sánchez', '1978-03-10', true, 'pedro@example.com'),
+    ('45678901', 'Ana', 'López', '1992-11-25', false, 'ana@example.com'),
+    ('56789012', 'Carlos', 'Fernández', '1980-07-03', true, 'carlos@example.com'),
+    ('67890123', 'Laura', 'Gómez', '1975-09-18', false, 'laura@example.com'),
+    ('78901234', 'David', 'Rodríguez', '1987-12-30', true, 'david@example.com'),
+    ('89012345', 'Elena', 'Pérez', '1995-04-08', true, 'elena@example.com'),
+    ('90123456', 'Sofía', 'Díaz', '1983-06-22', false, 'sofia@example.com'),
+    ('01234567', 'Pablo', 'Hernández', '1970-10-05', true, 'pablo@example.com'); 
+INSERT INTO expediente (titulo, nota, fechaingreso, estado, iniciante_id)
+VALUES
+    ('Investigación sobre nuevos productos', 'Realizar una investigación detallada sobre los productos potenciales para el próximo año.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona ORDER BY random() LIMIT 1)),
+    ('Proyecto de expansión internacional', 'Planificar y ejecutar la expansión de la empresa a nuevos mercados internacionales.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), false, (SELECT dni FROM persona ORDER BY random() LIMIT 1)),
+    ('Desarrollo de software personalizado', 'Desarrollar un sistema de gestión personalizado para las necesidades específicas de la empresa.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona ORDER BY random() LIMIT 1)),
+    ('Planificación estratégica anual', 'Elaborar un plan estratégico detallado para el próximo año fiscal.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), false, (SELECT dni FROM persona ORDER BY random() LIMIT 1)),
+    ('Revisión de procesos de producción', 'Realizar una revisión exhaustiva de los procesos de producción para identificar áreas de mejora.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona ORDER BY random() LIMIT 1)),
+    ('Campaña de marketing digital', 'Diseñar y lanzar una campaña de marketing digital para aumentar la visibilidad de la marca en línea.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), false, (SELECT dni FROM persona ORDER BY random() LIMIT 1)),
+    ('Implementación de sistema de gestión de calidad', 'Implementar un sistema de gestión de calidad para garantizar altos estándares en los productos y servicios.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona ORDER BY random() LIMIT 1)),
+    ('Investigación de mercado', 'Realizar un estudio exhaustivo del mercado para identificar oportunidades y amenazas.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), false, (SELECT dni FROM persona ORDER BY random() LIMIT 1)),
+    ('Desarrollo de nuevos productos', 'Desarrollar nuevos productos innovadores para satisfacer las necesidades cambiantes de los clientes.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona ORDER BY random() LIMIT 1)),
+    ('Optimización de la cadena de suministro', 'Optimizar la cadena de suministro para reducir costos y mejorar la eficiencia.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), false, (SELECT dni FROM persona ORDER BY random() LIMIT 1));
+INSERT INTO expediente_involucrado (expediente_id, involucrado_id)
+VALUES
+    (1, (SELECT dni FROM persona ORDER BY RANDOM() LIMIT 1)),
+    (1, (SELECT dni FROM persona ORDER BY RANDOM() LIMIT 1)),
+    -- Añadir más registros para el expediente 1 según sea necesario
+    (2, (SELECT dni FROM persona ORDER BY RANDOM() LIMIT 1)),
+    (2, (SELECT dni FROM persona ORDER BY RANDOM() LIMIT 1));
+    -- Añadir más registros para el expediente 2 según sea necesario
+    -- Y así sucesivamente para cada expediente

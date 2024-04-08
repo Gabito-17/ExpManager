@@ -10,7 +10,7 @@ import java.util.List;
 public class Expediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String id;
+    Integer id;
     @Column(name = "titulo")
     String titulo;
     @Column(name = "nota")
@@ -59,7 +59,7 @@ public class Expediente {
         this.involucrados = involucrados;
     }
 
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 

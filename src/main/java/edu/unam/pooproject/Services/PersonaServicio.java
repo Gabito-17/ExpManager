@@ -51,5 +51,20 @@ public class PersonaServicio {
         // Si hay resultados, devuelve el primero (debería ser único); de lo contrario, devuelve null
         return resultados.isEmpty() ? null : resultados.get(0);
     }
+
+    public boolean esIniciante(Persona personaSeleccionada) {
+        // Crear una consulta JPA para verificar si la persona tiene expedientes asociados
+        TypedQuery<Long> query = repositorio.getEntityManager()
+                .createQuery("SELECT COUNT(e) FROM Expediente e WHERE e.iniciante = :persona", Long.class);
+
+        // Establecer el parámetro de consulta para la persona seleccionada
+        query.setParameter("persona", personaSeleccionada);
+
+        // Obtener el resultado de la consulta (cantidad de expedientes asociados a la persona)
+        Long cantidadExpedientes = query.getSingleResult();
+
+        // Si la cantidad de expedientes es mayor que cero, significa que la persona tiene expedientes asociados
+        return cantidadExpedientes > 0;
+    }
 }
 

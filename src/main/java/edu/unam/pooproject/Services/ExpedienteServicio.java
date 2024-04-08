@@ -3,6 +3,7 @@ package edu.unam.pooproject.Services;
 import edu.unam.pooproject.modelo.Expediente;
 import edu.unam.pooproject.repositorio.Repositorio;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class ExpedienteServicio {
@@ -33,6 +34,13 @@ public class ExpedienteServicio {
 
     public List<Expediente> obtenerTodos() {
         return this.repositorio.obtenerTodos(Expediente.class);
+    }
+
+    public Expediente buscarPorId(Integer id) {
+        TypedQuery<Expediente> query = repositorio.getEntityManager().createQuery("Select p From Expediente p WHERE p.id = :numero", Expediente.class);
+        query.setParameter("id", id);
+        List<Expediente> resultados = query.getResultList();
+        return resultados.isEmpty() ? null : resultados.get(0);
     }
 }
 

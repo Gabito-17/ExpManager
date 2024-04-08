@@ -177,6 +177,10 @@ public class PersonaController {
             mostrarError("Selecciona una persona para eliminar.");
             return;
         }
+        if (personaServicio.esIniciante(personaSeleccionada)) {
+            mostrarError("La persona está asociada a expedientes y no puede ser eliminada.");
+            return;
+        }
 
         // Mostrar un cuadro de diálogo de confirmación
         Alert alertConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
@@ -186,12 +190,23 @@ public class PersonaController {
 
         Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            // Eliminar la persona seleccionada
-            PersonaServicio servicio = new PersonaServicio(repositorio);
-            servicio.eliminarPersona(personaSeleccionada);
+            try {
+                // Eliminar la persona seleccionada
+                PersonaServicio servicio = new PersonaServicio(repositorio);
+                servicio.eliminarPersona(personaSeleccionada);
 
-            // Actualizar la tabla
-            rellenarTabla();
+                // Actualizar la tabla
+                rellenarTabla();
+            } catch (javax.persistence.RollbackException e) {
+                Throwable causa = e.getCause();
+                if (causa instanceof org.hibernate.exception.ConstraintViolationException) {
+                    mostrarError("La persona está asociada a expedientes y no puede ser eliminada.");
+                } else {
+                    mostrarError("Error al eliminar la persona: " + e.getMessage());
+                }
+            } catch (Exception e) {
+                mostrarError("Error al eliminar la persona: " + e.getMessage());
+            }
         }
     }
 
