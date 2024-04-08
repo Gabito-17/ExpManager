@@ -11,74 +11,74 @@ public class Minuta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
     @Column(name = "fecha")
     LocalDate fecha;
-    @Column(name = "lugar")
-    String lugar;
+    @Column(name = "tema")
+    String tema;
     @Column(name = "resumen")
     String resumen;
-    @Column(name = "decision")
-    String decision;
+    @ManyToOne
+    private Reunion reunion;
     @ManyToMany(mappedBy = "minutas")
     private List<Expediente> expedientes;
-
-    @ManyToMany(mappedBy = "minutas")
-    private List<Reunion> reuniones;
-
-
 
 
     public Minuta() {
     }
 
-    public Minuta(int idMinuta, LocalDate fecha, String lugar, String resumen, String decision) {
-        this.id = idMinuta;
+    public Minuta(LocalDate f, String t, String res, Reunion reu, Expediente e) {
         this.fecha = fecha;
-        this.lugar = lugar;
-        this.resumen = resumen;
-        this.decision = decision;
+        this.tema = t;
+        this.resumen = res;
+        this.reunion = reu;
+        this.expedientes.add(e);
     }
 
-
-    public int getIdMinuta() {
-        return id;
+    public int getId() {
+        return this.id;
     }
 
-    public void setIdMinuta(int idMinuta) {
-        this.id = idMinuta;
+    public void setId(final int id) {
+        this.id = id;
     }
 
     public LocalDate getFecha() {
-        return fecha;
+        return this.fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(final LocalDate fecha) {
         this.fecha = fecha;
     }
 
-    public String getLugar() {
-        return lugar;
+    public String getTema() {
+        return this.tema;
     }
 
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
+    public void setTema(final String tema) {
+        this.tema = tema;
     }
 
     public String getResumen() {
-        return resumen;
+        return this.resumen;
     }
 
-    public void setResumen(String resumen) {
+    public void setResumen(final String resumen) {
         this.resumen = resumen;
     }
 
-    public String getDecision() {
-        return decision;
+    public Reunion getReunion() {
+        return this.reunion;
     }
 
-    public void setDecision(String decision) {
-        this.decision = decision;
+    public void setReunion(final Reunion reunion) {
+        this.reunion = reunion;
     }
 
+    public List<Expediente> getExpedientes() {
+        return this.expedientes;
+    }
+
+    public void setExpedientes(final List<Expediente> expedientes) {
+        this.expedientes = expedientes;
+    }
 }

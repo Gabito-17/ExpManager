@@ -1,15 +1,11 @@
-package edu.unam.pooproject.Controller;
+package edu.unam.pooproject.controller;
 
-import edu.unam.pooproject.Repositorio.PersonaRepositorio;
 import edu.unam.pooproject.Services.Enrutador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class MiembroController {
 
@@ -26,36 +22,6 @@ public class MiembroController {
     Label lblResultado;
     @FXML
     TextArea txtTexto;
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("PooProject");
-    PersonaRepositorio control = new PersonaRepositorio(emf);
-
-    //Limpiar todos los inputs
-    @FXML
-    public void limpiarCampos() {
-        txtDniMiembro.clear();
-        txtNombreMiembro.clear();
-        txtApellidoMiembro.clear();
-        txtEmailMiembro.clear();
-        txtTexto.clear();
-    }
-
-    public void cargarCampos() throws Exception {
-        lblResultado.setText(txtDniMiembro.getText() + txtNombreMiembro.getText() + txtTexto.getText());
-        control.destroy(3);
-    }
-
-    //Cerrar Sesion y ubicar en ventana "Login"
-    @FXML
-    public void cerrarSesion(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/login-view.fxml");
-    }
-
-    //Cambios de ventana
-    //Ubicar en ventana "Inicio"
-    @FXML
-    public void menuInicio(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/inicio-view.fxml");
-    }
 
     //Ubicar en ventana "Expediente"
     @FXML
@@ -65,8 +31,8 @@ public class MiembroController {
 
     //Ubicar en ventana "Miembro"
     @FXML
-    public void menuMiembros(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/miembros-view.fxml");
+    public void menuMiembro(ActionEvent event) {
+        Enrutador.cambiarVentana(event, "/View/personas-view.fxml");
     }
 
     //Ubicar en ventana "Reunion"
@@ -85,6 +51,11 @@ public class MiembroController {
     @FXML
     public void menuMinuta(ActionEvent event) {
         Enrutador.cambiarVentana(event, "/View/minuta-view.fxml");
+    }
+
+    @FXML
+    public void menuPersona(ActionEvent event) {
+        Enrutador.cambiarVentana(event, "/View/personas-view.fxml");
     }
 
 

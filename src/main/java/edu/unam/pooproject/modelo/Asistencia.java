@@ -1,7 +1,6 @@
 package edu.unam.pooproject.modelo;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 
 @Entity
@@ -10,38 +9,53 @@ public class Asistencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    @Column(name = "fecha")
-    LocalDate fecha;
     @Column(name = "asiste")
-    Boolean asiste;
+    Boolean asistio;
     @ManyToOne
     @JoinColumn(name = "reunion_id")
     private Reunion reunion;
+    @ManyToOne
+    @JoinColumn(name = "miembro_id")
+    private Persona miembro;
 
     public Asistencia() {
     }
 
-    public Asistencia(int idAsistencia, LocalDate fecha, Boolean asiste) {
-        this.id = idAsistencia;
-        this.asiste = asiste;
+    public Asistencia(Boolean a, Reunion r, Persona m) {
+        this.asistio = a;
+        this.reunion = r;
+        this.miembro = m;
     }
-
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
-    public void setId(int idAsistencia) {
-        this.id = idAsistencia;
+    public void setId(final int id) {
+        this.id = id;
     }
 
-
-    public Boolean getAsiste() {
-        return asiste;
+    public Boolean getAsistio() {
+        return this.asistio;
     }
 
-    public void setAsiste(Boolean asiste) {
-        this.asiste = asiste;
+    public void setAsistio(final Boolean asistio) {
+        this.asistio = asistio;
     }
 
+    public Reunion getReunion() {
+        return this.reunion;
+    }
+
+    public void setReunion(final Reunion reunion) {
+        this.reunion = reunion;
+    }
+
+    public Persona getMiembro() {
+        return this.miembro;
+    }
+
+    public void setMiembro(final Persona miembro) {
+        this.miembro = miembro;
+    }
 }

@@ -12,25 +12,22 @@ public class Reunion {
     int id;
     @Column(name = "fecha")
     LocalDate fecha;
-    @OneToMany(mappedBy = "reunion")
-    private List<Asistencia> asistencias;
-
-    @ManyToMany
-    @JoinTable(
-            name = "reunion_minuta",
-            joinColumns = @JoinColumn(name = "minuta_id"),
-            inverseJoinColumns = @JoinColumn(name = "reunion_id")
-    )
-    private List<Minuta> minutas;
-
     @ManyToMany
     @JoinTable(
             name = "reunion_miembro",
             joinColumns = @JoinColumn(name = "reunion_id"),
             inverseJoinColumns = @JoinColumn(name = "miembro_id")
     )
-    private List<Miembro> miembros;
+    private List<Persona> miembros;
 
+    @ManyToMany(mappedBy = "reuniones")
+    private List<Expediente> expedientes;
+
+    @OneToMany(mappedBy = "reunion")
+    private List<Asistencia> asistencias;
+
+    @OneToMany(mappedBy = "reunion")
+    private List<Minuta> minutas;
 
 
     public Reunion() {

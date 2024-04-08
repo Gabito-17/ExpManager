@@ -7,12 +7,10 @@
         <class>edu.unam.pooproject.modelo.Accion</class>
         <class>edu.unam.pooproject.modelo.Asistencia</class>
         <class>edu.unam.pooproject.modelo.Expediente</class>
-        <class>edu.unam.pooproject.modelo.Iniciante</class>
-        <class>edu.unam.pooproject.modelo.Involucrado</class>
-        <class>edu.unam.pooproject.modelo.Miembro</class>
         <class>edu.unam.pooproject.modelo.Minuta</class>
-        <class>edu.unam.pooproject.modelo.Reunion</class>
         <class>edu.unam.pooproject.modelo.Persona</class>
+        <class>edu.unam.pooproject.modelo.Reunion</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/prueba"/>

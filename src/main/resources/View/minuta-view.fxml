@@ -10,7 +10,7 @@
 <?import javafx.scene.text.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="900.0"
             style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/18"
-            fx:controller="edu.unam.pooproject.Controller.PrincipalViewController">
+            fx:controller="edu.unam.pooproject.controller.PersonaController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="582.0" prefWidth="214.0" spacing="10" BorderPane.alignment="CENTER">

@@ -21,8 +21,9 @@ public class Accion {
     public Accion() {
     }
 
-    public Accion(final LocalDate fecha, final String cambio, final Expediente expediente) {
-        this.fecha = fecha;
-        this.cambio = cambio;
+    public Accion(final LocalDate f, final String c, final Expediente e) {
+        this.fecha = f;
+        this.cambio = c;
+        this.expediente = e;
     }
 }
