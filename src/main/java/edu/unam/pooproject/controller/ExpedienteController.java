@@ -55,10 +55,6 @@ public class ExpedienteController {
     private TableColumn<Expediente, String> colEstado;
     private ObservableList<Persona> listaInvolucrados = FXCollections.observableArrayList();
 
-    public ExpedienteController() {
-        this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
-        this.expedienteServicio = new ExpedienteServicio(this.repositorio);
-    }
 
     @FXML
     public void initialize() {
@@ -81,6 +77,12 @@ public class ExpedienteController {
 
         // Asignar la fecha al label FechaIngreso
         lblFechaIngreso.setText(fechaHoy.toString());
+        cargarComboBox(cmbIniciantes);
+        cargarComboBox(cmbInvolucrados);
+
+    }
+
+    private void cargarComboBox(ComboBox cmb) {
 
         // Crear lista a partir de las personas registradas
         List<Persona> personas = repositorio.obtenerTodos(Persona.class);
@@ -88,11 +90,11 @@ public class ExpedienteController {
         ObservableList<Persona> opcionesPersonas = FXCollections.observableArrayList(personas);
 
         // Asignar la lista observable al ComboBoxIniciantes
-        cmbIniciantes.setItems(opcionesPersonas);
-        cmbIniciantes.setConverter(new StringConverter<Persona>() {
+        cmb.setItems(opcionesPersonas);
+        cmb.setConverter(new StringConverter<Persona>() {
             public String toString(Persona persona) {
                 if (persona != null) {
-                    return persona.getNombre() + " " + persona.getApellido();
+                    return persona.getApellido() + " " + persona.getNombre();
                 } else {
                     return "";
                 }
@@ -174,13 +176,6 @@ public class ExpedienteController {
         }
     }
 
-    private void mostrarError(String s) {
-        Alert alertError = new Alert(Alert.AlertType.ERROR);
-        alertError.setTitle("Error");
-        alertError.setHeaderText((String) null);
-        alertError.setContentText(s);
-        alertError.showAndWait();
-    }
 
     //Limpiar todos los inputs
     @FXML
@@ -347,6 +342,14 @@ public class ExpedienteController {
     @FXML
     public void menuMinuta(ActionEvent event) {
         Enrutador.cambiarVentana(event, "/View/minuta-view.fxml");
+    }
+
+    private void mostrarError(String s) {
+        Alert alertError = new Alert(Alert.AlertType.ERROR);
+        alertError.setTitle("Error");
+        alertError.setHeaderText((String) null);
+        alertError.setContentText(s);
+        alertError.showAndWait();
     }
 }
 

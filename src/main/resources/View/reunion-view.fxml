@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.effect.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="900.0"
-            style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21"
-            fx:controller="edu.unam.pooproject.controller.PersonaController">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unam.pooproject.controller.ReunionController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="582.0" prefWidth="214.0" spacing="10" BorderPane.alignment="CENTER">
@@ -20,181 +37,143 @@
                         <children>
                             <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@../edu/unam/pooproject/image/usuario.png"/>
+                                    <Image url="@../edu/unam/pooproject/image/usuario.png" />
                                 </image>
                             </ImageView>
                         </children>
                         <HBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </HBox.margin>
                         <padding>
-                            <Insets bottom="10.0" left="10.0" right="5.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
                         </padding>
                     </Pane>
                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                         <children>
                             <Label text="BIENVENIDO" textFill="WHITE">
                                 <font>
-                                    <Font name="Mongolian Baiti" size="13.0"/>
+                                    <Font name="Mongolian Baiti" size="13.0" />
                                 </font>
                                 <VBox.margin>
-                                    <Insets top="5.0"/>
+                                    <Insets top="5.0" />
                                 </VBox.margin>
                             </Label>
                             <Label text="ADMIN">
                                 <font>
-                                    <Font name="Constantia" size="12.0"/>
+                                    <Font name="Constantia" size="12.0" />
                                 </font>
                                 <VBox.margin>
-                                    <Insets top="5.0"/>
+                                    <Insets top="5.0" />
                                 </VBox.margin>
                             </Label>
-                            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="100.0">
-                                <children>
-                                    <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#cerrarSesion"
-                                            style="-fx-background-color: #568c8d;" text="Salir" textFill="WHITE">
-                                        <graphic>
-                                            <ImageView accessibleRole="BUTTON" fitHeight="22.0" fitWidth="22.0"
-                                                       pickOnBounds="true" preserveRatio="true">
-                                                <image>
-                                                    <Image url="@../edu/unam/pooproject/image/cerrar-sesion.png"/>
-                                                </image>
-                                            </ImageView>
-                                        </graphic>
-                                        <font>
-                                            <Font name="Cambria" size="15.0"/>
-                                        </font>
-                                        <cursor>
-                                            <Cursor fx:constant="HAND"/>
-                                        </cursor>
-                                    </Button>
-                                </children>
-                            </HBox>
+                            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="100.0" />
                         </children>
                     </VBox>
                 </children>
                 <VBox.margin>
-                    <Insets bottom="10.0" left="2.0" right="2.0"/>
+                    <Insets bottom="10.0" left="2.0" right="2.0" />
                 </VBox.margin>
             </HBox>
-            <Label prefHeight="22.0" prefWidth="206.0" text="MENU DE NAVEGACION" textFill="#e7e7e7">
+            <Button fx:id="btnMenuInicio" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembro" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="MIEMBROS DEL CONSEJO" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Palatino Linotype Bold" size="16.0"/>
-                </font>
-            </Label>
-            <Button fx:id="btnMenuInicio" alignment="CENTER" contentDisplay="CENTER" minWidth="100"
-                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuInicio" prefHeight="50.0" prefWidth="250.0"
-                    style="-fx-background-color: #396f70;" text="INICIO" textFill="WHITE" VBox.vgrow="ALWAYS">
-                <font>
-                    <Font name="Cambria" size="18.0"/>
+                    <Font name="Cambria" size="18.0" />
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN"/>
+                    <Blend mode="DARKEN" />
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0"/>
+                    <Insets bottom="5.0" top="5.0" />
                 </padding>
                 <VBox.margin>
-                    <Insets/>
+                    <Insets />
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuExpedientes" alignment="CENTER" contentDisplay="CENTER" minWidth="100"
-                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuExpedientes" prefHeight="50.0" prefWidth="250.0"
-                    style="-fx-background-color: #396f70;" text="EXPEDIENTES" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuExpedientes" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuExpediente" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="EXPEDIENTES" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0"/>
+                    <Font name="Cambria" size="18.0" />
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN"/>
+                    <Blend mode="DARKEN" />
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0"/>
+                    <Insets bottom="5.0" top="5.0" />
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0"/>
+                    <Insets top="-6.0" />
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuMiembros" alignment="CENTER" contentDisplay="CENTER" minWidth="100"
-                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembros" prefHeight="50.0" prefWidth="250.0"
-                    style="-fx-background-color: #396f70;" text="MIEMBROS DEL CONSEJO" textFill="WHITE"
-                    VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuMiembros" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuPersona" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="PERSONAS" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0"/>
+                    <Font name="Cambria" size="18.0" />
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN"/>
+                    <Blend mode="DARKEN" />
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0"/>
+                    <Insets bottom="5.0" top="5.0" />
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0"/>
+                    <Insets top="-6.0" />
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuReuniones" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuReunion" prefHeight="50.0" prefWidth="250.0"
-                    style="-fx-background-color: #73aaaa;" text="REUNIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuReuniones" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuReunion" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #73aaaa;" text="REUNIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0"/>
+                    <Font name="Cambria" size="18.0" />
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN"/>
+                    <Blend mode="DARKEN" />
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0"/>
+                    <Insets bottom="5.0" top="5.0" />
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0"/>
+                    <Insets top="-6.0" />
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuAsistencia" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuAsistencia" prefHeight="50.0" prefWidth="250.0"
-                    style="-fx-background-color: #396f70;" text="ASISTENCIA" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuAsistencia" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuAsistencia" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="ASISTENCIA" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0"/>
+                    <Font name="Cambria" size="18.0" />
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN"/>
+                    <Blend mode="DARKEN" />
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0"/>
+                    <Insets bottom="5.0" top="5.0" />
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0"/>
+                    <Insets top="-6.0" />
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuMinutas" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMinuta" prefHeight="50.0" prefWidth="250.0"
-                    style="-fx-background-color: #396f70;" text="MINUTAS" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuMinutas" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMinuta" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="MINUTAS" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0"/>
+                    <Font name="Cambria" size="18.0" />
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN"/>
+                    <Blend mode="DARKEN" />
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0"/>
+                    <Insets bottom="5.0" top="5.0" />
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0"/>
+                    <Insets top="-6.0" />
                 </VBox.margin>
             </Button>
         </VBox>
@@ -202,20 +181,19 @@
     <top>
         <Label alignment="TOP_LEFT" text="DEPARTAMENTO DE INFORMATICA" BorderPane.alignment="CENTER">
             <font>
-                <Font name="Georgia" size="12.0"/>
+                <Font name="Georgia" size="12.0" />
             </font>
         </Label>
     </top>
     <bottom>
         <Label text="Todos los derechos reservados" BorderPane.alignment="CENTER">
             <font>
-                <Font name="System Italic" size="8.0"/>
+                <Font name="System Italic" size="8.0" />
             </font>
         </Label>
     </bottom>
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e5f4f4;"
-                    BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e5f4f4;" BorderPane.alignment="CENTER">
             <children>
                 <VBox prefHeight="588.0" prefWidth="687.0">
                     <children>
@@ -225,220 +203,157 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="559.0" prefWidth="419.0">
                                             <children>
-                                                <Label layoutX="213.0" layoutY="14.0" prefHeight="27.0"
-                                                       prefWidth="197.0" text="REGISTRAR REUNION">
+                                                <Label layoutX="213.0" layoutY="14.0" prefHeight="27.0" prefWidth="197.0" text="REGISTRAR REUNION">
                                                     <font>
-                                                        <Font size="18.0"/>
+                                                        <Font size="18.0" />
                                                     </font>
                                                 </Label>
-                                                <GridPane layoutX="24.0" layoutY="68.0" prefHeight="259.0"
-                                                          prefWidth="287.0">
+                                                <GridPane layoutX="24.0" layoutY="68.0" prefHeight="277.0" prefWidth="276.0">
                                                     <columnConstraints>
-                                                        <ColumnConstraints hgrow="SOMETIMES"
-                                                                           maxWidth="154.66665649414062" minWidth="10.0"
-                                                                           prefWidth="110.0"/>
-                                                        <ColumnConstraints hgrow="SOMETIMES"
-                                                                           maxWidth="211.33334350585938" minWidth="10.0"
-                                                                           prefWidth="177.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.66665649414062" minWidth="0.0" prefWidth="61.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="158.0" />
                                                     </columnConstraints>
                                                     <rowConstraints>
-                                                        <RowConstraints maxHeight="86.66667175292969" minHeight="0.0"
-                                                                        prefHeight="25.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="120.66668701171874" minHeight="0.0"
-                                                                        prefHeight="38.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0"
-                                                                        prefHeight="42.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0"
-                                                                        prefHeight="72.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0"
-                                                                        prefHeight="85.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="86.66667175292969" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="120.66668701171874" minHeight="0.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0" prefHeight="119.0" vgrow="SOMETIMES" />
                                                     </rowConstraints>
                                                     <children>
-                                                        <Label fx:id="lblFecha" alignment="CENTER" prefHeight="27.0"
-                                                               prefWidth="184.0" textAlignment="RIGHT"
-                                                               GridPane.columnIndex="1">
+                                                        <Label fx:id="lblFecha" alignment="CENTER" prefHeight="27.0" prefWidth="184.0" textAlignment="RIGHT" GridPane.columnIndex="1">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label prefHeight="27.0" prefWidth="184.0" text="Hora inicio:"
-                                                               underline="true" GridPane.rowIndex="1">
+                                                        <Label prefHeight="27.0" prefWidth="184.0" text="Hora inicio:" underline="true" GridPane.rowIndex="1">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label prefHeight="22.0" prefWidth="160.0" text="Fecha:"
-                                                               underline="true">
+                                                        <Label prefHeight="22.0" prefWidth="160.0" text="Fecha:" underline="true">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <ComboBox fx:id="cmbIniciante" prefHeight="25.0"
-                                                                  prefWidth="199.0" GridPane.columnIndex="1"
-                                                                  GridPane.rowIndex="1"/>
-                                                        <ListView fx:id="lstInvolucrados" prefHeight="89.0"
-                                                                  prefWidth="195.0" GridPane.columnIndex="1"
-                                                                  GridPane.rowIndex="4"/>
-                                                        <Label prefHeight="27.0" prefWidth="184.0" text="Miembros:"
-                                                               underline="true" GridPane.rowIndex="4">
-                                                            <font>
-                                                                <Font size="11.0"/>
-                                                            </font>
-                                                        </Label>
-                                                        <VBox prefHeight="200.0" prefWidth="100.0"
-                                                              GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                            <children>
-                                                                <ComboBox fx:id="cmbIniciante1" prefHeight="25.0"
-                                                                          prefWidth="199.0"/>
-                                                            </children>
-                                                        </VBox>
+                                                        <ComboBox fx:id="cmbHoraInicio" onAction="#verificarHoraInicio" prefHeight="25.0" prefWidth="199.0" promptText="Seleccionar Hora de Inicio" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                         <VBox prefHeight="69.0" prefWidth="103.0" GridPane.rowIndex="2">
                                                             <children>
-                                                                <Label prefHeight="27.0" prefWidth="184.0"
-                                                                       text="Hora fin:" underline="true">
+                                                                <Label prefHeight="27.0" prefWidth="184.0" text="Hora fin:" underline="true">
                                                                     <font>
-                                                                        <Font size="11.0"/>
+                                                                        <Font size="11.0" />
                                                                     </font>
                                                                 </Label>
                                                             </children>
                                                         </VBox>
-                                                        <DatePicker GridPane.columnIndex="1"/>
-                                                        <BorderPane prefHeight="200.0" prefWidth="200.0"
-                                                                    GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                            <right>
-                                                                <Button fx:id="btnAgregar" mnemonicParsing="false"
-                                                                        prefHeight="25.0" prefWidth="71.0"
-                                                                        text="Agregar" BorderPane.alignment="CENTER"/>
-                                                            </right>
-                                                            <left>
-                                                                <Button fx:id="btnQuitar" mnemonicParsing="false"
-                                                                        prefHeight="25.0" prefWidth="71.0" text="Quitar"
-                                                                        BorderPane.alignment="CENTER"/>
-                                                            </left>
-                                                            <top>
-                                                                <ComboBox fx:id="cmbInvolucrado" prefHeight="25.0"
-                                                                          prefWidth="199.0"
-                                                                          BorderPane.alignment="CENTER"/>
-                                                            </top>
+                                                        <DatePicker fx:id="dpFecha" GridPane.columnIndex="1" />
+                                                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                             <center>
+                                                              <Label prefHeight="22.0" prefWidth="160.0" text="Lugar:" underline="true" BorderPane.alignment="CENTER">
+                                                                  <font>
+                                                                      <Font size="11.0" />
+                                                                  </font>
+                                                              </Label>
+                                             </center>
                                                         </BorderPane>
-                                                        <BorderPane prefHeight="200.0" prefWidth="200.0"
-                                                                    GridPane.rowIndex="3">
-                                                            <top>
-                                                                <Label prefHeight="27.0" prefWidth="115.0"
-                                                                       text="Añadir miembros:" underline="true"
-                                                                       BorderPane.alignment="CENTER">
+                                                          <ComboBox fx:id="cmbHoraFin" onAction="#verificarHoraFin" prefHeight="25.0" prefWidth="224.0" promptText="Seleccionar Hora de Finalizacion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <TextArea fx:id="taDetalles" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                                             <children>
+                                                                <Label prefHeight="22.0" prefWidth="160.0" text="Detalles:" underline="true">
                                                                     <font>
-                                                                        <Font size="11.0"/>
+                                                                        <Font size="11.0" />
                                                                     </font>
                                                                 </Label>
-                                                            </top>
-                                                        </BorderPane>
+                                             </children>
+                                          </VBox>
+                                                        <TextField fx:id="txtLugar" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                     </children>
                                                 </GridPane>
-                                                <TableView fx:id="tvExpediente" layoutX="6.0" layoutY="370.0"
-                                                           prefHeight="182.0" prefWidth="675.0">
+                                                <TableView fx:id="tvReunion" layoutX="6.0" layoutY="370.0" prefHeight="182.0" prefWidth="675.0">
                                                     <columns>
-                                                        <TableColumn prefWidth="104.66670227050781" text="Nro"/>
-                                                        <TableColumn minWidth="0.0" prefWidth="98.66665649414062"
-                                                                     text="Fecha"/>
-                                                        <TableColumn minWidth="0.0" prefWidth="182.66665649414062"
-                                                                     text="Hora"/>
-                                                        <TableColumn prefWidth="167.33331298828125" text="Titulo"/>
-                                                        <TableColumn prefWidth="120.00002034505212" text="Estado"/>
+                                                        <TableColumn fx:id="colId" prefWidth="34.0" text="Nro" />
+                                                        <TableColumn fx:id="colFecha" minWidth="0.0" prefWidth="132.0" text="Fecha" />
+                                                        <TableColumn fx:id="colDetalles" minWidth="0.0" prefWidth="358.0" text="Detalles" />
+                                                        <TableColumn fx:id="colHoraInicio" prefWidth="42.0" text="Inicio" />
+                                                        <TableColumn fx:id="colHoraFin" prefWidth="55.0" text="Fin" />
+                                          <TableColumn fx:id="colEstado" prefWidth="48.0" text="Estado" />
                                                     </columns>
                                                 </TableView>
-                                                <Button fx:id="btnCargar" layoutX="596.0" layoutY="334.0"
-                                                        mnemonicParsing="false" text="Cargar"/>
-                                                <Button fx:id="btnLimpiar" layoutX="465.0" layoutY="334.0"
-                                                        mnemonicParsing="false" text="Limpiar Campos"/>
-                                                <GridPane layoutX="346.0" layoutY="59.0" prefHeight="268.0"
-                                                          prefWidth="287.0">
+                                                <Button fx:id="btnCargar" layoutX="596.0" layoutY="334.0" mnemonicParsing="false" text="Cargar" />
+                                                <Button fx:id="btnLimpiar" layoutX="475.0" layoutY="334.0" mnemonicParsing="false" text="Limpiar Campos" />
+                                                <GridPane layoutX="348.0" layoutY="64.0" prefHeight="268.0" prefWidth="312.0">
                                                     <columnConstraints>
-                                                        <ColumnConstraints hgrow="SOMETIMES"
-                                                                           maxWidth="154.66665649414062" minWidth="10.0"
-                                                                           prefWidth="110.0"/>
-                                                        <ColumnConstraints hgrow="SOMETIMES"
-                                                                           maxWidth="211.33334350585938" minWidth="10.0"
-                                                                           prefWidth="177.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.66665649414062" minWidth="10.0" prefWidth="111.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="201.0" />
                                                     </columnConstraints>
                                                     <rowConstraints>
-                                                        <RowConstraints maxHeight="86.66667175292969" minHeight="0.0"
-                                                                        prefHeight="34.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0"
-                                                                        prefHeight="69.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0"
-                                                                        prefHeight="67.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0"
-                                                                        prefHeight="85.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="86.66667175292969" minHeight="0.0" prefHeight="57.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
                                                     </rowConstraints>
                                                     <children>
-                                                        <Label prefHeight="22.0" prefWidth="160.0" text="Lugar:"
-                                                               underline="true">
+                                                        <Label prefHeight="27.0" prefWidth="184.0" text="Orden:" underline="true" GridPane.rowIndex="3">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <ListView fx:id="lstInvolucrados1" prefHeight="89.0"
-                                                                  prefWidth="195.0" GridPane.columnIndex="1"
-                                                                  GridPane.rowIndex="3"/>
-                                                        <Label prefHeight="27.0" prefWidth="184.0" text="Orden:"
-                                                               underline="true" GridPane.rowIndex="3">
-                                                            <font>
-                                                                <Font size="11.0"/>
-                                                            </font>
-                                                        </Label>
-                                                        <VBox prefHeight="200.0" prefWidth="100.0"
-                                                              GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                             <children>
                                                                 <BorderPane prefHeight="200.0" prefWidth="200.0">
-                                                                    <center>
-                                                                        <TextArea prefHeight="200.0" prefWidth="200.0"
-                                                                                  BorderPane.alignment="CENTER"/>
-                                                                    </center>
+                                                   <center>
+                                                                    <ListView fx:id="lstMiembros" prefHeight="89.0" prefWidth="195.0" BorderPane.alignment="CENTER" />
+                                                   </center>
                                                                 </BorderPane>
                                                             </children>
                                                         </VBox>
                                                         <VBox prefHeight="69.0" prefWidth="103.0" GridPane.rowIndex="1">
-                                                            <children>
-                                                                <Label prefHeight="22.0" prefWidth="160.0"
-                                                                       text="Descripcion:" underline="true">
-                                                                    <font>
-                                                                        <Font size="11.0"/>
-                                                                    </font>
-                                                                </Label>
-                                                            </children>
+                                             <children>
+                                                              <Label prefHeight="27.0" prefWidth="184.0" text="Miembros:" underline="true">
+                                                                  <font>
+                                                                      <Font size="11.0" />
+                                                                  </font>
+                                                              </Label>
+                                             </children>
                                                         </VBox>
-                                                        <BorderPane prefHeight="200.0" prefWidth="200.0"
-                                                                    GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                             <right>
-                                                                <Button fx:id="btnAgregar1" mnemonicParsing="false"
-                                                                        prefHeight="25.0" prefWidth="71.0"
-                                                                        text="Agregar" BorderPane.alignment="CENTER"/>
+                                                                <Button fx:id="btnAgregar1" mnemonicParsing="false" onAction="#agregarExpediente" prefHeight="25.0" prefWidth="71.0" text="Agregar" BorderPane.alignment="CENTER" />
                                                             </right>
                                                             <left>
-                                                                <Button fx:id="btnQuitar1" mnemonicParsing="false"
-                                                                        prefHeight="25.0" prefWidth="71.0" text="Quitar"
-                                                                        BorderPane.alignment="CENTER"/>
+                                                                <Button fx:id="btnQuitar1" mnemonicParsing="false" onAction="#quitarExpediente" prefHeight="25.0" prefWidth="71.0" text="Quitar" BorderPane.alignment="CENTER" />
                                                             </left>
                                                             <top>
-                                                                <ComboBox fx:id="cmbInvolucrado1" prefHeight="25.0"
-                                                                          prefWidth="199.0"
-                                                                          BorderPane.alignment="CENTER"/>
+                                                                <ComboBox fx:id="cmbExpedientes" prefHeight="25.0" prefWidth="199.0" promptText="Seleccionar Expediente" BorderPane.alignment="CENTER" />
                                                             </top>
                                                         </BorderPane>
-                                                        <BorderPane prefHeight="200.0" prefWidth="200.0"
-                                                                    GridPane.rowIndex="2">
-                                                            <top>
-                                                                <Label prefHeight="27.0" prefWidth="115.0"
-                                                                       text="Añadir Expediente:" underline="true"
-                                                                       BorderPane.alignment="CENTER">
+                                          <ListView fx:id="lstExpedientes" prefHeight="89.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <top>
+                                                                <ComboBox fx:id="cmbMiembros" prefHeight="25.0" prefWidth="199.0" promptText="Seleccionar Miembro" BorderPane.alignment="CENTER" />
+                                             </top>
+                                             <right>
+                                                                <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregarMiembro" prefHeight="25.0" prefWidth="71.0" text="Agregar" BorderPane.alignment="CENTER" />
+                                             </right>
+                                             <left>
+                                                                <Button fx:id="btnQuitar" mnemonicParsing="false" onAction="#quitarMiembro" prefHeight="25.0" prefWidth="71.0" text="Quitar" BorderPane.alignment="CENTER" />
+                                             </left>
+                                                        </BorderPane>
+                                                          <Label prefHeight="27.0" prefWidth="115.0" text="Añadir Expediente:" underline="true" GridPane.rowIndex="2">
+                                                              <font>
+                                                                  <Font size="11.0" />
+                                                              </font>
+                                                          </Label>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                                <Label prefHeight="27.0" prefWidth="115.0" text="Añadir miembro:" underline="true">
                                                                     <font>
-                                                                        <Font size="11.0"/>
+                                                                        <Font size="11.0" />
                                                                     </font>
                                                                 </Label>
-                                                            </top>
-                                                        </BorderPane>
-                                                        <TextField GridPane.columnIndex="1"/>
+                                             </children>
+                                          </VBox>
                                                     </children>
                                                 </GridPane>
                                             </children>
@@ -449,84 +364,62 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
-                                                <Label layoutX="246.0" layoutY="14.0" prefHeight="27.0"
-                                                       prefWidth="110.0" text="ASISTENCIA" textAlignment="CENTER">
+                                                <Label layoutX="246.0" layoutY="14.0" prefHeight="27.0" prefWidth="110.0" text="ASISTENCIA" textAlignment="CENTER">
                                                     <font>
-                                                        <Font size="18.0"/>
+                                                        <Font size="18.0" />
                                                     </font>
                                                 </Label>
-                                                <TableView fx:id="tvExpediente11" layoutX="7.0" layoutY="346.0"
-                                                           prefHeight="207.0" prefWidth="677.0">
+                                                <TableView fx:id="tvReunion" layoutX="7.0" layoutY="346.0" prefHeight="207.0" prefWidth="677.0">
                                                     <columns>
-                                                        <TableColumn prefWidth="104.66670227050781" text="Nro"/>
-                                                        <TableColumn minWidth="0.0" prefWidth="98.66665649414062"
-                                                                     text="Fecha"/>
-                                                        <TableColumn minWidth="0.0" prefWidth="182.66665649414062"
-                                                                     text="Iniciante"/>
-                                                        <TableColumn prefWidth="167.33331298828125" text="Titulo"/>
-                                                        <TableColumn minWidth="0.0" prefWidth="130.00002034505212"
-                                                                     text="Estado"/>
+                                                        <TableColumn fx:id="colId" prefWidth="104.66670227050781" text="Nro" />
+                                                        <TableColumn fx:id="colFecha" minWidth="0.0" prefWidth="98.66665649414062" text="Fecha" />
+                                                        <TableColumn fx:id="colDetalles" minWidth="0.0" prefWidth="182.66665649414062" text="Detalles" />
+                                                        <TableColumn prefWidth="167.33331298828125" text="Titulo" />
+                                                        <TableColumn minWidth="0.0" prefWidth="130.00002034505212" text="Estado" />
                                                     </columns>
                                                 </TableView>
-                                                <GridPane layoutX="14.0" layoutY="41.0" prefHeight="271.0"
-                                                          prefWidth="287.0">
+                                                <GridPane layoutX="14.0" layoutY="41.0" prefHeight="271.0" prefWidth="287.0">
                                                     <columnConstraints>
-                                                        <ColumnConstraints hgrow="SOMETIMES"
-                                                                           maxWidth="154.66665649414062" minWidth="10.0"
-                                                                           prefWidth="110.0"/>
-                                                        <ColumnConstraints hgrow="SOMETIMES"
-                                                                           maxWidth="211.33334350585938" minWidth="10.0"
-                                                                           prefWidth="177.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.66665649414062" minWidth="10.0" prefWidth="110.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.33334350585938" minWidth="10.0" prefWidth="177.0" />
                                                     </columnConstraints>
                                                     <rowConstraints>
-                                                        <RowConstraints maxHeight="86.66667175292969" minHeight="0.0"
-                                                                        prefHeight="27.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="0.0"
-                                                                        prefHeight="19.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="0.0"
-                                                                        prefHeight="18.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="185.0" minHeight="0.0"
-                                                                        prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="86.66667175292969" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="0.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="0.0" prefHeight="18.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="185.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                     </rowConstraints>
                                                     <children>
-                                                        <Label prefHeight="22.0" prefWidth="37.0" text="Fecha:"
-                                                               underline="true">
+                                                        <Label prefHeight="22.0" prefWidth="37.0" text="Fecha:" underline="true">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label prefHeight="22.0" prefWidth="68.0" text="Hora Inicio:"
-                                                               underline="true" GridPane.rowIndex="1">
+                                                        <Label prefHeight="22.0" prefWidth="68.0" text="Hora Inicio:" underline="true" GridPane.rowIndex="1">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Hora Fin:"
-                                                               underline="true" GridPane.rowIndex="2">
+                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Hora Fin:" underline="true" GridPane.rowIndex="2">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Lugar:"
-                                                               underline="true" GridPane.rowIndex="3">
+                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Lugar:" underline="true" GridPane.rowIndex="3">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
                                                     </children>
                                                 </GridPane>
-                                                <ListView fx:id="lstInvolucrados21" layoutX="447.0" layoutY="61.0"
-                                                          prefHeight="131.0" prefWidth="195.0"/>
-                                                <Label layoutX="385.0" layoutY="84.0" prefHeight="22.0" prefWidth="58.0"
-                                                       text="Miembros:" underline="true">
+                                                <ListView fx:id="lstInvolucrados21" layoutX="447.0" layoutY="61.0" prefHeight="131.0" prefWidth="195.0" />
+                                                <Label layoutX="385.0" layoutY="84.0" prefHeight="22.0" prefWidth="58.0" text="Miembros:" underline="true">
                                                     <font>
-                                                        <Font size="11.0"/>
+                                                        <Font size="11.0" />
                                                     </font>
                                                 </Label>
-                                                <RadioButton layoutX="560.0" layoutY="207.0" mnemonicParsing="false"
-                                                             text="Presente"/>
-                                                <RadioButton layoutX="447.0" layoutY="207.0" mnemonicParsing="false"
-                                                             text="Ausente"/>
+                                                <RadioButton layoutX="560.0" layoutY="207.0" mnemonicParsing="false" text="Presente" />
+                                                <RadioButton layoutX="447.0" layoutY="207.0" mnemonicParsing="false" text="Ausente" />
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -535,107 +428,81 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
-                                                <Label layoutX="308.0" layoutY="14.0" prefHeight="27.0"
-                                                       prefWidth="110.0" text="REUNIONES" textAlignment="CENTER">
+                                                <Label layoutX="308.0" layoutY="14.0" prefHeight="27.0" prefWidth="110.0" text="REUNIONES" textAlignment="CENTER">
                                                     <font>
-                                                        <Font size="18.0"/>
+                                                        <Font size="18.0" />
                                                     </font>
                                                 </Label>
-                                                <TableView fx:id="tvExpediente1" layoutX="7.0" layoutY="375.0"
-                                                           prefHeight="178.0" prefWidth="677.0">
+                                                <TableView fx:id="tvReunion" layoutX="7.0" layoutY="375.0" prefHeight="178.0" prefWidth="677.0">
                                                     <columns>
-                                                        <TableColumn prefWidth="104.66670227050781" text="Nro"/>
-                                                        <TableColumn minWidth="0.0" prefWidth="98.66665649414062"
-                                                                     text="Fecha"/>
-                                                        <TableColumn minWidth="0.0" prefWidth="182.66665649414062"
-                                                                     text="Iniciante"/>
-                                                        <TableColumn prefWidth="167.33331298828125" text="Titulo"/>
-                                                        <TableColumn minWidth="0.0" prefWidth="130.00002034505212"
-                                                                     text="Estado"/>
+                                                        <TableColumn fx:id="colId" prefWidth="30.0" text="Nro" />
+                                                        <TableColumn fx:id="colFecha" minWidth="0.0" prefWidth="100.0" text="Fecha" />
+                                                        <TableColumn fx:id="colDetalles" minWidth="0.0" prefWidth="404.0" text="Detalles" />
+                                                        <TableColumn fx:id="colInicio" prefWidth="46.0" text="Inicio" />
+                                                        <TableColumn fx:id="colFin" minWidth="0.0" prefWidth="49.0" text="Fin" />
+                                          <TableColumn fx:id="colEstado" minWidth="0.0" prefWidth="44.0" text="Estado" />
                                                     </columns>
                                                 </TableView>
-                                                <Button fx:id="btnEliminar" layoutX="586.0" layoutY="338.0"
-                                                        mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0"
-                                                        text="Eliminar"/>
-                                                <GridPane layoutX="14.0" layoutY="41.0" prefHeight="321.0"
-                                                          prefWidth="287.0">
+                                                <Button fx:id="btnEliminar" layoutX="586.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Eliminar" />
+                                                <GridPane layoutX="14.0" layoutY="41.0" prefHeight="321.0" prefWidth="287.0">
                                                     <columnConstraints>
-                                                        <ColumnConstraints hgrow="SOMETIMES"
-                                                                           maxWidth="154.66665649414062" minWidth="10.0"
-                                                                           prefWidth="110.0"/>
-                                                        <ColumnConstraints hgrow="SOMETIMES"
-                                                                           maxWidth="211.33334350585938" minWidth="10.0"
-                                                                           prefWidth="177.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.66665649414062" minWidth="10.0" prefWidth="110.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.33334350585938" minWidth="10.0" prefWidth="177.0" />
                                                     </columnConstraints>
                                                     <rowConstraints>
-                                                        <RowConstraints maxHeight="86.66667175292969" minHeight="0.0"
-                                                                        prefHeight="27.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="0.0"
-                                                                        prefHeight="19.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="0.0"
-                                                                        prefHeight="18.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="185.0" minHeight="0.0"
-                                                                        prefHeight="30.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="214.0" minHeight="10.0"
-                                                                        prefHeight="112.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints maxHeight="185.0" minHeight="10.0"
-                                                                        prefHeight="110.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="86.66667175292969" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="0.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="0.0" prefHeight="18.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="185.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="214.0" minHeight="10.0" prefHeight="112.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="185.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
                                                     </rowConstraints>
                                                     <children>
-                                                        <Label prefHeight="22.0" prefWidth="37.0" text="Fecha:"
-                                                               underline="true">
+                                                        <Label prefHeight="22.0" prefWidth="37.0" text="Fecha:" underline="true">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label prefHeight="22.0" prefWidth="68.0" text="Hora Inicio:"
-                                                               underline="true" GridPane.rowIndex="1">
+                                                        <Label prefHeight="22.0" prefWidth="68.0" text="Hora Inicio:" underline="true" GridPane.rowIndex="1">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Hora Fin:"
-                                                               underline="true" GridPane.rowIndex="2">
+                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Hora Fin:" underline="true" GridPane.rowIndex="2">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Miembros:"
-                                                               underline="true" GridPane.rowIndex="4">
+                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Miembros:" underline="true" GridPane.rowIndex="4">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Lugar:"
-                                                               underline="true" GridPane.rowIndex="3">
+                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Lugar:" underline="true" GridPane.rowIndex="3">
                                                             <font>
-                                                                <Font size="11.0"/>
+                                                                <Font size="11.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label prefHeight="22.0" prefWidth="58.0" text="Orden:"
-                                                               underline="true" GridPane.rowIndex="5">
-                                                            <font>
-                                                                <Font size="11.0"/>
-                                                            </font>
-                                                        </Label>
-                                                        <BorderPane prefHeight="200.0" prefWidth="200.0"
-                                                                    GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                             <center>
-                                                                <ListView fx:id="lstInvolucrados2" prefHeight="89.0"
-                                                                          prefWidth="195.0"
-                                                                          BorderPane.alignment="CENTER"/>
+                                                                <ListView fx:id="lstInvolucrados2" prefHeight="89.0" prefWidth="195.0" BorderPane.alignment="CENTER" />
                                                             </center>
                                                         </BorderPane>
-                                                        <BorderPane prefHeight="200.0" prefWidth="200.0"
-                                                                    GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                                            <center>
-                                                                <ListView fx:id="lstInvolucrados11" prefHeight="106.0"
-                                                                          prefWidth="177.0"
-                                                                          BorderPane.alignment="CENTER"/>
-                                                            </center>
-                                                        </BorderPane>
+                                                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                                     </children>
                                                 </GridPane>
+                                                  <Label layoutX="389.0" layoutY="93.0" prefHeight="22.0" prefWidth="58.0" text="Orden:" underline="true">
+                                                      <font>
+                                                          <Font size="11.0" />
+                                                      </font>
+                                                  </Label>
+                                    <Button fx:id="btnVerDetalles" layoutX="498.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Ver Detalles" />
+                                    <TableView fx:id="tblOrden" layoutX="466.0" layoutY="63.0" prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="46.0" text="Orden" />
+                                        <TableColumn prefWidth="153.0" text="Expediente" />
+                                      </columns>
+                                    </TableView>
                                             </children>
                                         </AnchorPane>
                                     </content>

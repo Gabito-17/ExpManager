@@ -9,9 +9,19 @@ import java.util.List;
 public class Reunion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
+    @Column(name = "lugar")
+    private String lugar;
+    @Column(name = "detalles")
+    private String detalles;
     @Column(name = "fecha")
-    LocalDate fecha;
+    private LocalDate fecha;
+    @Column(name = "horainicio")
+    private String horaInicio;
+    @Column(name = "horaFin")
+    private String horaFin;
+    @Column(name = "estado")
+    private boolean estado;
     @ManyToMany
     @JoinTable(
             name = "reunion_miembro",
@@ -19,16 +29,12 @@ public class Reunion {
             inverseJoinColumns = @JoinColumn(name = "miembro_id")
     )
     private List<Persona> miembros;
-
     @ManyToMany(mappedBy = "reuniones")
     private List<Expediente> expedientes;
-
     @OneToMany(mappedBy = "reunion")
     private List<Asistencia> asistencias;
-
     @OneToMany(mappedBy = "reunion")
     private List<Minuta> minutas;
-
 
     public Reunion() {
     }
@@ -38,6 +44,85 @@ public class Reunion {
         this.fecha = fecha;
     }
 
+    public boolean estaCerrado() {
+        return this.estado;
+    }
+
+    public void setEstado(final boolean estado) {
+        this.estado = estado;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
+    }
+
+    public String getLugar() {
+        return this.lugar;
+    }
+
+    public void setLugar(final String lugar) {
+        this.lugar = lugar;
+    }
+
+    public String getHoraInicio() {
+        return this.horaInicio;
+    }
+
+    public void setHoraInicio(final String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public String getHoraFin() {
+        return this.horaFin;
+    }
+
+    public void setHoraFin(final String horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public String getDetalles() {
+        return this.detalles;
+    }
+
+    public void setDetalles(final String detalles) {
+        this.detalles = detalles;
+    }
+
+    public List<Persona> getMiembros() {
+        return this.miembros;
+    }
+
+    public void setMiembros(final List<Persona> miembros) {
+        this.miembros = miembros;
+    }
+
+    public List<Expediente> getExpedientes() {
+        return this.expedientes;
+    }
+
+    public void setExpedientes(final List<Expediente> expedientes) {
+        this.expedientes = expedientes;
+    }
+
+    public List<Asistencia> getAsistencias() {
+        return this.asistencias;
+    }
+
+    public void setAsistencias(final List<Asistencia> asistencias) {
+        this.asistencias = asistencias;
+    }
+
+    public List<Minuta> getMinutas() {
+        return this.minutas;
+    }
+
+    public void setMinutas(final List<Minuta> minutas) {
+        this.minutas = minutas;
+    }
 
     public int getNroReunion() {
         return id;
