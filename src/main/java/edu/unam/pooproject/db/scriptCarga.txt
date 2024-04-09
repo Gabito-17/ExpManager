@@ -53,23 +53,14 @@ VALUES
     (8, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
     -- Añadir más registros para el expediente 7 según sea necesario
     (9, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    (9, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    -- Añadir más registros para el expediente 8 según sea necesario
-    (10, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    (10, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
+    (9, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1));
     -- Añadir más registros para el expediente 9 según sea necesario
 
-INSERT INTO reunion (fecha, detalles, lugar, horaInicio, horaFin, estado)
+INSERT INTO reunion (lugar, detalles, fecha, horaInicio, horaFin, estado)
 VALUES
-    ('2024-04-09', 'Reunión para discutir avances en el Trabajo de Investigación en Ingeniería', 'Sala de reuniones A', '09:00', '11:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-10', 'Reunión para revisar el Proyecto de Laboratorio de Química', 'Sala de conferencias B', '10:00', '12:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-11', 'Reunión para planificar la presentación de la Tesis de Maestría en Biología', 'Sala de juntas C', '11:00', '13:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-12', 'Reunión para coordinar la Práctica Profesional en Medicina', 'Sala de reuniones D', '12:00', '14:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-13', 'Reunión para evaluar el Proyecto de Investigación en Psicología', 'Sala de conferencias E', '13:00', '15:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-14', 'Reunión para discutir la Práctica Docente en Educación', 'Sala de juntas F', '14:00', '16:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-15', 'Reunión para revisar avances en la Investigación en Ciencias Sociales', 'Sala de reuniones G', '15:00', '17:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-16', 'Reunión para planificar el desarrollo del Proyecto de Desarrollo de Software', 'Sala de conferencias H', '16:00', '18:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-17', 'Reunión para discutir resultados de la Investigación en Ciencias Económicas', 'Sala de juntas I', '17:00', '19:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-18', 'Reunión para coordinar actividades del Proyecto de Arte y Cultura', 'Sala de reuniones J', '18:00', '20:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END);
+    ( 'Sala de reuniones A', 'Reunión para discutir avances en el Trabajo de Investigación en Ingeniería', '2024-04-09', '09:00', '11:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
+    ('Sala de conferencias B','Reunión para revisar el Proyecto de Laboratorio de Química', '2024-04-10', '10:00', '12:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
+    ('Sala de juntas C', 'Reunión para planificar la presentación de la Tesis de Maestría en Biología', '2024-04-11', '11:00', '13:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
+    ('Sala de reuniones D','Reunión para coordinar la Práctica Profesional en Medicina', '2024-04-12', '12:00', '14:00', CASE WHEN fecha < CURRENT_DATE THEN true ELSE false END),
 
 

@@ -10,15 +10,15 @@ import java.util.List;
 public class Expediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
     @Column(name = "titulo")
-    String titulo;
+    private String titulo;
     @Column(name = "nota")
-    String nota;
+    private String nota;
     @Column(name = "fechaingreso")
-    LocalDate fechaIngreso;
+    private LocalDate fechaIngreso;
     @Column(name = "estado")
-    Boolean estado;
+    private Boolean estado;
     @ManyToOne
     @JoinColumn(name = "iniciante_id")
     private Persona iniciante;

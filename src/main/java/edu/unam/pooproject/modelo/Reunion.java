@@ -9,7 +9,7 @@ import java.util.List;
 public class Reunion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column(name = "lugar")
     private String lugar;
     @Column(name = "detalles")
