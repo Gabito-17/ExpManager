@@ -2,6 +2,7 @@ package edu.unam.pooproject.controller;
 
 import edu.unam.pooproject.Services.Enrutador;
 import edu.unam.pooproject.Services.PersonaServicio;
+import edu.unam.pooproject.Services.VentanaEmergente;
 import edu.unam.pooproject.db.Conexion;
 import edu.unam.pooproject.modelo.Persona;
 import edu.unam.pooproject.repositorio.Repositorio;
@@ -28,6 +29,7 @@ public class PersonaController {
     private LocalDate fechaHoy;
     private Repositorio repositorio;
     private PersonaServicio personaServicio;
+    private VentanaEmergente ventana = new VentanaEmergente();
     @FXML
     private TextField txtDniPersona;
     @FXML
@@ -72,7 +74,7 @@ public class PersonaController {
         colNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         colApellido.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellido()));
         colEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
-        colEsMiembro.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isEsMiembro()));
+        colEsMiembro.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().esMiembro()));
         colFechaNacimiento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getFechaNacimiento()));
         // Cargar todas las personas de la base de datos y mostrarlas en el TableView
         rellenarTabla();
@@ -96,7 +98,7 @@ public class PersonaController {
 
         // Verificar si hay alguna persona seleccionada
         if (personaSeleccionada == null) {
-            mostrarError("Selecciona una persona para editar.");
+            ventana.mostrarError("Selecciona una persona para editar.");
             return;
         }
 
@@ -114,7 +116,7 @@ public class PersonaController {
             txtApellidoPersona.setText(personaSeleccionada.getApellido());
             txtEmailPersona.setText(personaSeleccionada.getEmail());
             fechaNacimiento.setValue(personaSeleccionada.getFechaNacimiento());
-            esMiembro.setSelected(personaSeleccionada.isEsMiembro());
+            esMiembro.setSelected(personaSeleccionada.esMiembro());
         }
     }
 
@@ -164,6 +166,7 @@ public class PersonaController {
         } else {
             this.personaServicio.agregarPersona(persona);
         }
+        rellenarTabla();
         limpiarCampos();
     }
 
@@ -174,11 +177,11 @@ public class PersonaController {
 
         // Verificar si hay alguna persona seleccionada
         if (personaSeleccionada == null) {
-            mostrarError("Selecciona una persona para eliminar.");
+            ventana.mostrarError("Selecciona una persona para eliminar.");
             return;
         }
         if (personaServicio.esIniciante(personaSeleccionada)) {
-            mostrarError("La persona está asociada a expedientes y no puede ser eliminada.");
+            ventana.mostrarError("La persona está asociada a expedientes y no puede ser eliminada.");
             return;
         }
 
@@ -200,12 +203,12 @@ public class PersonaController {
             } catch (javax.persistence.RollbackException e) {
                 Throwable causa = e.getCause();
                 if (causa instanceof org.hibernate.exception.ConstraintViolationException) {
-                    mostrarError("La persona está asociada a expedientes y no puede ser eliminada.");
+                    ventana.mostrarError("La persona está asociada a expedientes y no puede ser eliminada.");
                 } else {
-                    mostrarError("Error al eliminar la persona: " + e.getMessage());
+                    ventana.mostrarError("Error al eliminar la persona: " + e.getMessage());
                 }
             } catch (Exception e) {
-                mostrarError("Error al eliminar la persona: " + e.getMessage());
+                ventana.mostrarError("Error al eliminar la persona: " + e.getMessage());
             }
         }
     }
@@ -234,11 +237,11 @@ public class PersonaController {
 
                 return true;
             } else {
-                mostrarError("Debe ser mayor de edad");
+                ventana.mostrarError("Debe ser mayor de edad");
                 return false;
             }
         } else {
-            mostrarError("SeleccionarFechaNacimiento");
+            ventana.mostrarError("SeleccionarFechaNacimiento");
             return false;
         }
     }
@@ -256,11 +259,11 @@ public class PersonaController {
             if (dni.matches("\\d{8}")) { // Verificar que tenga exactamente 8 dígitos numéricos
                 return true;
             } else {
-                mostrarError("El DNI debe contener exactamente 8 dígitos numéricos.");
+                ventana.mostrarError("El DNI debe contener exactamente 8 dígitos numéricos.");
                 return false;
             }
         } else {
-            mostrarError("Por favor ingrese un DNI.");
+            ventana.mostrarError("Por favor ingrese un DNI.");
             return false;
         }
     }
@@ -271,11 +274,11 @@ public class PersonaController {
             if (validarCorreo(correo)) {
                 return true;
             } else {
-                mostrarError("El correo electrónico ingresado no es válido.");
+                ventana.mostrarError("El correo electrónico ingresado no es válido.");
                 return false;
             }
         } else {
-            mostrarError("Por favor ingrese un correo electrónico.");
+            ventana.mostrarError("Por favor ingrese un correo electrónico.");
             return false;
         }
     }
@@ -312,11 +315,11 @@ public class PersonaController {
             if (nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) { // Solo permite letras, espacios y letras acentuadas
                 return true;
             } else {
-                mostrarError("El nombre no puede contener símbolos ni números.");
+                ventana.mostrarError("El nombre no puede contener símbolos ni números.");
                 return false;
             }
         } else {
-            mostrarError("Por favor ingrese un nombre.");
+            ventana.mostrarError("Por favor ingrese un nombre.");
             return false;
         }
     }
@@ -327,22 +330,15 @@ public class PersonaController {
             if (apellido.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) { // Solo permite letras, espacios y letras acentuadas
                 return true;
             } else {
-                mostrarError("El apellido no puede contener símbolos ni números.");
+                ventana.mostrarError("El apellido no puede contener símbolos ni números.");
                 return false;
             }
         } else {
-            mostrarError("Por favor ingrese un apellido.");
+            ventana.mostrarError("Por favor ingrese un apellido.");
             return false;
         }
     }
 
-    private void mostrarError(String mensaje) {
-        Alert alertError = new Alert(Alert.AlertType.ERROR);
-        alertError.setTitle("Error");
-        alertError.setHeaderText(null);
-        alertError.setContentText(mensaje);
-        alertError.showAndWait();
-    }
 
     //Ubicar en ventana "Inicio"
     @FXML

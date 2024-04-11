@@ -3,6 +3,7 @@ package edu.unam.pooproject.controller;
 import edu.unam.pooproject.Services.Enrutador;
 import edu.unam.pooproject.Services.ExpedienteServicio;
 import edu.unam.pooproject.Services.PersonaServicio;
+import edu.unam.pooproject.Services.VentanaEmergente;
 import edu.unam.pooproject.db.Conexion;
 import edu.unam.pooproject.modelo.Expediente;
 import edu.unam.pooproject.modelo.Persona;
@@ -23,6 +24,7 @@ import java.util.Optional;
 
 
 public class ExpedienteController {
+    private VentanaEmergente ventana = new VentanaEmergente();
     private LocalDate fechaHoy;
     private Repositorio repositorio;
     private PersonaServicio personaServicio;
@@ -108,13 +110,13 @@ public class ExpedienteController {
     }
 
     private void rellenarTabla() {
-        // Obtener todas las personas de la base de datos a través del servicio
+        // Obtener todos los expedientes de la base de datos a través del servicio
         List<Expediente> expedientes = expedienteServicio.obtenerTodos();
 
-        // Convertir la lista de personas en una ObservableList
+        // Convertir la lista de expedientes en una ObservableList
         ObservableList<Expediente> listaExpedientes = FXCollections.observableArrayList(expedientes);
 
-        // Asignar la lista de personas al TableView
+        // Asignar la lista de expediente al TableView
         tvExpedientes.setItems(listaExpedientes);
     }
 
@@ -125,7 +127,7 @@ public class ExpedienteController {
 
         // Verificar si hay algun expediente seleccionado
         if (expedienteSeleccionado == null) {
-            mostrarError("Selecciona un expediente para eliminar.");
+            ventana.mostrarError("Debe seleccionar un expediente de la tabla para eliminarlo");
             return;
         }
 
@@ -153,7 +155,7 @@ public class ExpedienteController {
 
         // Verificar si hay algun expediente seleccionado
         if (expedienteSeleccionado == null) {
-            mostrarError("Selecciona un expediente para editar.");
+            ventana.mostrarError("Selecciona un expediente para editar.");
             return;
         }
 
@@ -207,7 +209,7 @@ public class ExpedienteController {
                     @Override
                     public String toString(Persona persona) {
                         if (persona != null) {
-                            return persona.getNombre() + " " + persona.getApellido();
+                            return persona.getApellido() + " " + persona.getNombre();
                         } else {
                             return "";
                         }
@@ -220,10 +222,10 @@ public class ExpedienteController {
                     }
                 }));
             } else {
-                mostrarError("El involucrado ya se encuentra agregado.");
+                ventana.mostrarError("El involucrado ya se encuentra agregado.");
             }
         } else {
-            mostrarError("Debe seleccionar un involucrado.");
+            ventana.mostrarError("Debe seleccionar un involucrado.");
         }
     }
 
@@ -234,7 +236,7 @@ public class ExpedienteController {
             listaInvolucrados.remove(involucradoSeleccionado);
             lstInvolucrados.setItems(listaInvolucrados);
         } else {
-            mostrarError("Debe seleccionar un involucrado para quitar.");
+            ventana.mostrarError("Debe seleccionar un involucrado para quitar.");
         }
     }
 
@@ -248,19 +250,19 @@ public class ExpedienteController {
         if (!taNota.getText().isEmpty() && !txtTitulo.getText().isEmpty()) {
             // Verificar longitud del título
             if (txtTitulo.getText().length() < 3) {
-                mostrarError("Error al cargar expediente, el título debe tener al menos 3 caracteres.");
+                ventana.mostrarError("Error al cargar expediente, el título debe tener al menos 3 caracteres.");
                 return;
             }
 
             // Verificar caracteres del título
             if (!txtTitulo.getText().matches("[a-zA-Z\\s]+")) {
-                mostrarError("Error al cargar expediente, el título no debe contener caracteres especiales ni números.");
+                ventana.mostrarError("Error al cargar expediente, el título no debe contener caracteres especiales ni números.");
                 return;
             }
 
             // Verificar longitud de la nota
             if (taNota.getText().length() < 10) {
-                mostrarError("Error al cargar expediente, la nota debe tener al menos 10 caracteres.");
+                ventana.mostrarError("Error al cargar expediente, la nota debe tener al menos 10 caracteres.");
                 return;
             }
 
@@ -269,24 +271,24 @@ public class ExpedienteController {
             //Establecer la nota
             expediente.setNota(taNota.getText());
         } else {
-            mostrarError("Error al cargar expediente, los campos 'título' o 'nota' están vacíos.");
+            ventana.mostrarError("Error al cargar expediente, los campos 'título' o 'nota' están vacíos.");
             return;
         }
         if (cmbIniciantes.getSelectionModel().getSelectedItem() != null) {
             expediente.setIniciante(cmbIniciantes.getSelectionModel().getSelectedItem());
 
         } else {
-            mostrarError("Error al cargar expediente, no selecciono un iniciante.");
+            ventana.mostrarError("Error al cargar expediente, no selecciono un iniciante.");
             return;
         }
         if (fechaHoy.isAfter(LocalDate.now()) || fechaHoy.isBefore(LocalDate.now())) {
-            mostrarError("Error al cargar expediente, la fecha ingresada no es válida.");
+            ventana.mostrarError("Error al cargar expediente, la fecha ingresada no es válida.");
             return;
         } else {
             expediente.setFechaIngreso(fechaHoy);
         }
         if (listaInvolucrados.isEmpty()) {
-            mostrarError("Error al cargar expediente, no selecciono ningún involucrado.");
+            ventana.mostrarError("Error al cargar expediente, no selecciono ningún involucrado.");
             return;
         } else {
             expediente.setInvolucrados(listaInvolucrados);
@@ -295,10 +297,15 @@ public class ExpedienteController {
         if (expedienteExiste(expediente.getId())) {
             this.expedienteServicio.editarExpediente(expediente);
         } else {
+            // Guardar el expediente en la base de datos
             this.expedienteServicio.agregarExpediente(expediente);
+
         }
         limpiarCampos();
+        ventana.mostrarExito("El expediente fue cargado con existo!");
+        rellenarTabla();
     }
+
 
     public boolean expedienteExiste(Integer id) {
         // Llama al método del servicio de persona para buscar a la persona por su DNI
@@ -344,12 +351,6 @@ public class ExpedienteController {
         Enrutador.cambiarVentana(event, "/View/minuta-view.fxml");
     }
 
-    private void mostrarError(String s) {
-        Alert alertError = new Alert(Alert.AlertType.ERROR);
-        alertError.setTitle("Error");
-        alertError.setHeaderText((String) null);
-        alertError.setContentText(s);
-        alertError.showAndWait();
-    }
+
 }
 

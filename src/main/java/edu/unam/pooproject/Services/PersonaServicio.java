@@ -66,5 +66,20 @@ public class PersonaServicio {
         // Si la cantidad de expedientes es mayor que cero, significa que la persona tiene expedientes asociados
         return cantidadExpedientes > 0;
     }
+
+    public List<Persona> obtenerMiembros() {
+        TypedQuery<Persona> query = repositorio.getEntityManager()
+                .createQuery("SELECT p FROM edu.unam.pooproject.modelo.Persona p WHERE p.esMiembro = :esMiembro", Persona.class)
+                .setParameter("esMiembro", true);
+
+        return query.getResultList();
+    }
+
+    public void quitarDelConsejo(Persona miembroSeleccionado) {
+        miembroSeleccionado.setEsMiembro(false);
+        this.repositorio.iniciarTransaccion();
+        this.repositorio.modificar(miembroSeleccionado);
+        this.repositorio.confirmarTransaccion();
+    }
 }
 

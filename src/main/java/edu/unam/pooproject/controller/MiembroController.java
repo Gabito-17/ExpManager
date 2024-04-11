@@ -1,27 +1,112 @@
 package edu.unam.pooproject.controller;
 
-import edu.unam.pooproject.Services.Enrutador;
+import edu.unam.pooproject.Services.*;
+import edu.unam.pooproject.db.Conexion;
+import edu.unam.pooproject.modelo.Persona;
+import edu.unam.pooproject.repositorio.Repositorio;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+
+import java.util.List;
+import java.util.Optional;
 
 public class MiembroController {
 
     //Informacion del miembro
     @FXML
-    TextField txtDniMiembro;
+    private Label lblDni;
     @FXML
-    TextField txtNombreMiembro;
+    private Label lblNombre;
     @FXML
-    TextField txtApellidoMiembro;
+    private Label lblApellido;
     @FXML
-    TextField txtEmailMiembro;
+    private Label lblCantReuniones;
     @FXML
-    Label lblResultado;
+    private Label lblEmail;
     @FXML
-    TextArea txtTexto;
+    private Label lblFechaNacimiento;
+    @FXML
+    private TextArea txtTexto;
+    @FXML
+    private TableView<Persona> tvMiembros;
+    @FXML
+    private TableColumn<Persona, String> colDni;
+    @FXML
+    private TableColumn<Persona, String> colFechaNacimiento;
+    @FXML
+    private TableColumn<Persona, String> colApellido;
+    @FXML
+    private TableColumn<Persona, String> colNombre;
+    @FXML
+    private TableColumn<Persona, String> colEmail;
+
+    private VentanaEmergente ventana = new VentanaEmergente();
+    private Repositorio repositorio;
+    private ExpedienteServicio expedienteServicio;
+    private PersonaServicio personaServicio;
+    private ReunionServicio reunionServicio;
+
+    public void initialize() {
+        this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
+        this.personaServicio = new PersonaServicio(this.repositorio);
+        this.reunionServicio = new ReunionServicio(this.repositorio);
+        this.expedienteServicio = new ExpedienteServicio(this.repositorio);
+
+        // Configurar las columnas del TableView para que muestren los datos de Persona
+        colDni.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDni()));
+        colNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        colApellido.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellido()));
+        colEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
+        colFechaNacimiento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getFechaNacimiento().toString()));
+
+        rellenarTabla();
+
+    }
+
+    private void rellenarTabla() {
+        // Obtener todas las personas de la base de datos a través del servicio
+        List<Persona> miembros = personaServicio.obtenerMiembros();
+
+        // Convertir la lista de personas en una ObservableList
+        ObservableList<Persona> listamiembros = FXCollections.observableArrayList(miembros);
+
+        // Asignar la lista de personas al TableView
+        tvMiembros.setItems(listamiembros);
+    }
+
+    @FXML
+    public void quitarMiembro(ActionEvent event) {
+        // Obtener el expediente seleccionado en la tabla
+        Persona miembroSeleccionado = tvMiembros.getSelectionModel().getSelectedItem();
+
+        // Verificar si hay algun expediente seleccionado
+        if (miembroSeleccionado == null) {
+            ventana.mostrarError("Debe seleccionar un expediente de la tabla para eliminarlo");
+            return;
+        }
+
+        // Mostrar un cuadro de diálogo de confirmación
+        Alert alertConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirmacion.setTitle("Confirmar");
+        alertConfirmacion.setHeaderText("¿Estás seguro de quitar a esta persona del consejo?");
+        alertConfirmacion.setContentText("Se quitara permanentemente a la persona del consejo.");
+
+        Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            // Eliminar el expediente seleccionado
+            PersonaServicio servicio = new PersonaServicio(repositorio);
+            servicio.quitarDelConsejo(miembroSeleccionado);
+
+            // Actualizar la tabla
+            rellenarTabla();
+        }
+    }
+
 
     //Ubicar en ventana "Expediente"
     @FXML
@@ -59,14 +144,6 @@ public class MiembroController {
     }
 
 
-    //Acciones del formulario
-    //cargar (o modificar) un registro
-    //verifica el id, si ya existe debe modificarlo, de lo contrario crea uno nuevo
-    @FXML
-    public void cargarRegistro(ActionEvent event) {
-
-    }
-
     //limpiar campos
     @FXML
     public void limpiarCampos(ActionEvent event) {
@@ -87,4 +164,15 @@ public class MiembroController {
 
     }
 
+    public void verDetalles(ActionEvent event) {
+        Persona miembroSeleccionado = tvMiembros.getSelectionModel().getSelectedItem();
+        if (miembroSeleccionado != null) {
+            lblDni.setText(miembroSeleccionado.getDni());
+            lblEmail.setText(miembroSeleccionado.getEmail());
+            lblNombre.setText(miembroSeleccionado.getNombre());
+            lblApellido.setText(miembroSeleccionado.getApellido());
+            lblFechaNacimiento.setText(miembroSeleccionado.getFechaNacimiento().toString());
+        } else
+            ventana.mostrarError("Debe seleccionar un miembro para ver los detalles del mismo");
+    }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class Expediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     @Column(name = "titulo")
     private String titulo;
     @Column(name = "nota")

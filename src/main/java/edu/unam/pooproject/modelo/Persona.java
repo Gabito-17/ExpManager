@@ -72,7 +72,7 @@ public class Persona {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public boolean isEsMiembro() {
+    public boolean esMiembro() {
         return this.esMiembro;
     }
 
@@ -106,6 +106,10 @@ public class Persona {
 
     public String getNombreCompleto() {
         return apellido + " " + nombre;
+    }
+
+    public void setEsMiembro(boolean b) {
+        esMiembro = b;
     }
 }
 

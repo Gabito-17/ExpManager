@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.Blend?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unam.pooproject.controller.MiembroController">
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="900.0"
+            style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21"
+            fx:controller="edu.unam.pooproject.controller.MiembroController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="582.0" prefWidth="214.0" spacing="10" BorderPane.alignment="CENTER">
@@ -24,142 +20,155 @@
                         <children>
                             <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@../edu/unam/pooproject/image/usuario.png" />
+                                    <Image url="@../edu/unam/pooproject/image/usuario.png"/>
                                 </image>
                             </ImageView>
                         </children>
                         <HBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                         </HBox.margin>
                         <padding>
-                            <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
+                            <Insets bottom="10.0" left="10.0" right="5.0" top="10.0"/>
                         </padding>
                     </Pane>
                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                         <children>
                             <Label text="BIENVENIDO" textFill="WHITE">
                                 <font>
-                                    <Font name="Mongolian Baiti" size="13.0" />
+                                    <Font name="Mongolian Baiti" size="13.0"/>
                                 </font>
                                 <VBox.margin>
-                                    <Insets top="5.0" />
+                                    <Insets top="5.0"/>
                                 </VBox.margin>
                             </Label>
                             <Label text="ADMIN">
                                 <font>
-                                    <Font name="Constantia" size="12.0" />
+                                    <Font name="Constantia" size="12.0"/>
                                 </font>
                                 <VBox.margin>
-                                    <Insets top="5.0" />
+                                    <Insets top="5.0"/>
                                 </VBox.margin>
                             </Label>
                         </children>
                     </VBox>
                 </children>
                 <VBox.margin>
-                    <Insets bottom="10.0" left="2.0" right="2.0" />
+                    <Insets bottom="10.0" left="2.0" right="2.0"/>
                 </VBox.margin>
             </HBox>
-            <Button fx:id="btnMenuMiembro" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembro" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #73aaaa;" text="MIEMBROS DEL CONSEJO" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuMiembro" alignment="CENTER" contentDisplay="CENTER" minWidth="100"
+                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembro" prefHeight="50.0" prefWidth="250.0"
+                    style="-fx-background-color: #73aaaa;" text="MIEMBROS DEL CONSEJO" textFill="WHITE"
+                    VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0" />
+                    <Font name="Cambria" size="18.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN" />
+                    <Blend mode="DARKEN"/>
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets />
+                    <Insets/>
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuExpedientes" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuExpediente" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="EXPEDIENTES" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuExpedientes" alignment="CENTER" contentDisplay="CENTER" minWidth="100"
+                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuExpediente" prefHeight="50.0" prefWidth="250.0"
+                    style="-fx-background-color: #396f70;" text="EXPEDIENTES" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0" />
+                    <Font name="Cambria" size="18.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN" />
+                    <Blend mode="DARKEN"/>
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0" />
+                    <Insets top="-6.0"/>
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnPersonas" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuPersona" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="PERSONAS" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnPersonas" alignment="CENTER" contentDisplay="CENTER" minWidth="100"
+                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuPersona" prefHeight="50.0" prefWidth="250.0"
+                    style="-fx-background-color: #396f70;" text="PERSONAS" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0" />
+                    <Font name="Cambria" size="18.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN" />
+                    <Blend mode="DARKEN"/>
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0" />
+                    <Insets top="-6.0"/>
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuReuniones" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuReunion" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="REUNIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuReuniones" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuReunion" prefHeight="50.0" prefWidth="250.0"
+                    style="-fx-background-color: #396f70;" text="REUNIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0" />
+                    <Font name="Cambria" size="18.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN" />
+                    <Blend mode="DARKEN"/>
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0" />
+                    <Insets top="-6.0"/>
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuAsistencia" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuAsistencia" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="ASISTENCIA" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuAsistencia" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuAsistencia" prefHeight="50.0" prefWidth="250.0"
+                    style="-fx-background-color: #396f70;" text="ASISTENCIA" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0" />
+                    <Font name="Cambria" size="18.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN" />
+                    <Blend mode="DARKEN"/>
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0" />
+                    <Insets top="-6.0"/>
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuMinutas" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMinuta" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="MINUTAS" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuMinutas" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMinuta" prefHeight="50.0" prefWidth="250.0"
+                    style="-fx-background-color: #396f70;" text="MINUTAS" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0" />
+                    <Font name="Cambria" size="18.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN" />
+                    <Blend mode="DARKEN"/>
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0" />
+                    <Insets top="-6.0"/>
                 </VBox.margin>
             </Button>
         </VBox>
@@ -167,21 +176,265 @@
     <top>
         <Label alignment="TOP_LEFT" text="DEPARTAMENTO DE INFORMATICA" BorderPane.alignment="CENTER">
             <font>
-                <Font name="Georgia" size="12.0" />
+                <Font name="Georgia" size="12.0"/>
             </font>
         </Label>
     </top>
     <bottom>
         <Label text="Todos los derechos reservados" BorderPane.alignment="CENTER">
             <font>
-                <Font name="System Italic" size="8.0" />
+                <Font name="System Italic" size="8.0"/>
             </font>
         </Label>
     </bottom>
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e5f4f4;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e5f4f4;"
+                    BorderPane.alignment="CENTER">
             <children>
-                <Label layoutX="261.0" layoutY="277.0" text="BIENVENIDO AL MENU PRINCIPAL" />
+                <TabPane prefHeight="573.0" prefWidth="686.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Miembros del Consejo">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="559.0" prefWidth="419.0">
+                                    <children>
+                                        <Label layoutX="254.0" layoutY="20.0" text="Miembros del Consejo">
+                                            <font>
+                                                <Font size="18.0"/>
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="btnQuitarMiembro" layoutX="26.0" layoutY="491.0"
+                                                mnemonicParsing="false" onAction="#quitarMiembro"
+                                                text="Quitar Miembro"/>
+                                        <TableView fx:id="tvMiembros" layoutX="27.0" layoutY="228.0" prefHeight="253.0"
+                                                   prefWidth="636.0">
+                                            <columns>
+                                                <TableColumn fx:id="colDni" prefWidth="74.0" text="DNI"/>
+                                                <TableColumn fx:id="colApellido" prefWidth="76.0" text="Apellido"/>
+                                                <TableColumn fx:id="colNombre" prefWidth="116.0" text="Nombre"/>
+                                                <TableColumn fx:id="colFechaNacimiento" prefWidth="127.0"
+                                                             text="Fecha de Nacimiento"/>
+                                                <TableColumn fx:id="colEmail" prefWidth="162.0"
+                                                             text="Correo Electronico"/>
+                                            </columns>
+                                        </TableView>
+                                        <AnchorPane layoutX="22.0" layoutY="55.0" prefHeight="258.0" prefWidth="645.0">
+                                            <children>
+                                                <GridPane layoutX="14.0" layoutY="16.0" prefHeight="111.0"
+                                                          prefWidth="290.0" AnchorPane.bottomAnchor="131.0"
+                                                          AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="341.0"
+                                                          AnchorPane.topAnchor="16.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0"
+                                                                           minWidth="10.0" prefWidth="59.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0"
+                                                                           minWidth="10.0" prefWidth="231.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="61.0" minHeight="10.0"
+                                                                        prefHeight="36.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="104.0" minHeight="10.0"
+                                                                        prefHeight="39.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="38.0" minHeight="10.0"
+                                                                        prefHeight="35.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label text="DNI:">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Label text="Apellido:" GridPane.rowIndex="1">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Label text="Nombre:" GridPane.rowIndex="2">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Label fx:id="lblDni" text="Label" GridPane.columnIndex="1"/>
+                                                        <Label fx:id="lblApellido" text="Label" GridPane.columnIndex="1"
+                                                               GridPane.rowIndex="1"/>
+                                                        <Label fx:id="lblNombre" text="Label" GridPane.columnIndex="1"
+                                                               GridPane.rowIndex="2"/>
+                                                    </children>
+                                                </GridPane>
+                                                <Button fx:id="btnCargar" layoutX="557.0" layoutY="141.0"
+                                                        mnemonicParsing="false" onAction="#verDetalles"
+                                                        text="Ver Detalles"/>
+                                                <GridPane layoutX="315.0" layoutY="16.0" prefHeight="104.0"
+                                                          prefWidth="316.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0"
+                                                                           minWidth="10.0" prefWidth="128.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0"
+                                                                           minWidth="10.0" prefWidth="154.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="43.0" minHeight="10.0"
+                                                                        prefHeight="41.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="27.0" minHeight="10.0"
+                                                                        prefHeight="24.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label text="E-mail:">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Label text="Fecha Nacimiento:" GridPane.rowIndex="1">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Label fx:id="lblEmail" text="Label" GridPane.columnIndex="1"/>
+                                                        <Label fx:id="lblFechaNacimiento" text="Label"
+                                                               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                                        <Label text="Cantidad de Reuniones:" GridPane.rowIndex="2"/>
+                                                        <Label fx:id="lblCantReuniones" text="Label"
+                                                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                                                    </children>
+                                                </GridPane>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Untitled Tab 2">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="559.0" prefWidth="419.0">
+                                    <children>
+                                        <AnchorPane layoutX="30.0" layoutY="54.0" prefHeight="258.0" prefWidth="645.0">
+                                            <children>
+                                                <GridPane layoutX="14.0" layoutY="16.0" prefHeight="111.0"
+                                                          prefWidth="290.0" AnchorPane.bottomAnchor="131.0"
+                                                          AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="341.0"
+                                                          AnchorPane.topAnchor="16.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0"
+                                                                           minWidth="10.0" prefWidth="59.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0"
+                                                                           minWidth="10.0" prefWidth="231.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="61.0" minHeight="10.0"
+                                                                        prefHeight="36.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="104.0" minHeight="10.0"
+                                                                        prefHeight="39.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="38.0" minHeight="10.0"
+                                                                        prefHeight="35.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <TextField fx:id="txtDniPersona1" promptText="Ingresar el DNI"
+                                                                   GridPane.columnIndex="1"/>
+                                                        <TextField fx:id="txtApellidoPersona1"
+                                                                   promptText="Ingresar el Apellido"
+                                                                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                                        <Label text="DNI:">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Label text="Apellido:" GridPane.rowIndex="1">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Label text="Nombre:" GridPane.rowIndex="2">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <TextField fx:id="txtNombrePersona1"
+                                                                   promptText="Ingresar el Nombre"
+                                                                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                                                    </children>
+                                                </GridPane>
+                                                <Button fx:id="btnCargar1" layoutX="579.0" layoutY="142.0"
+                                                        mnemonicParsing="false" text="Cargar"/>
+                                                <Button fx:id="btnLimpiarCampos1" layoutX="456.0" layoutY="142.0"
+                                                        mnemonicParsing="false" text="Limpiar Campos"/>
+                                                <GridPane layoutX="315.0" layoutY="16.0" prefHeight="104.0"
+                                                          prefWidth="316.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0"
+                                                                           minWidth="10.0" prefWidth="128.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0"
+                                                                           minWidth="10.0" prefWidth="154.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="43.0" minHeight="10.0"
+                                                                        prefHeight="41.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="27.0" minHeight="10.0"
+                                                                        prefHeight="24.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label text="E-mail:">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <TextField fx:id="txtEmailPersona1"
+                                                                   promptText="Ingresar el E-mail"
+                                                                   GridPane.columnIndex="1"/>
+                                                        <Label text="Fecha Nacimiento:" GridPane.rowIndex="1">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <DatePicker fx:id="fechaNacimiento1" editable="false"
+                                                                    promptText="Seleccione Fecha"
+                                                                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                                        <Label text="Miembro del consejo?" GridPane.rowIndex="2">
+                                                            <font>
+                                                                <Font size="14.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <BorderPane prefHeight="200.0" prefWidth="200.0"
+                                                                    GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                            <center>
+                                                                <CheckBox fx:id="esMiembro1" mnemonicParsing="false"
+                                                                          BorderPane.alignment="CENTER"/>
+                                                            </center>
+                                                        </BorderPane>
+                                                    </children>
+                                                </GridPane>
+                                            </children>
+                                        </AnchorPane>
+                                        <Label layoutX="283.0" layoutY="21.0" text="ABM PERSONA">
+                                            <font>
+                                                <Font size="18.0"/>
+                                            </font>
+                                        </Label>
+                                        <TableView fx:id="tvPersonas1" layoutX="26.0" layoutY="229.0" prefHeight="253.0"
+                                                   prefWidth="636.0">
+                                            <columns>
+                                                <TableColumn fx:id="colDni1" prefWidth="74.0" text="DNI"/>
+                                                <TableColumn fx:id="colApellido1" prefWidth="76.0" text="Apellido"/>
+                                                <TableColumn fx:id="colNombre1" prefWidth="116.0" text="Nombre"/>
+                                                <TableColumn fx:id="colFechaNacimiento1" prefWidth="127.0"
+                                                             text="Fecha de Nacimiento"/>
+                                                <TableColumn fx:id="colEmail1" prefWidth="162.0"
+                                                             text="Correo Electronico"/>
+                                                <TableColumn fx:id="colEsMiembro1" prefWidth="73.0" text="Es miembro"/>
+                                            </columns>
+                                        </TableView>
+                                        <Button fx:id="btnEditarPersona1" layoutX="34.0" layoutY="492.0"
+                                                mnemonicParsing="false" text="Editar Persona"/>
+                                        <Button fx:id="btnEditarPersona11" layoutX="134.0" layoutY="492.0"
+                                                mnemonicParsing="false" text="Eliminar Persona"/>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
             </children>
         </AnchorPane>
     </center>

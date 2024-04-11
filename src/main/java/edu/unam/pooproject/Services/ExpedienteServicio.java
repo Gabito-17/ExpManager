@@ -1,6 +1,7 @@
 package edu.unam.pooproject.Services;
 
 import edu.unam.pooproject.modelo.Expediente;
+import edu.unam.pooproject.modelo.Persona;
 import edu.unam.pooproject.repositorio.Repositorio;
 
 import javax.persistence.TypedQuery;
@@ -37,10 +38,20 @@ public class ExpedienteServicio {
     }
 
     public Expediente buscarPorId(Integer id) {
-        TypedQuery<Expediente> query = repositorio.getEntityManager().createQuery("Select p From Expediente p WHERE p.id = :numero", Expediente.class);
+        TypedQuery<Expediente> query = repositorio.getEntityManager().createQuery("Select p From Expediente p WHERE p.id = :id", Expediente.class);
         query.setParameter("id", id);
         List<Expediente> resultados = query.getResultList();
         return resultados.isEmpty() ? null : resultados.get(0);
     }
+
+    public void agregarInvolucrados(Expediente expediente, List<Persona> involucrado) {
+        this.repositorio.iniciarTransaccion();
+        expediente.setInvolucrados(involucrado);
+        this.repositorio.modificar(expediente);
+        this.repositorio.confirmarTransaccion();
+
+    }
 }
+
+
 

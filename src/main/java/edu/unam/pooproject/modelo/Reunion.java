@@ -9,7 +9,7 @@ import java.util.List;
 public class Reunion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     @Column(name = "lugar")
     private String lugar;
     @Column(name = "detalles")
@@ -46,10 +46,6 @@ public class Reunion {
 
     public boolean estaCerrado() {
         return this.estado;
-    }
-
-    public void setEstado(final boolean estado) {
-        this.estado = estado;
     }
 
     public int getId() {
@@ -140,4 +136,14 @@ public class Reunion {
         this.fecha = fecha;
     }
 
+    public String getEstado() {
+        if (estado == false) {
+            return "Cerrado";
+        } else
+            return "Abierto";
+    }
+
+    public void setEstado(final boolean estado) {
+        this.estado = estado;
+    }
 }

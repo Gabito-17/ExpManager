@@ -18,7 +18,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         Repositorio repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/View/miembros-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
         stage.setTitle("Inicio de Sesión");
         stage.setScene(scene);
         stage.show();
