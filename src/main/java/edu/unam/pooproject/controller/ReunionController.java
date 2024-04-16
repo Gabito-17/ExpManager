@@ -2,6 +2,7 @@ package edu.unam.pooproject.controller;
 
 import edu.unam.pooproject.Services.*;
 import edu.unam.pooproject.db.Conexion;
+import edu.unam.pooproject.modelo.Asistencia;
 import edu.unam.pooproject.modelo.Expediente;
 import edu.unam.pooproject.modelo.Persona;
 import edu.unam.pooproject.modelo.Reunion;
@@ -77,6 +78,12 @@ public class ReunionController {
     @FXML
     private TableView<Reunion> tvReunionAsistencia;
     @FXML
+    private TableView<Asistencia> tvMiembroAsistencia;
+    @FXML
+    private TableColumn<Asistencia, String> colMiembroAsistencia;
+    @FXML
+    private TableColumn<Asistencia, String> colReunionAsistencia;
+    @FXML
     private TableColumn<Reunion, Integer> colNroAsistencia;
     @FXML
     private TableColumn<Reunion, String> colFechaAsistencia;
@@ -140,7 +147,7 @@ public class ReunionController {
         colDetalleFin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHoraFin().toString()));
         colDetalleInicio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHoraInicio().toString()));
         colDetalleLugar.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDetalles().toString()));
-        rellenarTabla();
+        rellenarTablas();
 
         //CargarComboBoxes
         rellenarComboBoxHorarios();
@@ -148,7 +155,7 @@ public class ReunionController {
         rellenarComboBoxExpedientes();
     }
 
-    private void rellenarTabla() {
+    private void rellenarTablas() {
         // Obtener todas las personas de la base de datos a través del servicio
         List<Reunion> reuniones = reunionServicio.obtenerTodos();
 
@@ -164,8 +171,8 @@ public class ReunionController {
     private void rellenarComboBoxHorarios() {
         // Crear una lista de horarios
         ObservableList<String> horarios = FXCollections.observableArrayList(
-                "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
-                "16:00 PM", "17:00 PM", "18:00 PM", "19:00 PM", "20:00 PM"
+                "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00",
+                "16:00", "17:00", "18:00", "19:00", "20:00"
         );
         // Establecer la lista de horarios en el ComboBox
         cmbHoraInicio.setItems(horarios);
@@ -201,7 +208,7 @@ public class ReunionController {
 
     private void rellenarComboBoxExpedientes() {
 
-        // Crear lista a partir de las personas registradas
+        // Crear lista a partir de los expedientes registradss
         List<Expediente> expedientes = repositorio.obtenerTodos(Expediente.class);
 
         ObservableList<Expediente> opcionesExpedientes = FXCollections.observableArrayList(expedientes);
@@ -323,8 +330,8 @@ public class ReunionController {
         }
 
 
-    }
 
+    }
 
     @FXML
     public void quitarMiembro() {
@@ -402,7 +409,7 @@ public class ReunionController {
     //Ubicar en ventana "Asistencia"
     @FXML
     public void menuAsistencia(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/asistencia-view.fxml");
+        Enrutador.cambiarVentana(event, "/View/accion-view.fxml");
     }
 
     //Ubicar en ventana "Minuta"
@@ -475,7 +482,7 @@ public class ReunionController {
         reunionServicio.agregarReunion(reunion);
         ventana.mostrarExito("La Reunion fue cargada con exito!");
         limpiarCampos();
-        rellenarTabla();
+        rellenarTablas();
     }
 
 
@@ -508,13 +515,20 @@ public class ReunionController {
     @FXML
     public void cargarAsistencia(ActionEvent event) {
         if (tvReunionAsistencia.getSelectionModel().getSelectedItem() != null) {
+            lblFechaAsistencia.setText(tvReunionAsistencia.getSelectionModel().getSelectedItem().getFecha().toString());
+            lblHoraFinAsistencia.setText(tvReunionAsistencia.getSelectionModel().getSelectedItem().getHoraFin());
+            lblHoraInicioAsistencia.setText(tvReunionAsistencia.getSelectionModel().getSelectedItem().getHoraInicio());
+            lblLugarAsistencia.setText(tvReunionAsistencia.getSelectionModel().getSelectedItem().getLugar());
+            lblEstadoAsistencia.setText(tvReunionAsistencia.getSelectionModel().getSelectedItem().getEstado());
+
             // Obtener todas las personas de la base de datos a través del servicio
             List<Persona> miembros = tvReunionAsistencia.getSelectionModel().getSelectedItem().getMiembros();
 
             // Convertir la lista de personas en una ObservableList
             ObservableList<Persona> listaMiembros = FXCollections.observableArrayList(miembros);
 
-            // Asignar la lista de personas al ListView
+            // Asignar la lista de personas al TableView
+            lstMiembrosAsistencia.setItems(listaMiembros);
             lstMiembrosAsistencia.setCellFactory(param -> new TextFieldListCell<>(new StringConverter<Persona>() {
                 @Override
                 public String toString(Persona persona) {
@@ -532,11 +546,12 @@ public class ReunionController {
                 }
             }));
 
-            lstMiembrosAsistencia.setItems(listaMiembros);
         } else {
-            ventana.mostrarError("Debe seleccionar una reunion para marcar su asistencia.");
+            ventana.mostrarError("Debe seleccionar un miembro para ver los detalles.");
             return;
         }
+
+
     }
 
 }

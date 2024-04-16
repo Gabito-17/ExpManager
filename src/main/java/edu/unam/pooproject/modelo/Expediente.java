@@ -24,7 +24,7 @@ public class Expediente {
     private Persona iniciante;
     @ManyToMany
     @JoinTable(
-            name = "expediente_reuniones",
+            name = "expediente_reunion",
             joinColumns = @JoinColumn(name = "expediente_id"),
             inverseJoinColumns = @JoinColumn(name = "reunion_id")
     )

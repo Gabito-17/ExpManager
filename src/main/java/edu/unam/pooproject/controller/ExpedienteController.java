@@ -342,7 +342,7 @@ public class ExpedienteController {
     //Ubicar en ventana "Asistencia"
     @FXML
     public void menuAsistencia(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/asistencia-view.fxml");
+        Enrutador.cambiarVentana(event, "/View/accion-view.fxml");
     }
 
     //Ubicar en ventana "Minuta"

@@ -1,30 +1,25 @@
--- Insertar personas que serán involucradas en los expedientes (estudiantes, profesores, etc.)
+-- Insertar personas que serán miembros o involucradas en expedientes
 INSERT INTO persona (dni, nombre, apellido, fechanacimiento, esmiembro, email)
 VALUES
     ('12345678', 'Juan', 'González', '1995-05-15', true, 'juan@example.com'),
-    ('23456789', 'María', 'Martínez', '1998-08-20', true, 'maria@example.com'),
+    ('23456789', 'María', 'Martínez', '1998-08-20', false, 'maria@example.com'),
     ('34567890', 'Pedro', 'Sánchez', '1990-03-10', true, 'pedro@example.com'),
-    ('45678901', 'Ana', 'López', '1997-11-25', true, 'ana@example.com'),
-    ('56789012', 'Carlos', 'Fernández', '1993-07-03', true, 'carlos@example.com'),
-    ('67890123', 'Laura', 'Gómez', '1992-09-18', true, 'laura@example.com'),
-    ('78901234', 'David', 'Rodríguez', '1989-12-30', true, 'david@example.com'),
-    ('89012345', 'Elena', 'Pérez', '1991-04-08', true, 'elena@example.com'),
-    ('90123456', 'Sofía', 'Díaz', '1996-06-22', true, 'sofia@example.com'),
-    ('01234567', 'Pablo', 'Hernández', '1988-10-05', true, 'pablo@example.com');
+    ('45678901', 'Ana', 'López', '1997-11-25', false, 'ana@example.com'),
+    ('56789012', 'Carlos', 'Fernández', '1993-07-03', false, 'carlos@example.com');
 
--- Insertar expedientes relacionados con la facultad
+-- Insertar expedientes relacionados con las personas
 INSERT INTO expediente (titulo, nota, fechaingreso, estado, iniciante_id)
 VALUES
     ('Trabajo de Investigación en Ingeniería', 'Realizar un estudio detallado sobre un tema de interés en el campo de la ingeniería.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
     ('Proyecto de Laboratorio de Química', 'Desarrollar un experimento práctico para aplicar los conocimientos adquiridos en la materia de química.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), false, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    ('Tesis de Maestría en Biología', 'Investigar un tema específico en el campo de la biología y presentar los hallazgos de manera académica.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    ('Práctica Profesional en Medicina', 'Realizar una pasantía en un hospital para adquirir experiencia práctica en el campo de la medicina.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), false, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    ('Proyecto de Investigación en Psicología', 'Conducir un estudio experimental para explorar un fenómeno psicológico específico.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    ('Práctica Docente en Educación', 'Realizar prácticas de enseñanza en un centro educativo para aplicar los conocimientos teóricos en un entorno real.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), false, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    ('Investigación en Ciencias Sociales', 'Realizar un estudio cualitativo sobre un tema relevante en el campo de las ciencias sociales.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    ('Proyecto de Desarrollo de Software', 'Desarrollar una aplicación informática para resolver un problema específico en el ámbito académico.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), false, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    ('Investigación en Ciencias Económicas', 'Realizar un análisis estadístico de datos para estudiar un fenómeno económico relevante.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    ('Proyecto de Arte y Cultura', 'Crear una obra artística original o participar en un proyecto cultural para promover el arte y la cultura en la comunidad académica.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), false, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1));
+    ('Tesis de Maestría en Biología', 'Investigar un tema específico en el campo de la biología y presentar los hallazgos de manera académica.', CURRENT_DATE - INTERVAL '30' DAY * (random() * 365), true, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1));
+
+-- Insertar reuniones relacionadas con las personas y los expedientes
+INSERT INTO reunion (fecha, detalles, lugar, horaInicio, horaFin, estado)
+VALUES
+    ('2024-04-09', 'Reunión para discutir avances en el Trabajo de Investigación en Ingeniería', 'Sala de reuniones A', '09:00', '11:00', CASE WHEN '2024-04-09' < CURRENT_DATE THEN true ELSE false END),
+    ('2024-04-10', 'Reunión para revisar el Proyecto de Laboratorio de Química', 'Sala de conferencias B', '10:00', '12:00', CASE WHEN '2024-04-10' < CURRENT_DATE THEN true ELSE false END),
+    ('2024-04-11', 'Reunión para planificar la presentación de la Tesis de Maestría en Biología', 'Sala de juntas C', '11:00', '13:00', CASE WHEN '2024-04-11' < CURRENT_DATE THEN true ELSE false END);
 
 -- Insertar relaciones entre expedientes y personas involucradas
 INSERT INTO expediente_involucrado (expediente_id, involucrado_id)
@@ -33,50 +28,20 @@ VALUES
     (1, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
     (2, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
     (2, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    -- Añadir más registros para el expediente 1 según sea necesario
     (3, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    (3, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    -- Añadir más registros para el expediente 2 según sea necesario
-    (4, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    (4, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    -- Añadir más registros para el expediente 3 según sea necesario
-    (5, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    (5, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    -- Añadir más registros para el expediente 4 según sea necesario
-    (6, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    (6, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    -- Añadir más registros para el expediente 5 según sea necesario
-    (7, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    (7, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    -- Añadir más registros para el expediente 6 según sea necesario
-    (8, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    (8, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    -- Añadir más registros para el expediente 7 según sea necesario
-    (9, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1)),
-    (9, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1));
-    -- Añadir más registros para el expediente 9 según sea necesario
+    (3, (SELECT dni FROM persona WHERE esmiembro = true ORDER BY random() LIMIT 1));
 
-INSERT INTO reunion (fecha, detalles, lugar, horaInicio, horaFin, estado)
+-- Insertar relaciones entre expedientes y reuniones
+INSERT INTO expediente_reuniones (expediente_id, reunion_id)
 VALUES
-    ('2024-04-09', 'Reunión para discutir avances en el Trabajo de Investigación en Ingeniería', 'Sala de reuniones A', '09:00', '11:00',
-        CASE WHEN '2024-04-09' < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-10', 'Reunión para revisar el Proyecto de Laboratorio de Química', 'Sala de conferencias B', '10:00', '12:00',
-        CASE WHEN '2024-04-10' < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-11', 'Reunión para planificar la presentación de la Tesis de Maestría en Biología', 'Sala de juntas C', '11:00', '13:00',
-        CASE WHEN '2024-04-11' < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-12', 'Reunión para coordinar la Práctica Profesional en Medicina', 'Sala de reuniones D', '12:00', '14:00',
-        CASE WHEN '2024-04-12' < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-13', 'Reunión para evaluar el Proyecto de Investigación en Psicología', 'Sala de conferencias E', '13:00', '15:00',
-        CASE WHEN '2024-04-13' < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-14', 'Reunión para discutir la Práctica Docente en Educación', 'Sala de juntas F', '14:00', '16:00',
-        CASE WHEN '2024-04-14' < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-15', 'Reunión para revisar avances en la Investigación en Ciencias Sociales', 'Sala de reuniones G', '15:00', '17:00',
-        CASE WHEN '2024-04-15' < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-16', 'Reunión para planificar el desarrollo del Proyecto de Desarrollo de Software', 'Sala de conferencias H', '16:00', '18:00',
-        CASE WHEN '2024-04-16' < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-17', 'Reunión para discutir resultados de la Investigación en Ciencias Económicas', 'Sala de juntas I', '17:00', '19:00',
-        CASE WHEN '2024-04-17' < CURRENT_DATE THEN true ELSE false END),
-    ('2024-04-18', 'Reunión para coordinar actividades del Proyecto de Arte y Cultura', 'Sala de reuniones J', '18:00', '20:00',
-        CASE WHEN '2024-04-18' < CURRENT_DATE THEN true ELSE false END);
+    (1, 1),
+    (2, 2),
+    (3, 3);
 
-
+-- Insertar relaciones entre reuniones y personas sin repetir un miembro en una reunión
+INSERT INTO reunion_miembro (reunion_id, miembro_id)
+VALUES
+    (1, (SELECT dni FROM persona WHERE esmiembro = true AND dni NOT IN (SELECT miembro_id FROM reunion_miembro WHERE reunion_id = 1) ORDER BY random() LIMIT 1)),
+    (1, (SELECT dni FROM persona WHERE esmiembro = true AND dni NOT IN (SELECT miembro_id FROM reunion_miembro WHERE reunion_id = 1) ORDER BY random() LIMIT 1)),
+    (2, (SELECT dni FROM persona WHERE esmiembro = true AND dni NOT IN (SELECT miembro_id FROM reunion_miembro WHERE reunion_id = 2) ORDER BY random() LIMIT 1)),
+    (2, (SELECT dni FROM persona WHERE esmiembro = true AND dni NOT IN (SELECT miembro_id FROM reunion_miembro WHERE reunion_id = 2) ORDER BY random() LIMIT 1));
