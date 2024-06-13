@@ -13,67 +13,19 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unam.pooproject.controller.ExpedienteController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="582.0" prefWidth="214.0" spacing="10" BorderPane.alignment="CENTER">
-            <HBox prefHeight="100.0" prefWidth="200.0">
-                <children>
-                    <Pane prefHeight="90.0" prefWidth="90.0">
-                        <children>
-                            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@../edu/unam/pooproject/image/usuario.png" />
-                                </image>
-                            </ImageView>
-                        </children>
-                        <HBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                        </HBox.margin>
-                        <padding>
-                            <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
-                        </padding>
-                    </Pane>
-                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                        <children>
-                            <Label text="BIENVENIDO" textFill="WHITE">
-                                <font>
-                                    <Font name="Mongolian Baiti" size="13.0" />
-                                </font>
-                                <VBox.margin>
-                                    <Insets top="5.0" />
-                                </VBox.margin>
-                            </Label>
-                            <Label text="ADMIN">
-                                <font>
-                                    <Font name="Constantia" size="12.0" />
-                                </font>
-                                <VBox.margin>
-                                    <Insets top="5.0" />
-                                </VBox.margin>
-                            </Label>
-                            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="100.0" />
-                        </children>
-                    </VBox>
-                </children>
-                <VBox.margin>
-                    <Insets bottom="10.0" left="2.0" right="2.0" />
-                </VBox.margin>
-            </HBox>
-            <Button fx:id="btnMenuMiembros" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembros" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="MIEMBROS DEL CONSEJO" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuMiembros" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembro" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="MIEMBROS DEL CONSEJO" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
                     <Font name="Cambria" size="18.0" />
                 </font>
@@ -90,7 +42,7 @@
                     <Insets />
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuExpedientes" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuExpedientes" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #73aaaa;" text="EXPEDIENTES" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuExpedientes" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuExpediente" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #73aaaa;" text="EXPEDIENTES" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
                     <Font name="Cambria" size="18.0" />
                 </font>
@@ -141,7 +93,7 @@
                     <Insets top="-6.0" />
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuAsistencia" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuAsistencia" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="ASISTENCIA" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuAsistencia" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuAcciones" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="ACCIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
                     <Font name="Cambria" size="18.0" />
                 </font>
@@ -187,188 +139,200 @@
     <center>
         <AnchorPane prefHeight="573.0" prefWidth="751.0" style="-fx-background-color: #e5f4f4;" BorderPane.alignment="CENTER">
             <children>
-                <VBox layoutX="-2.0" layoutY="-2.0" prefHeight="588.0" prefWidth="687.0">
-                    <children>
-                        <TabPane prefHeight="597.0" prefWidth="687.0" tabClosingPolicy="UNAVAILABLE">
-                            <tabs>
-                                <Tab text="CARGAR">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="559.0" prefWidth="419.0">
+                <TabPane prefHeight="600.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="EXPEDIENTES">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="687.0">
+                                    <children>
+                                        <Label layoutX="289.0" layoutY="14.0" prefHeight="27.0" prefWidth="109.0" text="EXPEDIENTES" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <TableView fx:id="tvExpedienteDetalle" layoutX="13.0" layoutY="41.0" onMouseClicked="#verDetalles" prefHeight="178.0" prefWidth="681.0">
+                                            <columns>
+                                                <TableColumn fx:id="colNroDetalle" prefWidth="56.0" text="Nro" />
+                                                <TableColumn fx:id="colInicianteDetalle" minWidth="0.0" prefWidth="148.0" text="Iniciante" />
+                                                <TableColumn fx:id="colTituloDetalle" minWidth="0.0" prefWidth="168.0" text="Titulo" />
+                                                <TableColumn fx:id="colFechaIngresoDetalle" minWidth="0.0" prefWidth="221.0" text="Fecha de Ingreso" />
+                                                <TableColumn fx:id="colEstadoDetalle" minWidth="0.0" prefWidth="85.0" text="Estado" />
+                                            </columns>
+                                        </TableView>
+                                        <Label layoutX="26.0" layoutY="346.0" prefHeight="27.0" prefWidth="50.0" text="Iniciante:" underline="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="26.0" layoutY="314.0" prefHeight="22.0" prefWidth="37.0" text="Fecha:" underline="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="26.0" layoutY="381.0" prefHeight="27.0" prefWidth="73.0" text="Involucrados:" underline="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="26.0" layoutY="284.0" prefHeight="22.0" prefWidth="27.0" text="Nro:" underline="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="318.0" layoutY="284.0" prefHeight="22.0" prefWidth="37.0" text="Titulo:" underline="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="318.0" layoutY="314.0" prefHeight="22.0" prefWidth="53.0" text="Nota:" underline="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="lblInicianteDetalle" layoutX="83.0" layoutY="346.0" prefHeight="27.0" prefWidth="209.0" underline="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="lblFechaDetalle" layoutX="83.0" layoutY="311.0" prefHeight="27.0" prefWidth="201.0" underline="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="lblNroDetalle" layoutX="83.0" layoutY="281.0" prefHeight="27.0" prefWidth="204.0" underline="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="btnEliminar1" layoutX="564.0" layoutY="225.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Marcar Cerrado" />
+                                        <ListView fx:id="lstInvolucradoDetalle" layoutX="30.0" layoutY="408.0" prefHeight="147.0" prefWidth="225.0" />
+                                        <Label fx:id="lblTituloDetalle" layoutX="392.0" layoutY="281.0" prefHeight="27.0" prefWidth="209.0" underline="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="lblNotaDetalle" alignment="TOP_LEFT" layoutX="355.0" layoutY="338.0" prefHeight="70.0" prefWidth="170.0" underline="true" wrapText="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="CARGAR">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="559.0" prefWidth="419.0">
+                                    <children>
+                                        <Label layoutX="256.0" layoutY="14.0" prefHeight="27.0" prefWidth="176.0" text="CARGAR EXPEDIENTE">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <GridPane layoutX="24.0" layoutY="68.0" prefHeight="259.0" prefWidth="287.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.66665649414062" minWidth="10.0" prefWidth="96.00001017252605" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.33334350585938" minWidth="10.0" prefWidth="191.33332316080725" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="86.66667175292969" minHeight="6.666646321614579" prefHeight="21.333325703938797" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="120.66668701171874" minHeight="0.0" prefHeight="62.000010172526046" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="157.33333333333331" minHeight="10.0" prefHeight="67.99998982747397" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="157.33333333333331" minHeight="10.0" prefHeight="102.66666666666666" vgrow="SOMETIMES" />
+                                            </rowConstraints>
                                             <children>
-                                                <Label layoutX="256.0" layoutY="14.0" prefHeight="27.0" prefWidth="176.0" text="CARGAR EXPEDIENTE">
+                                                <Label fx:id="lblFechaIngreso" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="184.0" textAlignment="RIGHT" GridPane.columnIndex="1">
                                                     <font>
-                                                        <Font size="18.0" />
+                                                        <Font size="11.0" />
                                                     </font>
                                                 </Label>
-                                                <GridPane layoutX="24.0" layoutY="68.0" prefHeight="259.0" prefWidth="287.0">
-                                                    <columnConstraints>
-                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.66665649414062" minWidth="10.0" prefWidth="96.00001017252605" />
-                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.33334350585938" minWidth="10.0" prefWidth="191.33332316080725" />
-                                                    </columnConstraints>
-                                                    <rowConstraints>
-                                                        <RowConstraints maxHeight="86.66667175292969" minHeight="6.666646321614579" prefHeight="21.333325703938797" vgrow="SOMETIMES" />
-                                                        <RowConstraints maxHeight="120.66668701171874" minHeight="0.0" prefHeight="62.000010172526046" vgrow="SOMETIMES" />
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0" prefHeight="67.99998982747397" vgrow="SOMETIMES" />
-                                                        <RowConstraints maxHeight="157.33333333333331" minHeight="10.0" prefHeight="102.66666666666666" vgrow="SOMETIMES" />
-                                                    </rowConstraints>
+                                                <Label prefHeight="27.0" prefWidth="184.0" text="Iniciante:" underline="true" GridPane.rowIndex="1">
+                                                    <font>
+                                                        <Font size="11.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label prefHeight="22.0" prefWidth="160.0" text="Fecha:" underline="true">
+                                                    <font>
+                                                        <Font size="11.0" />
+                                                    </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbIniciantes" prefHeight="25.0" prefWidth="199.0" promptText="Seleccionar Iniciante" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <ListView fx:id="lstInvolucrados" prefHeight="89.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label prefHeight="27.0" prefWidth="184.0" text="Involucrados:" underline="true" GridPane.rowIndex="3">
+                                                    <font>
+                                                        <Font size="11.0" />
+                                                    </font>
+                                                </Label>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                     <children>
-                                                        <Label fx:id="lblFechaIngreso" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="184.0" textAlignment="RIGHT" GridPane.columnIndex="1">
-                                                            <font>
-                                                                <Font size="11.0" />
-                                                            </font>
-                                                        </Label>
-                                                        <Label prefHeight="27.0" prefWidth="184.0" text="Iniciante:" underline="true" GridPane.rowIndex="1">
-                                                            <font>
-                                                                <Font size="11.0" />
-                                                            </font>
-                                                        </Label>
-                                                        <Label prefHeight="22.0" prefWidth="160.0" text="Fecha:" underline="true">
-                                                            <font>
-                                                                <Font size="11.0" />
-                                                            </font>
-                                                        </Label>
-                                                        <ComboBox fx:id="cmbIniciantes" prefHeight="25.0" prefWidth="199.0" promptText="Seleccionar Iniciante" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                        <ListView fx:id="lstInvolucrados" prefHeight="89.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                        <Label prefHeight="27.0" prefWidth="184.0" text="Involucrados:" underline="true" GridPane.rowIndex="3">
-                                                            <font>
-                                                                <Font size="11.0" />
-                                                            </font>
-                                                        </Label>
-                                                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                            <children>
-                                                                <ComboBox fx:id="cmbInvolucrados" prefHeight="25.0" prefWidth="199.0" promptText="Seleccionar Involucrado" />
-                                                                <BorderPane prefHeight="200.0" prefWidth="200.0">
-                                                                    <right>
-                                                                        <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregarInvolucrado" prefHeight="25.0" prefWidth="71.0" text="Agregar" BorderPane.alignment="CENTER" />
-                                                                    </right>
-                                                                    <left>
-                                                                        <Button fx:id="btnQuitar" mnemonicParsing="false" onAction="#quitarInvolucrado" prefHeight="25.0" prefWidth="71.0" text="Quitar" BorderPane.alignment="CENTER" />
-                                                                    </left>
-                                                                </BorderPane>
-                                                            </children>
-                                                        </VBox>
-                                                        <VBox prefHeight="69.0" prefWidth="103.0" GridPane.rowIndex="2">
-                                                            <children>
-                                                                <Label prefHeight="27.0" prefWidth="115.0" text="Añadir Involucrado:" underline="true">
-                                                                    <font>
-                                                                        <Font size="11.0" />
-                                                                    </font>
-                                                                </Label>
-                                                            </children>
-                                                        </VBox>
+                                                        <ComboBox fx:id="cmbInvolucrados" prefHeight="25.0" prefWidth="199.0" promptText="Seleccionar Involucrado" />
+                                                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                                            <right>
+                                                                <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregarInvolucrado" prefHeight="25.0" prefWidth="71.0" text="Agregar" BorderPane.alignment="CENTER" />
+                                                            </right>
+                                                            <left>
+                                                                <Button fx:id="btnQuitar" mnemonicParsing="false" onAction="#quitarInvolucrado" prefHeight="25.0" prefWidth="71.0" text="Quitar" BorderPane.alignment="CENTER" />
+                                                            </left>
+                                                        </BorderPane>
                                                     </children>
-                                                </GridPane>
-                                                <Label layoutX="388.0" layoutY="124.0" prefHeight="27.0" prefWidth="48.0" text="Nota:">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                                <TextField fx:id="txtTitulo" layoutX="388.0" layoutY="92.0" prefHeight="25.0" prefWidth="283.0" promptText="Ingrese un Titulo" />
-                                                <TextArea fx:id="taNota" layoutX="385.0" layoutY="145.0" prefHeight="181.0" prefWidth="287.0" promptText="ingrese la nota..." />
-                                                <Label layoutX="388.0" layoutY="55.0" prefHeight="27.0" prefWidth="48.0" text="Titulo:">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                                <TableView fx:id="tvExpedientes" layoutX="15.0" layoutY="363.0" prefHeight="182.0" prefWidth="659.0">
-                                                    <columns>
-                                                        <TableColumn fx:id="colId" prefWidth="64.0" text="Numero" />
-                                                        <TableColumn fx:id="colIniciante" minWidth="0.0" prefWidth="117.0" text="Iniciante" />
-                                                        <TableColumn fx:id="colTitulo" minWidth="0.0" prefWidth="204.0" text="Titulo" />
-                                          <TableColumn fx:id="colFechaIngreso" minWidth="0.0" prefWidth="186.0" text="Fecha Ingreso" />
-                                          <TableColumn fx:id="colEstado" minWidth="0.0" prefWidth="103.0" text="Estado" />
-                                                    </columns>
-                                                </TableView>
-                                                <Button fx:id="btnCargar" layoutX="620.0" layoutY="334.0" mnemonicParsing="false" onAction="#cargarExpediente" text="Cargar" />
-                                                <Button fx:id="btnLimpiar" layoutX="436.0" layoutY="334.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar Campos" />
-                                                <Button fx:id="btnEditar" layoutX="558.0" layoutY="334.0" mnemonicParsing="false" onAction="#editarExpediente" text="Editar" />
-                                    <Button fx:id="btnEliminarExpediente" layoutX="24.0" layoutY="334.0" mnemonicParsing="false" onAction="#eliminarExpediente" text="Eliminar Expediente" />
+                                                </VBox>
+                                                <VBox prefHeight="69.0" prefWidth="103.0" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Label prefHeight="27.0" prefWidth="115.0" text="Añadir Involucrado:" underline="true">
+                                                            <font>
+                                                                <Font size="11.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                </VBox>
                                             </children>
-                                        </AnchorPane>
-                                    </content>
-                                </Tab>
-                                <Tab text="EXPEDIENTES">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                            <children>
-                                                <Label layoutX="289.0" layoutY="14.0" prefHeight="27.0" prefWidth="109.0" text="EXPEDIENTE" textAlignment="CENTER">
-                                                    <font>
-                                                        <Font size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <TableView fx:id="tvExpediente1" layoutX="18.0" layoutY="375.0" prefHeight="178.0" prefWidth="648.0">
-                                                    <columns>
-                                                        <TableColumn prefWidth="104.66670227050781" text="Nro" />
-                                                        <TableColumn minWidth="0.0" prefWidth="98.66665649414062" text="Fecha" />
-                                                        <TableColumn minWidth="0.0" prefWidth="182.66665649414062" text="Iniciante" />
-                                                        <TableColumn minWidth="0.0" prefWidth="188.0" text="Titulo" />
-                                                        <TableColumn minWidth="0.0" prefWidth="71.0" text="Estado" />
-                                                    </columns>
-                                                </TableView>
-                                                <Label layoutX="18.0" layoutY="120.0" prefHeight="27.0" prefWidth="50.0" text="Iniciante:" underline="true">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label layoutX="18.0" layoutY="88.0" prefHeight="22.0" prefWidth="37.0" text="Fecha:" underline="true">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label layoutX="18.0" layoutY="155.0" prefHeight="27.0" prefWidth="73.0" text="Involucrados:" underline="true">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label layoutX="18.0" layoutY="58.0" prefHeight="22.0" prefWidth="27.0" text="Nro:" underline="true">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label layoutX="310.0" layoutY="58.0" prefHeight="22.0" prefWidth="37.0" text="Titulo:" underline="true">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label layoutX="310.0" layoutY="88.0" prefHeight="22.0" prefWidth="53.0" text="Nota:" underline="true">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                                <Text fx:id="txTitulo" layoutX="346.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="282.80340576171875" />
-                                                <TextArea fx:id="taNotaR" layoutX="310.0" layoutY="110.0" prefHeight="221.0" prefWidth="356.0" />
-                                                <TableView fx:id="tvInvolucrados" layoutX="18.0" layoutY="182.0" prefHeight="148.0" prefWidth="253.0">
-                                                    <columns>
-                                                        <TableColumn prefWidth="104.66670227050781" text="Nombre" />
-                                                        <TableColumn prefWidth="147.33331298828125" text="DNI" />
-                                                    </columns>
-                                                </TableView>
-                                                <Button fx:id="btnEliminar" layoutX="544.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Ver Detalles" />
-                                                <Label fx:id="txIniciante" layoutX="75.0" layoutY="120.0" prefHeight="27.0" prefWidth="209.0" underline="true">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label fx:id="txFecha" layoutX="75.0" layoutY="85.0" prefHeight="27.0" prefWidth="201.0" underline="true">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label fx:id="txNro" layoutX="75.0" layoutY="55.0" prefHeight="27.0" prefWidth="204.0" underline="true">
-                                                    <font>
-                                                        <Font size="11.0" />
-                                                    </font>
-                                                </Label>
-                                    <Button fx:id="btnEliminar1" layoutX="415.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Marcar Cerrado" />
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </Tab>
-                            </tabs>
-                        </TabPane>
-                    </children>
-                </VBox>
+                                        </GridPane>
+                                        <Label layoutX="388.0" layoutY="124.0" prefHeight="27.0" prefWidth="48.0" text="Nota:">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="txtTitulo" layoutX="388.0" layoutY="92.0" prefHeight="25.0" prefWidth="283.0" promptText="Ingrese un Titulo" />
+                                        <TextArea fx:id="taNota" layoutX="385.0" layoutY="145.0" prefHeight="181.0" prefWidth="287.0" promptText="ingrese la nota..." />
+                                        <Label layoutX="388.0" layoutY="55.0" prefHeight="27.0" prefWidth="48.0" text="Titulo:">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                        <TableView fx:id="tvExpedientes" layoutX="15.0" layoutY="363.0" prefHeight="182.0" prefWidth="659.0">
+                                            <columns>
+                                                <TableColumn fx:id="colId" prefWidth="64.0" text="Numero" />
+                                                <TableColumn fx:id="colIniciante" minWidth="0.0" prefWidth="117.0" text="Iniciante" />
+                                                <TableColumn fx:id="colTitulo" minWidth="0.0" prefWidth="204.0" text="Titulo" />
+                                                <TableColumn fx:id="colFechaIngreso" minWidth="0.0" prefWidth="186.0" text="Fecha Ingreso" />
+                                                <TableColumn fx:id="colEstado" minWidth="0.0" prefWidth="103.0" text="Estado" />
+                                            </columns>
+                                        </TableView>
+                                        <Button fx:id="btnCargar" layoutX="620.0" layoutY="334.0" mnemonicParsing="false" onAction="#cargarExpediente" text="Cargar" />
+                                        <Button fx:id="btnLimpiar" layoutX="436.0" layoutY="334.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar Campos" />
+                                        <Button fx:id="btnEditar" layoutX="558.0" layoutY="334.0" mnemonicParsing="false" onAction="#editarExpediente" text="Editar" />
+                                        <Button fx:id="btnEliminarExpediente" layoutX="24.0" layoutY="334.0" mnemonicParsing="false" onAction="#eliminarExpediente" text="Eliminar Expediente" />
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
             </children>
         </AnchorPane>
     </center>
+    <bottom>
+        <Label text="Todos los derechos reservados" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="System Italic" size="8.0" />
+            </font>
+        </Label>
+    </bottom>
+    <right>
+        <Label text="    " BorderPane.alignment="CENTER">
+            <font>
+                <Font name="System Italic" size="8.0" />
+            </font>
+        </Label>
+    </right>
 </BorderPane>

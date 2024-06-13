@@ -29,8 +29,14 @@ public class Reunion {
             inverseJoinColumns = @JoinColumn(name = "miembro_id")
     )
     private List<Persona> miembros;
-    @ManyToMany(mappedBy = "reuniones")
-    private List<Expediente> expedientes;
+
+    @ManyToMany
+    @JoinTable(
+            name = "reunion_expediente",
+            joinColumns = @JoinColumn(name = "reunion_id"),
+            inverseJoinColumns = @JoinColumn(name = "expediente_id")
+    )
+    private List<Expediente> orden;
     @OneToMany(mappedBy = "reunion")
     private List<Asistencia> asistencias;
     @OneToMany(mappedBy = "reunion")
@@ -96,20 +102,20 @@ public class Reunion {
         this.miembros = miembros;
     }
 
-    public List<Expediente> getExpedientes() {
-        return this.expedientes;
+    public List<Expediente> getOrden() {
+        return this.orden;
     }
 
-    public void setExpedientes(final List<Expediente> expedientes) {
-        this.expedientes = expedientes;
+    public void setOrden(final List<Expediente> orden) {
+        this.orden = orden;
     }
 
-    public List<Asistencia> getAsistencias() {
+    public List<Asistencia> getAsistencia() {
         return this.asistencias;
     }
 
-    public void setAsistencias(final List<Asistencia> asistencias) {
-        this.asistencias = asistencias;
+    public void setAsistencia(final List<Asistencia> asistencia) {
+        this.asistencias = asistencia;
     }
 
     public List<Minuta> getMinutas() {

@@ -1,6 +1,5 @@
 package edu.unam.pooproject.controller;
 
-import edu.unam.pooproject.Services.Enrutador;
 import edu.unam.pooproject.Services.PersonaServicio;
 import edu.unam.pooproject.Services.VentanaEmergente;
 import edu.unam.pooproject.db.Conexion;
@@ -22,7 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class PersonaController {
+public class PersonaController extends NavegacionController {
     private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
@@ -337,43 +336,6 @@ public class PersonaController {
             ventana.mostrarError("Por favor ingrese un apellido.");
             return false;
         }
-    }
-
-
-    //Ubicar en ventana "Inicio"
-    @FXML
-    public void menuMiembros(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/miembros-view.fxml");
-    }
-
-    //Ubicar en ventana "Expedientes"
-    @FXML
-    public void menuExpedientes(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/expediente-view.fxml");
-    }
-
-    //Ubicar en ventana "Miembros"
-    @FXML
-    public void menuPersona(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/personas-view.fxml");
-    }
-
-    //Ubicar en ventana "Reunion"
-    @FXML
-    public void menuReunion(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/reunion-view.fxml");
-    }
-
-    //Ubicar en ventana "Asistencia"
-    @FXML
-    public void menuAsistencia(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/accion-view.fxml");
-    }
-
-    //Ubicar en ventana "Minuta"
-    @FXML
-    public void menuMinuta(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/minuta-view.fxml");
     }
 }
 

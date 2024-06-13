@@ -21,6 +21,8 @@ public class Persona {
     boolean esMiembro;
     @Column(name = "email")
     String email;
+    @OneToMany(mappedBy = "miembro")
+    private List<Asistencia> asistencias;
     @ManyToMany(mappedBy = "miembros")
     private List<Reunion> reuniones;
     @OneToMany(mappedBy = "iniciante")

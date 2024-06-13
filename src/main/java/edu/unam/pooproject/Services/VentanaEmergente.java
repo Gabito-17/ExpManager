@@ -1,6 +1,9 @@
 package edu.unam.pooproject.Services;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 public class VentanaEmergente {
 
@@ -18,5 +21,15 @@ public class VentanaEmergente {
         alertExisto.setHeaderText((String) null);
         alertExisto.setContentText(s);
         alertExisto.showAndWait();
+    }
+
+    public Optional<ButtonType> mostrarConfirmacion(String p, String r) {
+        // Mostrar un Alert de confirmación
+        Alert alertConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirmacion.setTitle("Confirmar");
+        alertConfirmacion.setHeaderText(p);
+        alertConfirmacion.setContentText(r);
+        Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
+        return resultado;
     }
 }

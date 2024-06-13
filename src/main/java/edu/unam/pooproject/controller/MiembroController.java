@@ -1,6 +1,9 @@
 package edu.unam.pooproject.controller;
 
-import edu.unam.pooproject.Services.*;
+import edu.unam.pooproject.Services.ExpedienteServicio;
+import edu.unam.pooproject.Services.PersonaServicio;
+import edu.unam.pooproject.Services.ReunionServicio;
+import edu.unam.pooproject.Services.VentanaEmergente;
 import edu.unam.pooproject.db.Conexion;
 import edu.unam.pooproject.modelo.Persona;
 import edu.unam.pooproject.repositorio.Repositorio;
@@ -11,11 +14,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.util.List;
 import java.util.Optional;
 
-public class MiembroController {
+public class MiembroController extends NavegacionController {
 
     //Informacion del miembro
     @FXML
@@ -108,46 +112,9 @@ public class MiembroController {
     }
 
 
-    //Ubicar en ventana "Expediente"
-    @FXML
-    public void menuExpediente(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/expediente-view.fxml");
-    }
-
-    //Ubicar en ventana "Miembro"
-    @FXML
-    public void menuMiembro(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/personas-view.fxml");
-    }
-
-    //Ubicar en ventana "Reunion"
-    @FXML
-    public void menuReunion(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/reunion-view.fxml");
-    }
-
-    //Ubicar en ventana "Asistencia"
-    @FXML
-    public void menuAsistencia(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/accion-view.fxml");
-    }
-
-    //Ubicar en ventana "Minuta"
-    @FXML
-    public void menuMinuta(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/minuta-view.fxml");
-    }
-
-    @FXML
-    public void menuPersona(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/personas-view.fxml");
-    }
-
-
     //limpiar campos
     @FXML
     public void limpiarCampos(ActionEvent event) {
-
     }
 
     //modificar registro
@@ -164,7 +131,8 @@ public class MiembroController {
 
     }
 
-    public void verDetalles(ActionEvent event) {
+    @FXML
+    public void verDetalles(MouseEvent event) {
         Persona miembroSeleccionado = tvMiembros.getSelectionModel().getSelectedItem();
         if (miembroSeleccionado != null) {
             lblDni.setText(miembroSeleccionado.getDni());

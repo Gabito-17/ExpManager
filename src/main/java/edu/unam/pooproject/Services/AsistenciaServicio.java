@@ -1,5 +1,6 @@
 package edu.unam.pooproject.Services;
 
+import edu.unam.pooproject.modelo.Asistencia;
 import edu.unam.pooproject.modelo.Expediente;
 import edu.unam.pooproject.modelo.Persona;
 import edu.unam.pooproject.modelo.Reunion;
@@ -9,18 +10,26 @@ import javax.persistence.TypedQuery;
 import java.util.Collections;
 import java.util.List;
 
-public class ReunionServicio {
+public class AsistenciaServicio {
 
     private Repositorio repositorio;
 
-    public ReunionServicio(Repositorio p) {
+    public AsistenciaServicio(Repositorio p) {
         this.repositorio = p;
     }
 
-    public void agregarReunion(Reunion reunion) {
-        this.repositorio.iniciarTransaccion();
-        this.repositorio.insertar(reunion);
-        this.repositorio.confirmarTransaccion();
+    public void crearAsistencia(Reunion reunion, List<Persona> miembros) {
+        for (Persona m : miembros) {
+            Asistencia asistencia = new Asistencia();
+            asistencia.setReunion(reunion);
+            asistencia.setMiembro(m);
+            asistencia.setFueCargado(false);
+            this.repositorio.iniciarTransaccion();
+            this.repositorio.insertar(asistencia);
+            this.repositorio.confirmarTransaccion();
+        }
+
+
     }
 
     public void editarReunion(Reunion reunion) {

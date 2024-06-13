@@ -11,6 +11,8 @@ public class Asistencia {
     int id;
     @Column(name = "asiste")
     Boolean asistio;
+    @Column(name = "fueCargado")
+    Boolean fueCargado;
     @ManyToOne
     @JoinColumn(name = "reunion_id")
     private Reunion reunion;
@@ -33,6 +35,14 @@ public class Asistencia {
 
     public void setId(final int id) {
         this.id = id;
+    }
+
+    public Boolean getFueCargado() {
+        return this.fueCargado;
+    }
+
+    public void setFueCargado(Boolean b) {
+        this.fueCargado = b;
     }
 
     public Boolean getAsistio() {

@@ -5,6 +5,7 @@ import edu.unam.pooproject.modelo.Persona;
 import edu.unam.pooproject.repositorio.Repositorio;
 
 import javax.persistence.TypedQuery;
+import java.util.Collections;
 import java.util.List;
 
 public class ExpedienteServicio {
@@ -38,10 +39,7 @@ public class ExpedienteServicio {
     }
 
     public Expediente buscarPorId(Integer id) {
-        TypedQuery<Expediente> query = repositorio.getEntityManager().createQuery("Select p From Expediente p WHERE p.id = :id", Expediente.class);
-        query.setParameter("id", id);
-        List<Expediente> resultados = query.getResultList();
-        return resultados.isEmpty() ? null : resultados.get(0);
+        return this.repositorio.obtener(Expediente.class, id);
     }
 
     public void agregarInvolucrados(Expediente expediente, List<Persona> involucrado) {
@@ -49,7 +47,22 @@ public class ExpedienteServicio {
         expediente.setInvolucrados(involucrado);
         this.repositorio.modificar(expediente);
         this.repositorio.confirmarTransaccion();
+    }
 
+    public List<Persona> obtenerInvolucrados(Expediente expedienteSeleccionado) {
+        if (expedienteSeleccionado != null) {
+            // Crear una consulta para obtener los miembros de la reunión seleccionada
+            TypedQuery<Persona> query = repositorio.getEntityManager()
+                    .createQuery("SELECT ex FROM Expediente e JOIN e.involucrados ex WHERE e = :expediente", Persona.class)
+                    .setParameter("expediente", expedienteSeleccionado);
+
+            // Ejecutar la consulta y obtener la lista de miembros
+            List<Persona> miembros = query.getResultList();
+
+            // Devolver la lista de miembros
+            return miembros;
+        }
+        return Collections.emptyList(); // Devuelve una lista vacía si la reunión seleccionada es nula
     }
 }
 

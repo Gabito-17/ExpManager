@@ -1,6 +1,5 @@
 package edu.unam.pooproject.controller;
 
-import edu.unam.pooproject.Services.Enrutador;
 import edu.unam.pooproject.Services.ExpedienteServicio;
 import edu.unam.pooproject.Services.PersonaServicio;
 import edu.unam.pooproject.Services.VentanaEmergente;
@@ -16,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.input.MouseEvent;
 import javafx.util.StringConverter;
 
 import java.time.LocalDate;
@@ -23,13 +23,23 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class ExpedienteController {
+public class ExpedienteController extends NavegacionController {
     private VentanaEmergente ventana = new VentanaEmergente();
     private LocalDate fechaHoy;
     private Repositorio repositorio;
     private PersonaServicio personaServicio;
     private ExpedienteServicio expedienteServicio;
     //Informacion del expediente
+    @FXML
+    private Label lblNroDetalle;
+    @FXML
+    private Label lblFechaDetalle;
+    @FXML
+    private Label lblInicianteDetalle;
+    @FXML
+    private Label lblTituloDetalle;
+    @FXML
+    private Label lblNotaDetalle;
     @FXML
     private Label lblFechaIngreso;
     @FXML
@@ -44,7 +54,6 @@ public class ExpedienteController {
     private ListView<Persona> lstInvolucrados;
     @FXML
     private TableView<Expediente> tvExpedientes;
-
     @FXML
     private TableColumn<Expediente, Integer> colId;
     @FXML
@@ -55,6 +64,21 @@ public class ExpedienteController {
     private TableColumn<Expediente, String> colFechaIngreso;
     @FXML
     private TableColumn<Expediente, String> colEstado;
+    @FXML
+    private ListView<Persona> lstInvolucradoDetalle;
+    @FXML
+    private TableView<Expediente> tvExpedienteDetalle;
+
+    @FXML
+    private TableColumn<Expediente, Integer> colNroDetalle;
+    @FXML
+    private TableColumn<Expediente, String> colInicianteDetalle;
+    @FXML
+    private TableColumn<Expediente, String> colTituloDetalle;
+    @FXML
+    private TableColumn<Expediente, String> colFechaIngresoDetalle;
+    @FXML
+    private TableColumn<Expediente, String> colEstadoDetalle;
     private ObservableList<Persona> listaInvolucrados = FXCollections.observableArrayList();
 
 
@@ -70,6 +94,11 @@ public class ExpedienteController {
         colFechaIngreso.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaIngreso().toString()));
         colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado().toString()));
         colIniciante.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIniciante().getNombreCompleto()));
+        colNroDetalle.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+        colTituloDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitulo()));
+        colFechaIngresoDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaIngreso().toString()));
+        colEstadoDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado().toString()));
+        colInicianteDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIniciante().getNombreCompleto()));
 
         // Cargar todas los expedientes de la base de datos y mostrarlos en el TableView
         rellenarTabla();
@@ -109,6 +138,47 @@ public class ExpedienteController {
         });
     }
 
+    @FXML
+    public void verDetalles(MouseEvent event) {
+        if (tvExpedienteDetalle.getSelectionModel().getSelectedItem() != null) {
+            lblFechaDetalle.setText(tvExpedienteDetalle.getSelectionModel().getSelectedItem().getFechaIngreso().toString());
+            lblNroDetalle.setText(tvExpedienteDetalle.getSelectionModel().getSelectedItem().getId().toString());
+            lblInicianteDetalle.setText(tvExpedienteDetalle.getSelectionModel().getSelectedItem().getIniciante().getNombreCompleto());
+            lblTituloDetalle.setText(tvExpedienteDetalle.getSelectionModel().getSelectedItem().getTitulo().toString());
+            lblNotaDetalle.setText(tvExpedienteDetalle.getSelectionModel().getSelectedItem().getNota());
+
+            // Obtener todas las personas involucradas en el expediente seleccionado
+            List<Persona> involucradosExpediente = expedienteServicio.obtenerInvolucrados(tvExpedienteDetalle.getSelectionModel().getSelectedItem());
+
+            if (involucradosExpediente != null && !involucradosExpediente.isEmpty()) {
+                // Convertir la lista de personas en una ObservableList
+                ObservableList<Persona> listaInvolucrados = FXCollections.observableArrayList(involucradosExpediente);
+
+                // Asignar la lista de personas al TableView
+                lstInvolucradoDetalle.setItems(listaInvolucrados);
+                // Establecer el formato de las celdas del TableView para que muestren el nombre y apellido de cada persona
+                lstInvolucradoDetalle.setCellFactory(param -> new TextFieldListCell<>(new StringConverter<Persona>() {
+                    @Override
+                    public String toString(Persona persona) {
+                        return persona != null ? persona.getApellido() + " " + persona.getNombre() : "";
+                    }
+
+                    @Override
+                    public Persona fromString(String string) {
+                        return null;
+                    }
+                }));
+            } else {
+                // Mostrar un mensaje de error si no se selecciona un expediente o si no hay personas involucradas
+                ventana.mostrarError("Debe seleccionar un expediente con personas involucradas para ver los detalles.");
+            }
+        } else {
+            // Mostrar un mensaje de error si no se selecciona un expediente
+            ventana.mostrarError("Debe seleccionar un expediente para ver los detalles.");
+        }
+    }
+
+
     private void rellenarTabla() {
         // Obtener todos los expedientes de la base de datos a través del servicio
         List<Expediente> expedientes = expedienteServicio.obtenerTodos();
@@ -118,6 +188,7 @@ public class ExpedienteController {
 
         // Asignar la lista de expediente al TableView
         tvExpedientes.setItems(listaExpedientes);
+        tvExpedienteDetalle.setItems(listaExpedientes);
     }
 
     @FXML
@@ -160,21 +231,37 @@ public class ExpedienteController {
         }
 
         // Mostrar un Alert de confirmación para verificar si se desea editar el expediente
-        Alert alertConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        alertConfirmacion.setTitle("Confirmar");
-        alertConfirmacion.setHeaderText("¿Deseas editar este expediente?");
-        alertConfirmacion.setContentText("Se editarán los datos del expediente seleccionado.\n Al finalizar la edicion presiones 'Cargar' ");
-
-        Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
+        Optional<ButtonType> resultado = ventana.mostrarConfirmacion("¿Deseas editar este expediente?", "Se editarán los datos del expediente seleccionado.\n Al finalizar la edicion presione 'Cargar'");
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             // Cargar los datos del expediente seleccionado en los campos correspondientes
             txtTitulo.setText(expedienteSeleccionado.getTitulo());
             lblFechaIngreso.setText(expedienteSeleccionado.getFechaIngreso().toString());
             taNota.setText(expedienteSeleccionado.getNota());
             cmbIniciantes.getSelectionModel().select(expedienteSeleccionado.getIniciante());
-            listaInvolucrados.clear();
-            lstInvolucrados.setItems(listaInvolucrados);
             lblFechaIngreso.setText(expedienteSeleccionado.getFechaIngreso().toString());
+            listaInvolucrados.clear();
+
+            List<Persona> involucrados = expedienteSeleccionado.getInvolucrados();
+
+            // Convertir la lista de Involucrados a ObservableList
+            ObservableList<Persona> listaInvolucrados = FXCollections.observableArrayList(involucrados);
+            lstInvolucrados.setItems(listaInvolucrados);
+            lstInvolucrados.setCellFactory(param -> new TextFieldListCell<>(new StringConverter<Persona>() {
+                @Override
+                public String toString(Persona persona) {
+                    if (persona != null) {
+                        return persona.getApellido() + " " + persona.getNombre();
+                    } else {
+                        return "";
+                    }
+                }
+
+                @Override
+                public Persona fromString(String string) {
+                    // No se usa en este caso
+                    return null;
+                }
+            }));
         }
     }
 
@@ -295,6 +382,10 @@ public class ExpedienteController {
         }
 
         if (expedienteExiste(expediente.getId())) {
+            if (!expediente.getEstado()) {
+                ventana.mostrarError("Error al cargar expediente, el expediente ya se encuentra cerrado.");
+                return;
+            }
             this.expedienteServicio.editarExpediente(expediente);
         } else {
             // Guardar el expediente en la base de datos
@@ -314,43 +405,5 @@ public class ExpedienteController {
         // Si la persona existe (es diferente de null), devuelve true; de lo contrario, devuelve false
         return expedienteExistente != null;
     }
-
-    //Ubicar en ventana "Inicio"
-    @FXML
-    public void menuMiembros(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/miembros-view.fxml");
-    }
-
-    //Ubicar en ventana "Expedientes"
-    @FXML
-    public void menuExpedientes(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/expediente-view.fxml");
-    }
-
-    //Ubicar en ventana "Miembros"
-    @FXML
-    public void menuPersona(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/personas-view.fxml");
-    }
-
-    //Ubicar en ventana "Reunion"
-    @FXML
-    public void menuReunion(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/reunion-view.fxml");
-    }
-
-    //Ubicar en ventana "Asistencia"
-    @FXML
-    public void menuAsistencia(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/accion-view.fxml");
-    }
-
-    //Ubicar en ventana "Minuta"
-    @FXML
-    public void menuMinuta(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/minuta-view.fxml");
-    }
-
-
 }
 

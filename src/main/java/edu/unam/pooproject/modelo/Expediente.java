@@ -22,14 +22,8 @@ public class Expediente {
     @ManyToOne
     @JoinColumn(name = "iniciante_id")
     private Persona iniciante;
-    @ManyToMany
-    @JoinTable(
-            name = "expediente_reunion",
-            joinColumns = @JoinColumn(name = "expediente_id"),
-            inverseJoinColumns = @JoinColumn(name = "reunion_id")
-    )
+    @ManyToMany(mappedBy = "orden")
     private List<Reunion> reuniones;
-
     @OneToMany(mappedBy = "expediente")
     private List<Accion> acciones;
 
