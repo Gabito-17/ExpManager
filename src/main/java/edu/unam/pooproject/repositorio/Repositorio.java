@@ -15,6 +15,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import java.util.List;
 
 public class Repositorio {
+
     private final EntityManager em;
 
     public Repositorio(EntityManagerFactory emf) {

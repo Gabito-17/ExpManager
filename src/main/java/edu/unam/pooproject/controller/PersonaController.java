@@ -100,23 +100,13 @@ public class PersonaController extends NavegacionController {
             ventana.mostrarError("Selecciona una persona para editar.");
             return;
         }
-
-        // Mostrar un Alert de confirmación para verificar si se desea editar la persona
-        Alert alertConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        alertConfirmacion.setTitle("Confirmar");
-        alertConfirmacion.setHeaderText("¿Deseas editar a esta persona?");
-        alertConfirmacion.setContentText("Se editarán los datos de la persona seleccionada. \n Al finalizar la edicion presiones 'Cargar' ");
-
-        Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
-        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            // Cargar los datos de la persona seleccionada en los campos correspondientes
-            txtDniPersona.setText(personaSeleccionada.getDni());
-            txtNombrePersona.setText(personaSeleccionada.getNombre());
-            txtApellidoPersona.setText(personaSeleccionada.getApellido());
-            txtEmailPersona.setText(personaSeleccionada.getEmail());
-            fechaNacimiento.setValue(personaSeleccionada.getFechaNacimiento());
-            esMiembro.setSelected(personaSeleccionada.esMiembro());
-        }
+        // Cargar los datos de la persona seleccionada en los campos correspondientes
+        txtDniPersona.setText(personaSeleccionada.getDni());
+        txtNombrePersona.setText(personaSeleccionada.getNombre());
+        txtApellidoPersona.setText(personaSeleccionada.getApellido());
+        txtEmailPersona.setText(personaSeleccionada.getEmail());
+        fechaNacimiento.setValue(personaSeleccionada.getFechaNacimiento());
+        esMiembro.setSelected(personaSeleccionada.esMiembro());
     }
 
 
