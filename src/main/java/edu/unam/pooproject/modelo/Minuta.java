@@ -11,8 +11,6 @@ public class Minuta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    @Column(name = "fecha")
-    LocalDate fecha;
     @Column(name = "tema")
     String tema;
     @Column(name = "resumen")
@@ -27,7 +25,6 @@ public class Minuta {
     }
 
     public Minuta(LocalDate f, String t, String res, Reunion reu, Expediente e) {
-        this.fecha = fecha;
         this.tema = t;
         this.resumen = res;
         this.reunion = reu;
@@ -40,14 +37,6 @@ public class Minuta {
 
     public void setId(final int id) {
         this.id = id;
-    }
-
-    public LocalDate getFecha() {
-        return this.fecha;
-    }
-
-    public void setFecha(final LocalDate fecha) {
-        this.fecha = fecha;
     }
 
     public String getTema() {
