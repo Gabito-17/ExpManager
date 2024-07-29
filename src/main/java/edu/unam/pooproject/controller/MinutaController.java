@@ -94,34 +94,28 @@ public class MinutaController extends NavegacionController {
     @FXML
     void cargarMinuta(ActionEvent event) {
         if (minutaSeleccionada != null) {
-            if (minutaSeleccionada.getTema().isEmpty() && minutaSeleccionada.getResumen().isEmpty()) {
-                bloquearInputs(false);
-                // Obtener valores de los inputs
-                String tema = txtTema.getText();
-                String resumen = taResumen.getText();
+            // Obtener valores de los inputs
+            String tema = txtTema.getText();
+            String resumen = taResumen.getText();
 
-                // Validar que los campos no estén vacíos antes de guardar
-                if (tema.isEmpty() || resumen.isEmpty()) {
-                    System.out.println("Los campos Tema y Resumen no pueden estar vacíos.");
-                    return;
-                }
-
-                // Actualizar la minuta seleccionada
-                minutaSeleccionada.setTema(tema);
-                minutaSeleccionada.setResumen(resumen);
-
-                // Guardar cambios en la base de datos
-                minutaServicio.editarMinuta(minutaSeleccionada);
-
-                // Actualizar la tabla
-                rellenarTabla();
-
-                // Bloquear inputs
-                bloquearInputs(true);
+            // Validar que los campos no estén vacíos antes de guardar
+            if (tema.isEmpty() || resumen.isEmpty()) {
+                System.out.println("Los campos Tema y Resumen no pueden estar vacíos.");
+                return;
             }
-            else {
-                System.out.println("La minuta ya ha sido cargada y no puede ser editada.");
-            }
+
+            // Actualizar la minuta seleccionada
+            minutaSeleccionada.setTema(tema);
+            minutaSeleccionada.setResumen(resumen);
+
+            // Guardar cambios en la base de datos
+            minutaServicio.editarMinuta(minutaSeleccionada);
+
+            // Actualizar la tabla
+            rellenarTabla();
+
+            // Bloquear inputs
+            bloquearInputs(true);
         }
     }
 
