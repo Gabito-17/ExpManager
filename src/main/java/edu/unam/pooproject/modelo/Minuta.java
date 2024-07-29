@@ -2,6 +2,7 @@ package edu.unam.pooproject.modelo;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,11 +18,17 @@ public class Minuta {
     String resumen;
     @ManyToOne
     private Reunion reunion;
-    @ManyToMany(mappedBy = "minutas")
-    private List<Expediente> expedientes;
+    @ManyToMany
+    @JoinTable(
+            name = "expediente_minuta",
+            joinColumns = @JoinColumn(name = "minuta_id"),
+            inverseJoinColumns = @JoinColumn(name = "expediente_id")
+    )
+    private List<Expediente> expedientes = new ArrayList<>();
 
 
     public Minuta() {
+        this.expedientes = new ArrayList<>(); // Inicializar la lista
     }
 
     public Minuta(LocalDate f, String t, String res, Reunion reu, Expediente e) {
@@ -29,6 +36,10 @@ public class Minuta {
         this.resumen = res;
         this.reunion = reu;
         this.expedientes.add(e);
+    }
+
+    public void agregarExpediente(Expediente expediente) {
+        this.getExpedientes().add(expediente);
     }
 
     public int getId() {

@@ -2,10 +2,7 @@ package edu.unam.pooproject.controller;
 
 import edu.unam.pooproject.Services.*;
 import edu.unam.pooproject.db.Conexion;
-import edu.unam.pooproject.modelo.Asistencia;
-import edu.unam.pooproject.modelo.Expediente;
-import edu.unam.pooproject.modelo.Persona;
-import edu.unam.pooproject.modelo.Reunion;
+import edu.unam.pooproject.modelo.*;
 import edu.unam.pooproject.repositorio.Repositorio;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -419,6 +416,10 @@ public class ReunionController extends NavegacionController {
         Reunion reunion = new Reunion();
         //Establecer el estado de la reunion en "Abierto"
         reunion.setEstado(true);
+
+        //Establecer la lista de expedientes de la reunion en la lista de expedientes
+        reunion.setOrden(listaExpedientes);
+        //Establecer la lista de miembros de la reunion en la
         //verificar que el campo Fecha sea valido
         if (dpFecha.getValue() == null) {
             ventana.mostrarError("Error al cargar la reunion, debe seleccionar una fecha.");
@@ -476,6 +477,16 @@ public class ReunionController extends NavegacionController {
         //Establecer la lista de expedientes
         reunion.setOrden(lstExpedientes.getItems());
 
+        ObservableList<Minuta> listaMinutas = FXCollections.observableArrayList();
+
+        for (Expediente expediente : reunion.getOrden()) {
+            Minuta minuta = new Minuta();
+            minuta.agregarExpediente(expediente);
+            listaMinutas.add(minuta);
+            
+        }
+
+        reunion.setMinutas(listaMinutas);
 
         reunionServicio.agregarReunion(reunion);
         asistenciaServicio.crearAsistencia(reunion, lstMiembros.getItems());

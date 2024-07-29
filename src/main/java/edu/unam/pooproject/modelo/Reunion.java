@@ -2,6 +2,7 @@ package edu.unam.pooproject.modelo;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -43,11 +44,13 @@ public class Reunion {
     private List<Minuta> minutas;
 
     public Reunion() {
+        this.minutas = new ArrayList<>(); // Inicializar la lista minutas
     }
 
     public Reunion(int nroReunion, LocalDate fecha) {
         this.id = nroReunion;
         this.fecha = fecha;
+        this.minutas = new ArrayList<>(); // Inicializar la lista minutas
     }
 
     public boolean estaCerrado() {
@@ -124,6 +127,10 @@ public class Reunion {
 
     public void setMinutas(final List<Minuta> minutas) {
         this.minutas = minutas;
+    }
+
+    public void agregarMinuta(final Minuta minuta) {
+        this.minutas.add(minuta);
     }
 
     public int getNroReunion() {
