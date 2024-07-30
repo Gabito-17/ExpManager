@@ -34,7 +34,7 @@ public class Expediente {
             inverseJoinColumns = @JoinColumn(name = "involucrado_id")
     )
     private List<Persona> involucrados;
-    @ManyToMany(mappedBy = "expedientes")
+    @OneToMany(mappedBy = "expediente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Minuta> minutas = new ArrayList<>();
 
     public Expediente() {

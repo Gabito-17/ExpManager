@@ -3,11 +3,10 @@ package edu.unam.pooproject.controller;
 import edu.unam.pooproject.Services.ExpedienteServicio;
 import edu.unam.pooproject.Services.MinutaServicio;
 import edu.unam.pooproject.Services.ReunionServicio;
+import edu.unam.pooproject.Services.VentanaEmergente;
 import edu.unam.pooproject.db.Conexion;
-import edu.unam.pooproject.modelo.Expediente;
 import edu.unam.pooproject.modelo.Minuta;
 import edu.unam.pooproject.modelo.Reunion;
-import edu.unam.pooproject.Services.VentanaEmergente;
 import edu.unam.pooproject.repositorio.Repositorio;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -78,7 +77,7 @@ public class MinutaController extends NavegacionController {
 
         // Configurar las propiedades de las columnas
         colId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-        colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpedientes().toString()));
+        colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpediente().toString()));
         colTema.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTema().toString()));
         colResumen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getResumen().toString()));
         // Bloquear inputs
@@ -96,7 +95,7 @@ public class MinutaController extends NavegacionController {
                 ventanaEmergente.mostrarError("Campos vacío, por favor, llena todos los campos antes de cargar la minuta.");
                 return;
             }
-            ventanaEmergente.mostrarConfirmacion("¿Esta seguro que desea guardar la minuta? Una vez guardada no podra ser modificada "+ minutaSeleccionada.getId(), "La minuta se guardó exitosamente.");
+            ventanaEmergente.mostrarConfirmacion("¿Esta seguro que desea guardar la minuta? Una vez guardada no podra ser modificada " + minutaSeleccionada.getId(), "La minuta se guardó exitosamente.");
 
             // Actualizar la minuta seleccionada
             minutaSeleccionada.setTema(tema);
@@ -107,10 +106,10 @@ public class MinutaController extends NavegacionController {
 
             // Bloquear inputs
             bloquearInputs(true);
-            } else {
-                // Mostrar mensaje de que no se puede editar una minuta ya cargada
-                ventanaEmergente.mostrarError("No se puede editar la minuta ya cargada.");
-            } 
+        } else {
+            // Mostrar mensaje de que no se puede editar una minuta ya cargada
+            ventanaEmergente.mostrarError("No se puede editar la minuta ya cargada.");
+        }
     }
 
     @FXML
@@ -139,6 +138,7 @@ public class MinutaController extends NavegacionController {
             System.out.println(listaMinutas);
         }
     }
+
     @FXML
     private void seleccionarMinuta(MouseEvent event) {
         // Obtener la minuta seleccionada

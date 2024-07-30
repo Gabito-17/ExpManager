@@ -487,7 +487,7 @@ public class ReunionController extends NavegacionController {
 
         for (Expediente expediente : reunion.getOrden()) {
             Minuta minuta = new Minuta();
-            minuta.agregarExpediente(expediente);
+            minuta.setExpediente(expediente);
             minuta.setReunion(reunion);
             minutaServicio.cargarMinuta(minuta);
             listaMinutas.add(minuta);
