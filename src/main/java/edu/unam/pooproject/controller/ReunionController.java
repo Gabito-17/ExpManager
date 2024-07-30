@@ -10,11 +10,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -420,9 +425,16 @@ public class ReunionController extends NavegacionController {
         //Establecer el estado de la reunion en "Abierto"
         reunion.setEstado(true);
 
-        //Establecer la lista de expedientes de la reunion en la lista de expedientes
-        reunion.setOrden(listaExpedientes);
-        //Establecer la lista de miembros de la reunion en la
+        //verificar lista expedientes
+        if (listaExpedientes.size() < 1) {
+            ventana.mostrarError("Error al cargar la reunion, debe añadir al menos 1 expediente.");
+            return;
+        }
+        //verificar lista miembros
+        if (listaMiembros.size() < 2) {
+            ventana.mostrarError("Error al cargar la reunion, debe añadir al menos 2 miembros.");
+            return;
+        }
         //verificar que el campo Fecha sea valido
         if (dpFecha.getValue() == null) {
             ventana.mostrarError("Error al cargar la reunion, debe seleccionar una fecha.");
@@ -455,15 +467,6 @@ public class ReunionController extends NavegacionController {
             ventana.mostrarError("Error al cargar reunion, 'Detalles' debe tener al menos 10 caracteres.");
             return;
         }
-        //Verificar que la lista de Miembros no este vacia
-        if (lstMiembros.getItems() == null) {
-            ventana.mostrarError("Error al cargar la reunion, no selecciono ningún miembro del consejo que participe en ella.");
-            return;
-        }
-        if (lstExpedientes.getItems() == null) {
-            ventana.mostrarError("Error al cargar la reunion, no selecciono ningún expediente del consejo que se discuta en ella.");
-            return;
-        }
 
         //Establecer la fecha de la reunion
         reunion.setFecha(dpFecha.getValue());
@@ -479,25 +482,45 @@ public class ReunionController extends NavegacionController {
         reunion.setMiembros(lstMiembros.getItems());
         //Establecer la lista de expedientes
         reunion.setOrden(lstExpedientes.getItems());
-
+        reunionServicio.agregarReunion(reunion);
         ObservableList<Minuta> listaMinutas = FXCollections.observableArrayList();
 
         for (Expediente expediente : reunion.getOrden()) {
             Minuta minuta = new Minuta();
             minuta.agregarExpediente(expediente);
+            minuta.setReunion(reunion);
             minutaServicio.cargarMinuta(minuta);
             listaMinutas.add(minuta);
-            System.out.println(minuta);
         }
-
-
         reunion.setMinutas(listaMinutas);
+        reunionServicio.editarReunion(reunion);
 
-        reunionServicio.agregarReunion(reunion);
         asistenciaServicio.crearAsistencia(reunion, lstMiembros.getItems());
         ventana.mostrarExito("La Reunion fue cargada con exito!");
         limpiarCampos();
         rellenarTablas();
+    }
+
+    @FXML
+    public void verMinutas(ActionEvent event) {
+        Reunion reunionSeleccionada = tvDetallesReunion.getSelectionModel().getSelectedItem();
+        if (reunionSeleccionada != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/minuta-view.fxml"));
+                Parent root = loader.load();
+                MinutaController minutaController = loader.getController();
+                minutaController.setReunionId(reunionSeleccionada.getId());
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                ventana.mostrarError("Error al cargar la ventana de minutas.");
+                e.printStackTrace();
+            }
+        } else {
+            ventana.mostrarError("Debe seleccionar una reunión para ver las minutas.");
+        }
     }
 
 

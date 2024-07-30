@@ -9,7 +9,6 @@ import edu.unam.pooproject.modelo.Minuta;
 import edu.unam.pooproject.modelo.Reunion;
 import edu.unam.pooproject.repositorio.Repositorio;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -64,7 +63,6 @@ public class MinutaController extends NavegacionController {
     private Minuta minutaSeleccionada = null;
 
     public void initialize() {
-        // Inicializar servicios
         this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.minutaServicio = new MinutaServicio(this.repositorio);
         this.expedienteServicio = new ExpedienteServicio(this.repositorio);
@@ -72,19 +70,8 @@ public class MinutaController extends NavegacionController {
 
         // Configurar las propiedades de las columnas
         colId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-        //colFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReunion().getFecha().toString()));
-        //colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpedientes().get(0).getTitulo()));
-        colTema.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTema()));
-        colResumen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getResumen()));
-
-        // Inicializar la tabla con las minutas de la reunión actual
-        rellenarTabla();
-
-        // Bloquear inputs y botones
-        bloquearInputs(true);
-
-        // Añadir evento de selección de fila en la tabla
-        tvMinutasDeLaReunion.setOnMouseClicked(this::seleccionarMinuta);
+        // colFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get().getFecha().toString()));
+        // colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpediente().getTitulo()));
     }
 
     @FXML
@@ -106,9 +93,6 @@ public class MinutaController extends NavegacionController {
 
             // Guardar cambios en la base de datos
             minutaServicio.editarMinuta(minutaSeleccionada);
-
-            // Actualizar la tabla
-            rellenarTabla();
 
             // Bloquear inputs
             bloquearInputs(true);
@@ -136,24 +120,20 @@ public class MinutaController extends NavegacionController {
         }
     }
 
-    void rellenarTabla() {
-        // Obtener la reunión seleccionada a través del ID de reunión proporcionado
-        int idReunion = Integer.parseInt(lbIdReunion.getText());
+    public void setReunionId(int reunionId) {
+        lbIdReunion.setText(String.valueOf(reunionId));
+        rellenarTabla(reunionId);
+    }
 
-        // Buscar la reunión en la base de datos
-        Reunion reunionSeleccionada = reunionServicio.buscarPorId(idReunion);
-
-        if (reunionSeleccionada != null) {
-            // Obtener todas las minutas de la reunión actual
-            List<Minuta> minutas = reunionSeleccionada.getMinutas();
-
-            // Convertir la lista de minutas en una ObservableList
+    private void rellenarTabla(int reunionId) {
+        Reunion reunion = reunionServicio.buscarPorId(reunionId);
+        if (reunion != null) {
+            List<Minuta> minutas = reunion.getMinutas();
             ObservableList<Minuta> listaMinutas = FXCollections.observableArrayList(minutas);
-
-            // Asignar la lista de minutas al TableView
             tvMinutasDeLaReunion.setItems(listaMinutas);
+            System.out.println(listaMinutas);
         } else {
-            System.out.println("Reunión no encontrada.");
+            return;
         }
     }
 

@@ -203,7 +203,7 @@
                                                     </center>
                                                 </BorderPane>
                                                 <ComboBox fx:id="cmbHoraFin" onAction="#verificarHoraFin" prefHeight="25.0" prefWidth="224.0" promptText="Seleccionar Hora de Finalizacion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <TextArea fx:id="taDetalles" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <TextArea fx:id="taDetalles" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                                                     <children>
                                                         <Label prefHeight="22.0" prefWidth="160.0" text="Detalles:" underline="true">
@@ -315,7 +315,7 @@
                                                 <Font size="18.0" />
                                             </font>
                                         </Label>
-                                        <TableView fx:id="tvDetallesReunion" layoutX="7.0" layoutY="375.0" onMouseClicked="#verDetalles" prefHeight="178.0" prefWidth="677.0">
+                                        <TableView fx:id="tvDetallesReunion" layoutX="12.0" layoutY="350.0" onMouseClicked="#verDetalles" prefHeight="178.0" prefWidth="677.0">
                                             <columns>
                                                 <TableColumn fx:id="colDetalleNro" prefWidth="30.0" text="Nro" />
                                                 <TableColumn fx:id="colDetalleFecha" minWidth="0.0" prefWidth="100.0" text="Fecha" />
@@ -325,7 +325,7 @@
                                                 <TableColumn fx:id="colDetalleEstado" minWidth="0.0" prefWidth="44.0" text="Estado" />
                                             </columns>
                                         </TableView>
-                                        <Button fx:id="btnEliminar" layoutX="586.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Eliminar" />
+                                        <Button fx:id="btnEliminar" layoutX="22.0" layoutY="532.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Eliminar Reunion" />
                                         <Label layoutX="469.0" layoutY="75.0" prefHeight="22.0" prefWidth="58.0" text="Orden:" underline="true">
                                             <font>
                                                 <Font size="11.0" />
@@ -399,6 +399,7 @@
                                             </font>
                                         </Label>
                               <Label fx:id="lblDetallesDetalle" layoutX="13.0" layoutY="245.0" prefHeight="17.0" prefWidth="191.0" text="Label" />
+                              <Button fx:id="btnVerMinutas" layoutX="606.0" layoutY="532.0" mnemonicParsing="false" onAction="#verMinutas" prefHeight="25.0" prefWidth="80.0" text="Ver Minutas" />
                                     </children>
                                 </AnchorPane>
                             </content>
