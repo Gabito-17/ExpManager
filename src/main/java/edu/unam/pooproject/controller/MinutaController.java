@@ -7,8 +7,10 @@ import edu.unam.pooproject.db.Conexion;
 import edu.unam.pooproject.modelo.Expediente;
 import edu.unam.pooproject.modelo.Minuta;
 import edu.unam.pooproject.modelo.Reunion;
+import edu.unam.pooproject.Services.VentanaEmergente;
 import edu.unam.pooproject.repositorio.Repositorio;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,19 +33,22 @@ public class MinutaController extends NavegacionController {
     private Button btnLimpiar;
 
     @FXML
-    private Button editarMinuta;
+    private Label lbIdReunion;
 
     @FXML
-    private Label lbIdReunion; // Este label contendrá el ID de la reunión
+    private Label lbIdMinuta;
+
+    @FXML
+    private Label lbIdExpediente;
+
+    @FXML
+    private Label lbReunionFecha;
 
     @FXML
     private TableColumn<Minuta, Integer> colId;
 
     @FXML
-    private TableColumn<Reunion, String> colFecha;
-
-    @FXML
-    private TableColumn<Expediente, String> colExpediente;
+    private TableColumn<Minuta, String> colExpediente;
 
     @FXML
     private TableColumn<Minuta, String> colTema;
@@ -59,33 +64,39 @@ public class MinutaController extends NavegacionController {
 
     @FXML
     private TextField txtTema;
-
+    private VentanaEmergente ventanaEmergente = new VentanaEmergente();
     private Minuta minutaSeleccionada = null;
+    private Integer idReunion;
+    private String fechaReunion;
 
     public void initialize() {
         this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.minutaServicio = new MinutaServicio(this.repositorio);
         this.expedienteServicio = new ExpedienteServicio(this.repositorio);
         this.reunionServicio = new ReunionServicio(this.repositorio);
+        lbIdReunion.setText(String.valueOf(idReunion));
 
         // Configurar las propiedades de las columnas
         colId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-        // colFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get().getFecha().toString()));
-        // colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpediente().getTitulo()));
+        colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpedientes().toString()));
+        colTema.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTema().toString()));
+        colResumen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getResumen().toString()));
+        // Bloquear inputs
+        bloquearInputs(true);
     }
 
     @FXML
     void cargarMinuta(ActionEvent event) {
         if (minutaSeleccionada != null) {
-            // Obtener valores de los inputs
             String tema = txtTema.getText();
             String resumen = taResumen.getText();
 
             // Validar que los campos no estén vacíos antes de guardar
             if (tema.isEmpty() || resumen.isEmpty()) {
-                System.out.println("Los campos Tema y Resumen no pueden estar vacíos.");
+                ventanaEmergente.mostrarError("Campos vacío, por favor, llena todos los campos antes de cargar la minuta.");
                 return;
             }
+            ventanaEmergente.mostrarConfirmacion("¿Esta seguro que desea guardar la minuta? Una vez guardada no podra ser modificada "+ minutaSeleccionada.getId(), "La minuta se guardó exitosamente.");
 
             // Actualizar la minuta seleccionada
             minutaSeleccionada.setTema(tema);
@@ -96,7 +107,10 @@ public class MinutaController extends NavegacionController {
 
             // Bloquear inputs
             bloquearInputs(true);
-        }
+            } else {
+                // Mostrar mensaje de que no se puede editar una minuta ya cargada
+                ventanaEmergente.mostrarError("No se puede editar la minuta ya cargada.");
+            } 
     }
 
     @FXML
@@ -106,48 +120,41 @@ public class MinutaController extends NavegacionController {
         taResumen.clear();
     }
 
-    @FXML
-    void editarMinuta(ActionEvent event) {
-        if (minutaSeleccionada != null) {
-            // Validar si los campos de la minuta están vacíos
-            if (minutaSeleccionada.getTema().isEmpty() && minutaSeleccionada.getResumen().isEmpty()) {
-                // Habilitar inputs para cargar minuta
-                bloquearInputs(false);
-            } else {
-                // Mostrar mensaje de que no se puede editar una minuta ya cargada
-                System.out.println("La minuta ya ha sido cargada y no puede ser editada.");
-            }
-        }
+    public void setFechaReunion(String reunionFecha) {
+        this.fechaReunion = reunionFecha;
     }
 
     public void setReunionId(int reunionId) {
-        lbIdReunion.setText(String.valueOf(reunionId));
+        this.idReunion = reunionId;
         rellenarTabla(reunionId);
     }
 
     private void rellenarTabla(int reunionId) {
         Reunion reunion = reunionServicio.buscarPorId(reunionId);
+        setFechaReunion(reunion.getFecha().toString());
         if (reunion != null) {
             List<Minuta> minutas = reunion.getMinutas();
             ObservableList<Minuta> listaMinutas = FXCollections.observableArrayList(minutas);
             tvMinutasDeLaReunion.setItems(listaMinutas);
             System.out.println(listaMinutas);
-        } else {
-            return;
         }
     }
-
+    @FXML
     private void seleccionarMinuta(MouseEvent event) {
         // Obtener la minuta seleccionada
-        minutaSeleccionada = tvMinutasDeLaReunion.getSelectionModel().getSelectedItem();
-
-        if (minutaSeleccionada != null) {
-            // Mostrar los detalles de la minuta en los inputs
+        if (tvMinutasDeLaReunion.getSelectionModel().getSelectedItem() != null) {
+            minutaSeleccionada = tvMinutasDeLaReunion.getSelectionModel().getSelectedItem();
+            lbIdMinuta.setText(String.valueOf(minutaSeleccionada.getId()));
+            lbReunionFecha.setText(fechaReunion);
             txtTema.setText(minutaSeleccionada.getTema());
             taResumen.setText(minutaSeleccionada.getResumen());
-
-            // Bloquear inputs si la minuta ya contiene información
-            bloquearInputs(!minutaSeleccionada.getTema().isEmpty() || !minutaSeleccionada.getResumen().isEmpty());
+            if (minutaSeleccionada.getTema().isEmpty() && minutaSeleccionada.getResumen().isEmpty()) {
+                // Habilitar inputs para cargar minuta
+                bloquearInputs(false);
+            } else {
+                // Bloquear inputs
+                bloquearInputs(true);
+            }
         }
     }
 
