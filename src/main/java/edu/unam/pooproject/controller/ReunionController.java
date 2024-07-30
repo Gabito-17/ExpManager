@@ -22,6 +22,8 @@ public class ReunionController extends NavegacionController {
 
     private Repositorio repositorio;
     private PersonaServicio personaServicio;
+
+    private MinutaServicio minutaServicio;
     private ExpedienteServicio expedienteServicio;
     private ReunionServicio reunionServicio;
     private AsistenciaServicio asistenciaServicio;
@@ -132,6 +134,7 @@ public class ReunionController extends NavegacionController {
     public void initialize() {
         this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.personaServicio = new PersonaServicio(this.repositorio);
+        this.minutaServicio = new MinutaServicio(this.repositorio);
         this.expedienteServicio = new ExpedienteServicio(this.repositorio);
         this.reunionServicio = new ReunionServicio(this.repositorio);
         this.asistenciaServicio = new AsistenciaServicio(this.repositorio);
@@ -482,9 +485,11 @@ public class ReunionController extends NavegacionController {
         for (Expediente expediente : reunion.getOrden()) {
             Minuta minuta = new Minuta();
             minuta.agregarExpediente(expediente);
+            minutaServicio.cargarMinuta(minuta);
             listaMinutas.add(minuta);
-            
+            System.out.println(minuta);
         }
+
 
         reunion.setMinutas(listaMinutas);
 

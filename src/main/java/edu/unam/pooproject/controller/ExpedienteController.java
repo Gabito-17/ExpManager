@@ -399,10 +399,10 @@ public class ExpedienteController extends NavegacionController {
 
 
     public boolean expedienteExiste(Integer id) {
-        // Llama al método del servicio de persona para buscar a la persona por su DNI
+        // Llama al método del servicio de expediente  para buscar el expediente por su Id
         Expediente expedienteExistente = expedienteServicio.buscarPorId(id);
 
-        // Si la persona existe (es diferente de null), devuelve true; de lo contrario, devuelve false
+        // Si el expediente existe (es diferente de null), devuelve true; de lo contrario, devuelve false
         return expedienteExistente != null;
     }
 }

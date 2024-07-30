@@ -1,6 +1,5 @@
 package edu.unam.pooproject.controller;
 
-import java.util.List;
 import edu.unam.pooproject.Services.ExpedienteServicio;
 import edu.unam.pooproject.Services.MinutaServicio;
 import edu.unam.pooproject.Services.ReunionServicio;
@@ -15,13 +14,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+
+import java.util.List;
 
 public class MinutaController extends NavegacionController {
     private Repositorio repositorio;
@@ -76,8 +72,8 @@ public class MinutaController extends NavegacionController {
 
         // Configurar las propiedades de las columnas
         colId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-        colFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReunion().getFecha().toString()));
-        colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpedientes().get(0).getTitulo()));
+        //colFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReunion().getFecha().toString()));
+        //colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpedientes().get(0).getTitulo()));
         colTema.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTema()));
         colResumen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getResumen()));
 
