@@ -27,7 +27,7 @@ public class NavegacionController {
     //Ubicar en ventana "Acciones"
     @FXML
     public void menuAcciones(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/accion-view.fxml");
+        Enrutador.cambiarVentana(event, "/View/accionXexpediente-view.fxml");
     }
 
     //Ubicar en ventana "Minuta"

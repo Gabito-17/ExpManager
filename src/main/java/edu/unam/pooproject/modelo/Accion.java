@@ -19,6 +19,9 @@ public class Accion {
     @ManyToOne
     @JoinColumn(name = "expediente_id")
     private Expediente expediente;
+    
+    public Accion() {
+    }
     public Accion(LocalDate fecha, String titulo, String accion, Expediente expediente) {
         this.fecha = fecha;
         Titulo = titulo;
