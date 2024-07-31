@@ -18,6 +18,7 @@
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="Gabito1235"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="javax.persistence.sql-load-script-source" value="META-INF/data.sql"/>
         </properties>
     </persistence-unit>
 </persistence>
