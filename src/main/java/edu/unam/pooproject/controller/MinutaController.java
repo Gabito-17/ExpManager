@@ -46,8 +46,8 @@ public class MinutaController extends NavegacionController {
     @FXML
     private TableColumn<Minuta, Integer> colId;
 
-    @FXML
-    private TableColumn<Minuta, String> colExpediente;
+    //@FXML
+    //private TableColumn<Minuta, String> colExpediente;
 
     @FXML
     private TableColumn<Minuta, String> colTema;
@@ -73,13 +73,13 @@ public class MinutaController extends NavegacionController {
         this.minutaServicio = new MinutaServicio(this.repositorio);
         this.expedienteServicio = new ExpedienteServicio(this.repositorio);
         this.reunionServicio = new ReunionServicio(this.repositorio);
-        lbIdReunion.setText(String.valueOf(idReunion));
 
         // Configurar las propiedades de las columnas
         colId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-        colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpediente().toString()));
-        colTema.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTema().toString()));
-        colResumen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getResumen().toString()));
+        //colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpedientes().get(0).getTitulo())); // Obtener título del expediente
+        colTema.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTema()));
+        colResumen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getResumen()));
+        tvMinutasDeLaReunion.setOnMouseClicked(this::seleccionarMinuta);
         // Bloquear inputs
         bloquearInputs(true);
     }
@@ -125,6 +125,7 @@ public class MinutaController extends NavegacionController {
 
     public void setReunionId(int reunionId) {
         this.idReunion = reunionId;
+        lbIdReunion.setText(idReunion.toString());
         rellenarTabla(reunionId);
     }
 
@@ -146,14 +147,16 @@ public class MinutaController extends NavegacionController {
             minutaSeleccionada = tvMinutasDeLaReunion.getSelectionModel().getSelectedItem();
             lbIdMinuta.setText(String.valueOf(minutaSeleccionada.getId()));
             lbReunionFecha.setText(fechaReunion);
-            txtTema.setText(minutaSeleccionada.getTema());
-            taResumen.setText(minutaSeleccionada.getResumen());
             if (minutaSeleccionada.getTema().isEmpty() && minutaSeleccionada.getResumen().isEmpty()) {
                 // Habilitar inputs para cargar minuta
                 bloquearInputs(false);
+                txtTema.setText(minutaSeleccionada.getTema());
+                taResumen.setText(minutaSeleccionada.getResumen());
             } else {
                 // Bloquear inputs
                 bloquearInputs(true);
+                txtTema.setText(minutaSeleccionada.getTema());
+                taResumen.setText(minutaSeleccionada.getResumen());
             }
         }
     }
