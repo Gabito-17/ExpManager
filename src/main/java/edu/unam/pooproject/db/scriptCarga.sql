@@ -68,6 +68,7 @@ VALUES
     (3, (SELECT dni FROM persona WHERE esmiembro = true AND dni NOT IN (SELECT miembro_id FROM reunion_miembro WHERE reunion_id = 8) ORDER BY random() LIMIT 1)),
     (3, (SELECT dni FROM persona WHERE esmiembro = true AND dni NOT IN (SELECT miembro_id FROM reunion_miembro WHERE reunion_id = 9) ORDER BY random() LIMIT 1)),
     (4, (SELECT dni FROM persona WHERE esmiembro = true AND dni NOT IN (SELECT miembro_id FROM reunion_miembro WHERE reunion_id = 9) ORDER BY random() LIMIT 1));
+
 -- Insertar asistencia de los miembros a las reuniones con valores aleatorios para 'asiste'
 INSERT INTO asistencia (asiste, reunion_id, miembro_id)
 SELECT
@@ -76,3 +77,17 @@ SELECT
     miembro_id
 FROM
     reunion_miembro;
+
+-- Insertar minutas adicionales relacionadas con reuniones y expedientes
+INSERT INTO minuta (tema, resumen, reunion_id, expediente_id)
+SELECT
+    'Tema de la minuta ' || r.id,
+    'Resumen de la minuta para la reunión ' || r.id || ' y el expediente ' || e.id,
+    r.id,
+    e.id
+FROM
+    reunion r
+JOIN
+    reunion_expediente re ON r.id = re.reunion_id
+JOIN
+    expediente e ON re.expediente_id = e.id;
