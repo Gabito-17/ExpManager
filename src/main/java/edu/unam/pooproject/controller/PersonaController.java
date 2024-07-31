@@ -155,7 +155,7 @@ public class PersonaController extends NavegacionController {
         } else {
             this.personaServicio.agregarPersona(persona);
         }
-        rellenarTabla();
+        initialize();
         limpiarCampos();
     }
 

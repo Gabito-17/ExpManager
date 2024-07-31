@@ -23,6 +23,7 @@ import javafx.util.StringConverter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class ReunionController extends NavegacionController {
 
@@ -499,7 +500,7 @@ public class ReunionController extends NavegacionController {
         asistenciaServicio.crearAsistencia(reunion, lstMiembros.getItems());
         ventana.mostrarExito("La Reunion fue cargada con exito!");
         limpiarCampos();
-        rellenarTablas();
+        initialize();
     }
 
     @FXML
@@ -594,6 +595,37 @@ public class ReunionController extends NavegacionController {
         if (rbPresente.isSelected()) {
 
         }
+    }
+
+    @FXML
+    public void eliminarReunion(ActionEvent event) {
+
+        // Obtener la reunion seleccionada en la tabla
+        Reunion reunionSeleccionada = tvDetallesReunion.getSelectionModel().getSelectedItem();
+
+        // Verificar si hay alguna reunion seleccionada
+        if (reunionSeleccionada == null) {
+            ventana.mostrarError("Debe seleccionar un expediente de la tabla para eliminarlo");
+            return;
+        }
+
+        // Mostrar un cuadro de diálogo de confirmación
+        Alert alertConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirmacion.setTitle("Confirmar");
+        alertConfirmacion.setHeaderText("¿Estás seguro de eliminar esta reunion?");
+        alertConfirmacion.setContentText("Se eliminará permanentemente la reunion seleccionada.");
+
+        Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            // Eliminar la reunion seleccionado
+            ReunionServicio servicio = new ReunionServicio(repositorio);
+            servicio.eliminarReunion(reunionSeleccionada);
+
+            // Actualizar la tabla
+            rellenarTablas();
+        }
+
+
     }
 
     @FXML

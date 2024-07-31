@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MinutaController extends NavegacionController {
     private Repositorio repositorio;
@@ -81,6 +82,8 @@ public class MinutaController extends NavegacionController {
         tvMinutasDeLaReunion.setOnMouseClicked(this::seleccionarMinuta);
         // Bloquear inputs
         bloquearInputs(true);
+        System.out.println(idReunion);
+
     }
 
     @FXML
@@ -94,16 +97,27 @@ public class MinutaController extends NavegacionController {
                 ventanaEmergente.mostrarError("Campos vacío, por favor, llena todos los campos antes de cargar la minuta.");
                 return;
             }
+            // Mostrar un cuadro de diálogo de confirmación
+            Alert alertConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+            alertConfirmacion.setTitle("Confirmar");
+            alertConfirmacion.setHeaderText("¿Estás seguro de cargar esta minuta?");
+            alertConfirmacion.setContentText("La minuta cargada no se podra editar.");
 
-            // Actualizar la minuta seleccionada
-            minutaSeleccionada.setTema(tema);
-            minutaSeleccionada.setResumen(resumen);
+            Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
 
-            // Guardar cambios en la base de datos
-            minutaServicio.editarMinuta(minutaSeleccionada);
+                // Actualizar la minuta seleccionada
+                minutaSeleccionada.setTema(tema);
+                minutaSeleccionada.setResumen(resumen);
 
-            // Bloquear inputs
-            bloquearInputs(true);
+                // Guardar cambios en la base de datos
+                minutaServicio.editarMinuta(minutaSeleccionada);
+
+                // Bloquear inputs
+                bloquearInputs(true);
+
+                rellenarTabla(idReunion);
+            }
         } else {
             // Mostrar mensaje de que no se puede editar una minuta ya cargada
             ventanaEmergente.mostrarError("No se puede editar la minuta ya cargada.");
@@ -124,7 +138,7 @@ public class MinutaController extends NavegacionController {
     public void setReunionId(int reunionId) {
         this.idReunion = reunionId;
         lbIdReunion.setText(idReunion.toString());
-        rellenarTabla(reunionId);
+        rellenarTabla(idReunion);
     }
 
     private void rellenarTabla(int reunionId) {
