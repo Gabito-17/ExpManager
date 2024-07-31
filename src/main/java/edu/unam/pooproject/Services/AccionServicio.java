@@ -21,7 +21,7 @@ public class AccionServicio {
         this.repositorio.confirmarTransaccion();
     }
 
-    public void editarMinuta(Accion accion) {
+    public void editarAccion(Accion accion) {
         this.repositorio.iniciarTransaccion();
         this.repositorio.modificar(accion);
         this.repositorio.confirmarTransaccion();
