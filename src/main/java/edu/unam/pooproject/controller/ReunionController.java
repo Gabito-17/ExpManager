@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -514,6 +515,9 @@ public class ReunionController extends NavegacionController {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
+                // Cerrar la ventana actual
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
             } catch (IOException e) {
                 ventana.mostrarError("Error al cargar la ventana de minutas.");
                 e.printStackTrace();

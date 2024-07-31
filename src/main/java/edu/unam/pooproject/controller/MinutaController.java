@@ -46,14 +46,13 @@ public class MinutaController extends NavegacionController {
     @FXML
     private TableColumn<Minuta, Integer> colId;
 
-    //@FXML
-    //private TableColumn<Minuta, String> colExpediente;
-
     @FXML
     private TableColumn<Minuta, String> colTema;
 
     @FXML
     private TableColumn<Minuta, String> colResumen;
+    @FXML
+    private TableColumn<Minuta, String> colExpediente;
 
     @FXML
     private TextArea taResumen;
@@ -76,7 +75,7 @@ public class MinutaController extends NavegacionController {
 
         // Configurar las propiedades de las columnas
         colId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-        //colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpedientes().get(0).getTitulo())); // Obtener título del expediente
+        colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpediente().getTitulo()));
         colTema.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTema()));
         colResumen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getResumen()));
         tvMinutasDeLaReunion.setOnMouseClicked(this::seleccionarMinuta);
@@ -95,7 +94,6 @@ public class MinutaController extends NavegacionController {
                 ventanaEmergente.mostrarError("Campos vacío, por favor, llena todos los campos antes de cargar la minuta.");
                 return;
             }
-            ventanaEmergente.mostrarConfirmacion("¿Esta seguro que desea guardar la minuta? Una vez guardada no podra ser modificada " + minutaSeleccionada.getId(), "La minuta se guardó exitosamente.");
 
             // Actualizar la minuta seleccionada
             minutaSeleccionada.setTema(tema);
@@ -146,8 +144,9 @@ public class MinutaController extends NavegacionController {
         if (tvMinutasDeLaReunion.getSelectionModel().getSelectedItem() != null) {
             minutaSeleccionada = tvMinutasDeLaReunion.getSelectionModel().getSelectedItem();
             lbIdMinuta.setText(String.valueOf(minutaSeleccionada.getId()));
+            lbIdExpediente.setText(String.valueOf(minutaSeleccionada.getExpediente().getId()));
             lbReunionFecha.setText(fechaReunion);
-            if (minutaSeleccionada.getTema().isEmpty() && minutaSeleccionada.getResumen().isEmpty()) {
+            if (minutaSeleccionada.getTema() == null && minutaSeleccionada.getResumen() == null) {
                 // Habilitar inputs para cargar minuta
                 bloquearInputs(false);
                 txtTema.setText(minutaSeleccionada.getTema());
