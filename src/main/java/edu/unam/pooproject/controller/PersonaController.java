@@ -91,7 +91,7 @@ public class PersonaController extends NavegacionController {
     }
 
     @FXML
-    public void editarPersona(ActionEvent event) throws Exception {
+    private void editarPersona(ActionEvent event) throws Exception {
         // Obtener la persona seleccionada en el TableView
         Persona personaSeleccionada = tvPersonas.getSelectionModel().getSelectedItem();
 
@@ -111,7 +111,7 @@ public class PersonaController extends NavegacionController {
 
 
     @FXML
-    public void cargarPersona(ActionEvent event) throws Exception {
+    private void cargarPersona(ActionEvent event) throws Exception {
         //Instancia una persona
         Persona persona = new Persona();
         // Verificar DNI
@@ -160,7 +160,7 @@ public class PersonaController extends NavegacionController {
     }
 
     @FXML
-    public void eliminarPersona(ActionEvent event) {
+    private void eliminarPersona(ActionEvent event) {
         // Obtener la persona seleccionada en la tabla
         Persona personaSeleccionada = tvPersonas.getSelectionModel().getSelectedItem();
 
@@ -202,7 +202,7 @@ public class PersonaController extends NavegacionController {
         }
     }
 
-    public boolean personaExiste(String dni) {
+    private boolean personaExiste(String dni) {
         // Llama al método del servicio de persona para buscar a la persona por su DNI
         Persona personaExistente = personaServicio.buscarPorDni(dni);
 
@@ -219,7 +219,7 @@ public class PersonaController extends NavegacionController {
         esMiembro.setSelected(false);
     }
 
-    public boolean verificarFecha() {
+    private boolean verificarFecha() {
         LocalDate fechaSeleccionada = fechaNacimiento.getValue();
         if (fechaSeleccionada != null) {
             if (fechaSeleccionada.isBefore(LocalDate.now().minusYears(18))) {
@@ -257,7 +257,7 @@ public class PersonaController extends NavegacionController {
         }
     }
 
-    public boolean verificarCorreo() {
+    private boolean verificarCorreo() {
         String correo = txtEmailPersona.getText().trim();
         if (!correo.isEmpty()) {
             if (validarCorreo(correo)) {
@@ -274,7 +274,7 @@ public class PersonaController extends NavegacionController {
 
     @FXML
 
-    public boolean verificarEsMiembro() {
+    private boolean verificarEsMiembro() {
         if (esMiembro.isSelected()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmar");

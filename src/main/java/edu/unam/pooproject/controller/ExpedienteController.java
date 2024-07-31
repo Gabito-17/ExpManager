@@ -211,11 +211,36 @@ public class ExpedienteController extends NavegacionController {
         Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             // Eliminar el expediente seleccionado
-            ExpedienteServicio servicio = new ExpedienteServicio(repositorio);
-            servicio.eliminarExpediente(expedienteSeleccionado);
+            expedienteServicio = new ExpedienteServicio(repositorio);
+            expedienteServicio.eliminarExpediente(expedienteSeleccionado);
 
             // Actualizar la tabla
             rellenarTabla();
+        }
+    }
+
+    @FXML
+    public void marcarCerrado(ActionEvent event) throws Exception {
+        // Obtener expediente seleccionado en el TableView
+        Expediente expedienteSeleccionado = tvExpedienteDetalle.getSelectionModel().getSelectedItem();
+
+        // Verificar si hay algun expediente seleccionado
+        if (expedienteSeleccionado == null) {
+            ventana.mostrarError("Debe seleccionar un expediente para marcarlo como cerrado.");
+            return;
+        }
+        if (expedienteSeleccionado.getEstado() == true) {
+            expedienteSeleccionado.setEstado(false);
+            // Mostrar un Alert de confirmación para verificar si se desea marcar el expediente como cerrado
+            Optional<ButtonType> resultado = ventana.mostrarConfirmacion("¿Deseas marcar este expediente como cerrado?", "Esto es reversible");
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+                // Cambiar el estado del expediente a cerrado
+                expedienteServicio.editarExpediente(expedienteSeleccionado);
+                initialize();
+
+            }
+        } else {
+            ventana.mostrarError("El expediente ya se encuentra cerrado");
         }
     }
 
@@ -240,11 +265,10 @@ public class ExpedienteController extends NavegacionController {
             cmbIniciantes.getSelectionModel().select(expedienteSeleccionado.getIniciante());
             lblFechaIngreso.setText(expedienteSeleccionado.getFechaIngreso().toString());
             listaInvolucrados.clear();
-
             List<Persona> involucrados = expedienteSeleccionado.getInvolucrados();
 
             // Convertir la lista de Involucrados a ObservableList
-            ObservableList<Persona> listaInvolucrados = FXCollections.observableArrayList(involucrados);
+            listaInvolucrados = FXCollections.observableArrayList(involucrados);
             lstInvolucrados.setItems(listaInvolucrados);
             lstInvolucrados.setCellFactory(param -> new TextFieldListCell<>(new StringConverter<Persona>() {
                 @Override
@@ -329,6 +353,7 @@ public class ExpedienteController extends NavegacionController {
 
     @FXML
     public void cargarExpediente(ActionEvent event) throws Exception {
+
         //Instancias un expediente
         Expediente expediente = new Expediente();
         //Establece el estado del expediente en "Abierto"
@@ -342,7 +367,7 @@ public class ExpedienteController extends NavegacionController {
             }
 
             // Verificar caracteres del título
-            if (!txtTitulo.getText().matches("[a-zA-Z\\s]+")) {
+            if (!txtTitulo.getText().matches("[a-zA-Z0-9\\s]+")) {
                 ventana.mostrarError("Error al cargar expediente, el título no debe contener caracteres especiales ni números.");
                 return;
             }
@@ -394,7 +419,7 @@ public class ExpedienteController extends NavegacionController {
         }
         limpiarCampos();
         ventana.mostrarExito("El expediente fue cargado con existo!");
-        rellenarTabla();
+        initialize();
     }
 
 
