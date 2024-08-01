@@ -151,7 +151,6 @@ public class MinutaController extends NavegacionController {
             ObservableList<Minuta> listaMinutas = FXCollections.observableArrayList(minutas);
             tvMinutasDeLaReunion.setItems(listaMinutas);
             tvMinutasDeLaReunion.refresh();
-
         }
     }
 
