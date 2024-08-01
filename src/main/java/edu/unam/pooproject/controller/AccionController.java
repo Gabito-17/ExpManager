@@ -26,7 +26,6 @@ public class AccionController extends NavegacionController {
     private ExpedienteServicio expedienteServicio;
     private VentanaEmergente ventana = new VentanaEmergente();
     private Accion accionSeleccionada = null;
-    private boolean accionExiste;
     private Expediente expediente;
     private Integer idAccion;
 
@@ -90,108 +89,78 @@ public class AccionController extends NavegacionController {
     @FXML
     void cargarAccion(ActionEvent event) {
         if (idAccion != null) {
-            accionExiste = true;
             Accion accionEditada = this.accionServicio.buscarPorId(idAccion);
-            accionEditada.setExpediente(expediente);
-            if (fechaAccion.getValue() == null) {
-                ventana.mostrarError("Error al cargar la accion, debe seleccionar una fecha.");
-                return;
-            } else if (fechaAccion.getValue().isBefore(LocalDate.now())) {
-                ventana.mostrarError("Error al cargar la accion, la fecha ingresada debe ser posterior o igual a la de hoy.");
+            if (!verificarCamposAccion()) {
                 return;
             }
             accionEditada.setFecha(fechaAccion.getValue());
             accionEditada.setTitulo(txtTituloAccion.getText().trim());
-            if (!verificarTituloAccion()) {
-                return;
-            }
             accionEditada.setAccion(taAccion.getText().trim());
-            if (!verificarTituloAccion()) {
-                return;
-            }
             this.accionServicio.editarAccion(accionEditada);
         } else {
-            accionExiste = false;
             Accion accion = new Accion();
             accion.setExpediente(expediente);
-            if (fechaAccion.getValue() == null) {
-                ventana.mostrarError("Error al cargar la accion, debe seleccionar una fecha.");
-                return;
-            } else if (fechaAccion.getValue().isBefore(LocalDate.now())) {
-                ventana.mostrarError("Error al cargar la accion, la fecha ingresada debe ser posterior o igual a la de hoy.");
+            if (!verificarCamposAccion()) {
                 return;
             }
             accion.setFecha(fechaAccion.getValue());
             accion.setTitulo(txtTituloAccion.getText().trim());
-            if (!verificarTituloAccion()) {
-                return;
-            }
             accion.setAccion(taAccion.getText().trim());
-            if (!verificarTituloAccion()) {
-                return;
-            }
             this.accionServicio.agregarAccion(accion);
         }
-        // Asegúrate de actualizar el expediente y la tabla
-        if (expediente != null) {
-            expediente = this.expedienteServicio.buscarPorId(expediente.getId());
-            rellenarTabla(expediente);
-        }
+        actualizarExpediente();
+        actualizarTabla();
         limpiarCampos();
     }
 
     @FXML
-    void editarAccion(ActionEvent event) {
-        // Obtener la persona seleccionada en el TableView
-        this.accionSeleccionada = tvAccionesPorExpediente.getSelectionModel().getSelectedItem();
-
-        // Verificar si hay alguna persona seleccionada
-        if (accionSeleccionada == null) {
-            ventana.mostrarError("Selecciona una accion para editar.");
-            return;
-        }
-        // Cargar los datos de la persona seleccionada en los campos correspondientes
-        Optional<ButtonType> resultado = ventana.mostrarConfirmacion("¿Deseas editar esta accion?", "Se editarán los datos de la accion seleccionada.\n Al finalizar la edicion presione 'Cargar'");
-        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            fechaAccion.setValue(accionSeleccionada.getFecha());
-            txtTituloAccion.setText(accionSeleccionada.getTitulo());
-            taAccion.setText(accionSeleccionada.getAccion());
-            this.idAccion = accionSeleccionada.getId();
-            accionExiste = true;
-        }
-
-    }
-
-    @FXML
     void eliminarAccion(ActionEvent event) {
-        // Obtener el expediente seleccionado en la tabla
         this.accionSeleccionada = tvAccionesPorExpediente.getSelectionModel().getSelectedItem();
 
-        // Verificar si hay algun expediente seleccionado
         if (accionSeleccionada == null) {
             ventana.mostrarError("Debe seleccionar una accion de la tabla para eliminarlo");
             return;
         }
 
-        // Mostrar un cuadro de diálogo de confirmación
         Alert alertConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         alertConfirmacion.setTitle("Confirmar");
         alertConfirmacion.setHeaderText("¿Estás seguro de eliminar esta accion?");
         alertConfirmacion.setContentText("Se eliminará permanentemente a la accion seleccionada.");
         Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            // Eliminar el expediente seleccionado
             this.accionServicio.eliminarAccion(accionSeleccionada);
-            // Actualizar la tabla
-            rellenarTabla(expediente);
+            actualizarExpediente();
+            actualizarTabla();
+        }
+    }
+
+    @FXML
+    void editarAccion(ActionEvent event) {
+        this.accionSeleccionada = tvAccionesPorExpediente.getSelectionModel().getSelectedItem();
+
+        if (accionSeleccionada == null) {
+            ventana.mostrarError("Selecciona una accion para editar.");
+            return;
+        }
+
+        Optional<ButtonType> resultado = ventana.mostrarConfirmacion("¿Deseas editar esta accion?", "Se editarán los datos de la accion seleccionada.\n Al finalizar la edicion presione 'Cargar'");
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            fechaAccion.setValue(accionSeleccionada.getFecha());
+            txtTituloAccion.setText(accionSeleccionada.getTitulo());
+            taAccion.setText(accionSeleccionada.getAccion());
+            this.idAccion = accionSeleccionada.getId();
+        }
+    }
+
+    private void actualizarExpediente() {
+        if (expediente != null) {
+            expediente = expedienteServicio.buscarPorId(expediente.getId());
         }
     }
 
     @FXML
     void limpiarCampos(ActionEvent event) {
-        fechaAccion.setValue(null);
-        txtTituloAccion.clear();
-        taAccion.clear();
+        limpiarCampos();
     }
 
     @FXML
@@ -200,19 +169,20 @@ public class AccionController extends NavegacionController {
         this.accionServicio = new AccionServicio(this.repositorio);
         this.expedienteServicio = new ExpedienteServicio(this.repositorio);
 
-        // Configurar las columnas del TableView para que muestren los datos de las Acciones
         colId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         colFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFecha().toString()));
         colTitulo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitulo()));
         colAccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAccion()));
-        rellenarTabla(expediente);
-
+        if (expediente != null) {
+            lbExpedienteTitulo.setText(expediente.getTitulo());
+            rellenarTabla(expediente);
+        }
     }
 
     public void setExpediente(Expediente expediente) {
         this.expediente = expediente;
         if (expediente != null) {
-            lbExpedienteTitulo.setText((expediente.getTitulo()));
+            lbExpedienteTitulo.setText(expediente.getTitulo());
             rellenarTabla(expediente);
         }
     }
@@ -223,7 +193,6 @@ public class AccionController extends NavegacionController {
             ObservableList<Accion> listaAcciones = FXCollections.observableArrayList(acciones);
             tvAccionesPorExpediente.setItems(listaAcciones);
             tvAccionesPorExpediente.refresh();
-
         }
     }
 
@@ -233,20 +202,34 @@ public class AccionController extends NavegacionController {
         taAccion.clear();
     }
 
-    private boolean verificarTituloAccion() {
-        String titulo = txtTituloAccion.getText().trim();
-        String accion = taAccion.getText().trim();
-        if (!titulo.isEmpty() || !accion.isEmpty()) {
-            if ((titulo.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) || (accion.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"))) { // Solo permite letras, espacios y letras acentuadas
-                return true;
-            } else {
-                ventana.mostrarError("El titulo o la accion no pueden contener símbolos ni números.");
-                return false;
-            }
-        } else {
-            ventana.mostrarError("Por favor ingrese texto en el campo.");
+    private boolean verificarCamposAccion() {
+        if (fechaAccion.getValue() == null) {
+            ventana.mostrarError("Error al cargar la accion, debe seleccionar una fecha.");
+            return false;
+        } else if (fechaAccion.getValue().isBefore(LocalDate.now())) {
+            ventana.mostrarError("Error al cargar la accion, la fecha ingresada debe ser posterior o igual a la de hoy.");
             return false;
         }
+        String titulo = txtTituloAccion.getText().trim();
+        String accion = taAccion.getText().trim();
+        if (titulo.isEmpty() || accion.isEmpty()) {
+            ventana.mostrarError("Por favor ingrese texto en los campos.");
+            return false;
+        }
+        if (!titulo.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") || !accion.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+            ventana.mostrarError("El titulo o la accion no pueden contener símbolos ni números.");
+            return false;
+        }
+        return true;
     }
 
+    private void actualizarTabla() {
+        if (expediente != null) {
+            expediente = expedienteServicio.buscarPorId(expediente.getId());
+            List<Accion> acciones = expediente.getAcciones();
+            ObservableList<Accion> listaAcciones = FXCollections.observableArrayList(acciones);
+            tvAccionesPorExpediente.setItems(listaAcciones);
+            tvAccionesPorExpediente.refresh();
+        }
+    }
 }

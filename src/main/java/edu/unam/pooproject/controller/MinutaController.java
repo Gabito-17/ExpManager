@@ -73,7 +73,6 @@ public class MinutaController extends NavegacionController {
         this.minutaServicio = new MinutaServicio(this.repositorio);
         this.expedienteServicio = new ExpedienteServicio(this.repositorio);
         this.reunionServicio = new ReunionServicio(this.repositorio);
-
         // Configurar las propiedades de las columnas
         colId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         colExpediente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpediente().getTitulo()));
@@ -117,6 +116,7 @@ public class MinutaController extends NavegacionController {
                 bloquearInputs(true);
 
                 initialize();
+                limpiarCampos();
             }
         } else {
             // Mostrar mensaje de que no se puede editar una minuta ya cargada
@@ -125,7 +125,7 @@ public class MinutaController extends NavegacionController {
     }
 
     @FXML
-    void limpiarCampos(ActionEvent event) {
+    void limpiarCampos() {
         // Limpiar campos
         txtTema.clear();
         taResumen.clear();
@@ -144,6 +144,7 @@ public class MinutaController extends NavegacionController {
             rellenarTabla(reunion);
         }
     }
+
 
     private void rellenarTabla(Reunion reunion) {
         if (reunion != null) {
