@@ -5,7 +5,6 @@ import edu.unam.pooproject.Services.VentanaEmergente;
 import edu.unam.pooproject.db.Conexion;
 import edu.unam.pooproject.modelo.Persona;
 import edu.unam.pooproject.repositorio.Repositorio;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -61,7 +60,7 @@ public class PersonaController extends NavegacionController {
     private TableColumn<Persona, LocalDate> colFechaNacimiento;
 
     @FXML
-    private TableColumn<Persona, Boolean> colEsMiembro;
+    private TableColumn<Persona, String> colEsMiembro;
 
     @FXML
     public void initialize() {
@@ -73,7 +72,7 @@ public class PersonaController extends NavegacionController {
         colNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         colApellido.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellido()));
         colEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
-        colEsMiembro.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().esMiembro()));
+        colEsMiembro.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().esMiembroString()));
         colFechaNacimiento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getFechaNacimiento()));
         // Cargar todas las personas de la base de datos y mostrarlas en el TableView
         rellenarTabla();
@@ -92,6 +91,8 @@ public class PersonaController extends NavegacionController {
 
     @FXML
     private void editarPersona(ActionEvent event) throws Exception {
+
+        txtDniPersona.setDisable(true);
         // Obtener la persona seleccionada en el TableView
         Persona personaSeleccionada = tvPersonas.getSelectionModel().getSelectedItem();
 
@@ -211,6 +212,7 @@ public class PersonaController extends NavegacionController {
     }
 
     public void limpiarCampos() {
+        txtDniPersona.setDisable(false);
         txtDniPersona.clear();
         txtNombrePersona.clear();
         txtApellidoPersona.clear();

@@ -77,11 +77,18 @@ public class Expediente {
     }
 
     public Boolean getEstado() {
-        return this.estado;
+        return estado;
     }
 
     public void setEstado(final Boolean estado) {
         this.estado = estado;
+    }
+
+    public String getEstadoString() {
+        if (estado == false) {
+            return "Cerrado";
+        } else
+            return "Abierto";
     }
 
     public Persona getIniciante() {
