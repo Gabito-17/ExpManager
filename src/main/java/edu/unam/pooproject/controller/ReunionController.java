@@ -480,17 +480,7 @@ public class ReunionController extends NavegacionController {
         //Establecer la lista de expedientes
         reunion.setOrden(lstExpedientes.getItems());
         reunionServicio.agregarReunion(reunion);
-        ObservableList<Minuta> listaMinutas = FXCollections.observableArrayList();
 
-        for (Expediente expediente : reunion.getOrden()) {
-            Minuta minuta = new Minuta();
-            minuta.setExpediente(expediente);
-            minuta.setReunion(reunion);
-            minutaServicio.cargarMinuta(minuta);
-            listaMinutas.add(minuta);
-        }
-        reunion.setMinutas(listaMinutas);
-        reunionServicio.editarReunion(reunion);
 
         ventana.mostrarExito("La Reunion fue cargada con exito!");
         limpiarCampos();
@@ -500,6 +490,19 @@ public class ReunionController extends NavegacionController {
     @FXML
     public void verMinutas(ActionEvent event) {
         Reunion reunionSeleccionada = tvDetallesReunion.getSelectionModel().getSelectedItem();
+        System.out.println(reunionSeleccionada.getMinutas());
+        if (reunionSeleccionada.getMinutas().isEmpty()) {
+            ObservableList<Minuta> listaMinutas = FXCollections.observableArrayList();
+            for (Expediente expediente : reunionSeleccionada.getOrden()) {
+                Minuta minuta = new Minuta();
+                minuta.setExpediente(expediente);
+                minuta.setReunion(reunionSeleccionada);
+                minutaServicio.cargarMinuta(minuta);
+                listaMinutas.add(minuta);
+            }
+            reunionSeleccionada.setMinutas(listaMinutas);
+            reunionServicio.editarReunion(reunionSeleccionada);
+        }
         if (reunionSeleccionada != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/minuta-view.fxml"));
