@@ -6,6 +6,7 @@ import edu.unam.pooproject.Services.VentanaEmergente;
 import edu.unam.pooproject.db.Conexion;
 import edu.unam.pooproject.modelo.Expediente;
 import edu.unam.pooproject.modelo.Persona;
+import edu.unam.pooproject.modelo.Reunion;
 import edu.unam.pooproject.repositorio.Repositorio;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,11 +14,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -254,7 +261,27 @@ public class ExpedienteController extends NavegacionController {
     }
 
     @FXML
-    public void verAcciones(ActionEvent event) throws Exception {
+    public void verAcciones(ActionEvent event) {
+        Expediente expedienteSeleccionado = tvExpedienteDetalle.getSelectionModel().getSelectedItem();
+        if (expedienteSeleccionado != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/accionXexpediente-view.fxml"));
+                Parent root = loader.load();
+                AccionController accionController = loader.getController();
+                accionController.setExpediente(expedienteSeleccionado); // Pasar la reunión
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                // Cerrar la ventana actual
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+            } catch (IOException e) {
+                ventana.mostrarError("Error al cargar la ventana de acciones.");
+                e.printStackTrace();
+            }
+        } else {
+            ventana.mostrarError("Debe seleccionar una reunión para ver las acciones.");
+        }
     }
 
     //Limpiar todos los inputs

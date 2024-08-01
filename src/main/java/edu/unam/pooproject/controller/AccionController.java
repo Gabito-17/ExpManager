@@ -9,7 +9,9 @@ import edu.unam.pooproject.Services.VentanaEmergente;
 import edu.unam.pooproject.db.Conexion;
 import edu.unam.pooproject.modelo.Accion;
 import edu.unam.pooproject.modelo.Expediente;
+import edu.unam.pooproject.modelo.Minuta;
 import edu.unam.pooproject.modelo.Persona;
+import edu.unam.pooproject.modelo.Reunion;
 import edu.unam.pooproject.repositorio.Repositorio;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -36,9 +38,9 @@ public class AccionController extends NavegacionController {
     private ExpedienteServicio expedienteServicio;
     private VentanaEmergente ventana = new VentanaEmergente();
     private Accion accionSeleccionada = null;
-    private Integer idExpediente;
     private boolean accionExiste;
-    private Integer idExpedienteFijo;
+    private Expediente expediente;
+    private Integer idAccion;
 
     @FXML
     private Button btnCargar;
@@ -100,34 +102,63 @@ public class AccionController extends NavegacionController {
     @FXML
     void cargarAccion(ActionEvent event) {
         //Instancia una accion
-        Accion accion = new Accion();
-        //verificar que el campo Fecha sea valido
-        if (fechaAccion.getValue() == null) {
-            ventana.mostrarError("Error al cargar la accion, debe seleccionar una fecha.");
-            return;
-        } else if (fechaAccion.getValue().isBefore(LocalDate.now())) {
-            ventana.mostrarError("Error al cargar la accion, la fecha ingresada debe ser posterior o igual a la de hoy.");
-            return;
-        }
-        //asignar fecha de la accion
-        accion.setFecha(fechaAccion.getValue());
-        // Asignar Titulo
-        accion.setTitulo(txtTituloAccion.getText().trim());
-        if (!verificarTituloAccion()) {
-            return; // Detener la carga si el Titulo no es valido
-        }
-        // Asignar Accion
-        accion.setAccion(taAccion.getText().trim());
-        if (!verificarTituloAccion()) {
-            return; // Detener la carga si el Titulo no es valido
-        }
-        if (accionExiste) { // Si la accion ya existe, editarla
-            this.accionServicio.editarAccion(accion);
-        } else { // Si la accion no existe, agregarla
+        if (idAccion != null) {
+            accionExiste = true;
+            Accion accionEditada = this.accionServicio.buscarPorId(idAccion);
+            accionEditada.setExpediente(expediente);
+            //verificar que el campo Fecha sea valido
+            if (fechaAccion.getValue() == null) {
+                ventana.mostrarError("Error al cargar la accion, debe seleccionar una fecha.");
+                return;
+            } else if (fechaAccion.getValue().isBefore(LocalDate.now())) {
+                ventana.mostrarError("Error al cargar la accion, la fecha ingresada debe ser posterior o igual a la de hoy.");
+                return;
+            }
+            //asignar fecha de la accion
+            accionEditada.setFecha(fechaAccion.getValue());
+            // Asignar Titulo
+            accionEditada.setTitulo(txtTituloAccion.getText().trim());
+            if (!verificarTituloAccion()) {
+                return; // Detener la carga si el Titulo no es valido
+            }
+            // Asignar Accion
+            accionEditada.setAccion(taAccion.getText().trim());
+            if (!verificarTituloAccion()) {
+                return; // Detener la carga si el Titulo no es valido
+            }
+            this.accionServicio.editarAccion(accionEditada);
+            rellenarTabla(expediente);
+            limpiarCampos();
+
+        } else {
+            accionExiste = false;
+            Accion accion = new Accion();
+            accion.setExpediente(expediente);
+            //verificar que el campo Fecha sea valido
+            if (fechaAccion.getValue() == null) {
+                ventana.mostrarError("Error al cargar la accion, debe seleccionar una fecha.");
+                return;
+            } else if (fechaAccion.getValue().isBefore(LocalDate.now())) {
+                ventana.mostrarError("Error al cargar la accion, la fecha ingresada debe ser posterior o igual a la de hoy.");
+                return;
+            }
+            //asignar fecha de la accion
+            accion.setFecha(fechaAccion.getValue());
+            // Asignar Titulo
+            accion.setTitulo(txtTituloAccion.getText().trim());
+            if (!verificarTituloAccion()) {
+                return; // Detener la carga si el Titulo no es valido
+            }
+            // Asignar Accion
+            accion.setAccion(taAccion.getText().trim());
+            if (!verificarTituloAccion()) {
+                return; // Detener la carga si el Titulo no es valido
+            }
             this.accionServicio.agregarAccion(accion);
-        }
-        rellenarTabla(idExpedienteFijo);
-        limpiarCampos();
+            rellenarTabla(expediente);
+            limpiarCampos();
+            }
+        
     }
 
     @FXML
@@ -146,6 +177,7 @@ public class AccionController extends NavegacionController {
             fechaAccion.setValue(accionSeleccionada.getFecha());
             txtTituloAccion.setText(accionSeleccionada.getTitulo());
             taAccion.setText(accionSeleccionada.getAccion());
+            this.idAccion = accionSeleccionada.getId();
             accionExiste = true;
         }
         
@@ -172,7 +204,7 @@ public class AccionController extends NavegacionController {
             // Eliminar el expediente seleccionado
             this.accionServicio.eliminarAccion(accionSeleccionada);
             // Actualizar la tabla
-            rellenarTabla(idExpedienteFijo);
+            rellenarTabla(expediente);
         }
     }
 
@@ -193,24 +225,25 @@ public class AccionController extends NavegacionController {
         colFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFecha().toString()));
         colTitulo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitulo()));
         colAccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAccion()));
+        rellenarTabla(expediente);
 
     }
 
-    public void setExpedienteId(int expedienteId) {
-        this.idExpediente = expedienteId;
-        this.idExpedienteFijo = expedienteId;
-        // Cargar todas las acciones de la base de datos y mostrarlas en el TableView
-        rellenarTabla(expedienteId);
+     public void setExpediente(Expediente expediente) {
+        this.expediente = expediente;
+        if (expediente != null) {
+            lbExpedienteTitulo.setText((expediente.getTitulo()));
+            rellenarTabla(expediente);
+        }
     }
 
-    private void rellenarTabla(int expedienteId) {
-        Expediente expediente = expedienteServicio.buscarPorId(expedienteId);
-        lbExpedienteTitulo.setText(expediente.getTitulo());
+    private void rellenarTabla(Expediente expediente) {
         if (expediente != null) {
             List<Accion> acciones = expediente.getAcciones();
             ObservableList<Accion> listaAcciones = FXCollections.observableArrayList(acciones);
             tvAccionesPorExpediente.setItems(listaAcciones);
-            System.out.println(listaAcciones);
+            tvAccionesPorExpediente.refresh();
+
         }
     }
 

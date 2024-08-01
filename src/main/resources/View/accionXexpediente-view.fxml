@@ -151,7 +151,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="84.0" layoutY="1.0" text="ABM Acciones del expediente:">
+                              <Label layoutX="62.0" layoutY="1.0" text="ABM Acciones del expediente:">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -193,7 +193,7 @@
                               </GridPane>
                               <Button fx:id="btnCargar" layoutX="487.0" layoutY="221.0" mnemonicParsing="false" onAction="#cargarAccion" text="Cargar" />
                               <Button fx:id="btnLimpiarCampos" layoutX="555.0" layoutY="221.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar Campos" />
-                              <Label fx:id="lbExpedienteTitulo" layoutX="324.0" layoutY="1.0" prefHeight="27.0" prefWidth="204.0" text="[Expediente.titulo]">
+                              <Label fx:id="lbExpedienteTitulo" layoutX="302.0" layoutY="1.0" prefHeight="27.0" prefWidth="325.0" text="[Expediente.titulo]">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
