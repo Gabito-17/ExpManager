@@ -253,6 +253,10 @@ public class ExpedienteController extends NavegacionController {
         }
     }
 
+    @FXML
+    public void verAcciones(ActionEvent event) throws Exception {
+    }
+
     //Limpiar todos los inputs
     @FXML
     public void limpiarCampos() {
