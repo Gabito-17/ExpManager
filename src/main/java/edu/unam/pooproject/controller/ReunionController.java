@@ -674,10 +674,14 @@ public class ReunionController extends NavegacionController {
 
     @FXML
     public void seleccionarAsistencia() {
-
-        if (rbPresente.isSelected()) {
+        Asistencia asistenciaSeleccionada = tvMiembroAsistencia.getSelectionModel().getSelectedItem();
+        if (asistenciaSeleccionada.getFueCargado() == false) {
+            rbPresente.setDisable(false);
+            rbAusente.setDisable(false);
+            btnAsignar.setDisable(false);
 
         }
+
     }
 
     @FXML
@@ -733,9 +737,9 @@ public class ReunionController extends NavegacionController {
 
                 reunionSeleccionada.setAsistencia(asistencias);
 
-                
-                ventana.mostrarExito("Se han creado las asistencias para la reunión seleccionada.");
 
+                ventana.mostrarExito("Se han creado las asistencias para la reunión seleccionada.");
+                initialize();
             } else {
                 ventana.mostrarError("La reunión seleccionada ya tiene cargada las asistencias");
             }
