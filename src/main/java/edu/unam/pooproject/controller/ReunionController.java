@@ -66,7 +66,7 @@ public class ReunionController extends NavegacionController {
     @FXML
     private TableColumn<Reunion, String> colHoraFin;
     @FXML
-    private TableColumn<Reunion, Boolean> colEstado;
+    private TableColumn<Reunion, String> colEstado;
     @FXML
     private TableColumn<Reunion, String> colDetalles;
     @FXML
@@ -80,7 +80,7 @@ public class ReunionController extends NavegacionController {
     @FXML
     private TableColumn<Reunion, String> colDetalleFin;
     @FXML
-    private TableColumn<Reunion, Boolean> colDetalleEstado;
+    private TableColumn<Reunion, String> colDetalleEstado;
     @FXML
     private TableColumn<Reunion, String> colDetalleLugar;
     @FXML
@@ -151,6 +151,7 @@ public class ReunionController extends NavegacionController {
         colHoraFin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHoraFin().toString()));
         colHoraInicio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHoraInicio().toString()));
         colDetalles.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDetalles().toString()));
+        colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado()));
         colNroAsistencia.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         colFechaAsistencia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFecha().toString()));
         colHoraFinAsistencia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHoraFin().toString()));
@@ -161,6 +162,7 @@ public class ReunionController extends NavegacionController {
         colDetalleFin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHoraFin().toString()));
         colDetalleInicio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHoraInicio().toString()));
         colDetalleLugar.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDetalles().toString()));
+        colDetalleEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado()));
         rellenarTablas();
 
         //CargarComboBoxes
@@ -221,25 +223,18 @@ public class ReunionController extends NavegacionController {
     }
 
     private void rellenarComboBoxExpedientes() {
-
-        // Crear lista a partir de los expedientes registradss
         List<Expediente> expedientes = repositorio.obtenerTodos(Expediente.class);
-
-        ObservableList<Expediente> opcionesExpedientes = FXCollections.observableArrayList(expedientes);
-
-        // Asignar la lista observable al ComboBoxIniciantes
+        List<Expediente> expedientesFiltrados = expedientes.stream()
+                .filter(expediente -> expediente.getEstado())
+                .toList();
+        ObservableList<Expediente> opcionesExpedientes = FXCollections.observableArrayList(expedientesFiltrados);
         cmbExpedientes.setItems(opcionesExpedientes);
         cmbExpedientes.setConverter(new StringConverter<Expediente>() {
             public String toString(Expediente expediente) {
-                if (expediente != null) {
-                    return expediente.getTitulo();
-                } else {
-                    return "";
-                }
+                return expediente != null ? expediente.getTitulo() : "";
             }
 
             public Expediente fromString(String string) {
-                // No se usa en este caso
                 return null;
             }
         });

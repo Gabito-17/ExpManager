@@ -99,12 +99,12 @@ public class ExpedienteController extends NavegacionController {
         colId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         colTitulo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitulo()));
         colFechaIngreso.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaIngreso().toString()));
-        colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado().toString()));
+        colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstadoString()));
         colIniciante.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIniciante().getNombreCompleto()));
         colNroDetalle.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         colTituloDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitulo()));
         colFechaIngresoDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaIngreso().toString()));
-        colEstadoDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado().toString()));
+        colEstadoDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstadoString()));
         colInicianteDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIniciante().getNombreCompleto()));
 
         // Cargar todas los expedientes de la base de datos y mostrarlos en el TableView
@@ -399,18 +399,10 @@ public class ExpedienteController extends NavegacionController {
         } else {
             expediente.setInvolucrados(listaInvolucrados);
         }
+        // Guardar el expediente en la base de datos
+        this.expedienteServicio.agregarExpediente(expediente);
 
-        if (expedienteExiste(expediente.getId())) {
-            if (!expediente.getEstado()) {
-                ventana.mostrarError("Error al cargar expediente, el expediente ya se encuentra cerrado.");
-                return;
-            }
-            this.expedienteServicio.editarExpediente(expediente);
-        } else {
-            // Guardar el expediente en la base de datos
-            this.expedienteServicio.agregarExpediente(expediente);
 
-        }
         limpiarCampos();
         ventana.mostrarExito("El expediente fue cargado con existo!");
         initialize();

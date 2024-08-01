@@ -78,6 +78,12 @@ public class Persona {
         return this.esMiembro;
     }
 
+    public String esMiembroString() {
+        if (this.esMiembro == true) {
+            return "Si";
+        } else return "No";
+    }
+
     public void setRol(final boolean esMiembro) {
         this.esMiembro = esMiembro;
     }
