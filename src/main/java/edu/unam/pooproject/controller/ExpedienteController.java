@@ -252,52 +252,6 @@ public class ExpedienteController extends NavegacionController {
         }
     }
 
-    @FXML
-    public void editarExpediente(ActionEvent event) throws Exception {
-        // Obtener expediente seleccionado en el TableView
-        Expediente expedienteSeleccionado = tvExpedientes.getSelectionModel().getSelectedItem();
-
-        // Verificar si hay algun expediente seleccionado
-        if (expedienteSeleccionado == null) {
-            ventana.mostrarError("Selecciona un expediente para editar.");
-            return;
-        }
-
-        // Mostrar un Alert de confirmación para verificar si se desea editar el expediente
-        Optional<ButtonType> resultado = ventana.mostrarConfirmacion("¿Deseas editar este expediente?", "Se editarán los datos del expediente seleccionado.\n Al finalizar la edicion presione 'Cargar'");
-        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            // Cargar los datos del expediente seleccionado en los campos correspondientes
-            txtTitulo.setText(expedienteSeleccionado.getTitulo());
-            lblFechaIngreso.setText(expedienteSeleccionado.getFechaIngreso().toString());
-            taNota.setText(expedienteSeleccionado.getNota());
-            cmbIniciantes.getSelectionModel().select(expedienteSeleccionado.getIniciante());
-            lblFechaIngreso.setText(expedienteSeleccionado.getFechaIngreso().toString());
-            listaInvolucrados.clear();
-            List<Persona> involucrados = expedienteSeleccionado.getInvolucrados();
-
-            // Convertir la lista de Involucrados a ObservableList
-            listaInvolucrados = FXCollections.observableArrayList(involucrados);
-            lstInvolucrados.setItems(listaInvolucrados);
-            lstInvolucrados.setCellFactory(param -> new TextFieldListCell<>(new StringConverter<Persona>() {
-                @Override
-                public String toString(Persona persona) {
-                    if (persona != null) {
-                        return persona.getApellido() + " " + persona.getNombre();
-                    } else {
-                        return "";
-                    }
-                }
-
-                @Override
-                public Persona fromString(String string) {
-                    // No se usa en este caso
-                    return null;
-                }
-            }));
-        }
-    }
-
-
     //Limpiar todos los inputs
     @FXML
     public void limpiarCampos() {
