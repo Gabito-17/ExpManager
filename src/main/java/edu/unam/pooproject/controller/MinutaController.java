@@ -141,6 +141,7 @@ public class MinutaController extends NavegacionController {
             setFechaReunion(reunion.getFecha().toString());
             lbIdReunion.setText(String.valueOf(reunion.getId()));
             lbReunionFecha.setText(fechaReunion);
+            rellenarTabla(reunion);
         }
     }
 
@@ -149,8 +150,7 @@ public class MinutaController extends NavegacionController {
             List<Minuta> minutas = reunion.getMinutas();
             ObservableList<Minuta> listaMinutas = FXCollections.observableArrayList(minutas);
             tvMinutasDeLaReunion.setItems(listaMinutas);
-            System.out.println(listaMinutas);
-            System.out.println(reunion);
+            tvMinutasDeLaReunion.refresh();
 
         }
     }
@@ -160,7 +160,6 @@ public class MinutaController extends NavegacionController {
         // Obtener la minuta seleccionada
         if (tvMinutasDeLaReunion.getSelectionModel().getSelectedItem() != null) {
             minutaSeleccionada = tvMinutasDeLaReunion.getSelectionModel().getSelectedItem();
-            System.out.println(minutaSeleccionada.getTema());
             lbIdMinuta.setText(String.valueOf(minutaSeleccionada.getId()));
             lbIdExpediente.setText(String.valueOf(minutaSeleccionada.getExpediente().getId()));
             lbReunionFecha.setText(fechaReunion);

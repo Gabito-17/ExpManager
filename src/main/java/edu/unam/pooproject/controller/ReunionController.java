@@ -511,7 +511,6 @@ public class ReunionController extends NavegacionController {
                 Parent root = loader.load();
                 MinutaController minutaController = loader.getController();
                 minutaController.setReunion(reunionSeleccionada); // Pasar la reunión
-                System.out.println(reunionSeleccionada);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
