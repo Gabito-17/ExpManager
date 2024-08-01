@@ -238,11 +238,12 @@ public class ExpedienteController extends NavegacionController {
             return;
         }
         if (expedienteSeleccionado.getEstado() == true) {
-            expedienteSeleccionado.setEstado(false);
+
             // Mostrar un Alert de confirmación para verificar si se desea marcar el expediente como cerrado
             Optional<ButtonType> resultado = ventana.mostrarConfirmacion("¿Deseas marcar este expediente como cerrado?", "Esto es reversible");
             if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
                 // Cambiar el estado del expediente a cerrado
+                expedienteSeleccionado.setEstado(false);
                 expedienteServicio.editarExpediente(expedienteSeleccionado);
                 initialize();
 
