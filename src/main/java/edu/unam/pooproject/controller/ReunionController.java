@@ -90,7 +90,7 @@ public class ReunionController extends NavegacionController {
     @FXML
     private TableColumn<Asistencia, String> colMiembroAsistencia;
     @FXML
-    private TableColumn<Asistencia, String> colReunionAsistencia;
+    private TableColumn<Asistencia, String> colAsiste;
     @FXML
     private TableColumn<Reunion, Integer> colNroAsistencia;
     @FXML
@@ -118,6 +118,8 @@ public class ReunionController extends NavegacionController {
     @FXML
     private RadioButton rbPresente;
     @FXML
+    private Button btnAsignar;
+    @FXML
     private Label lblLugar;
     @FXML
     private Label lblFecha;
@@ -133,12 +135,15 @@ public class ReunionController extends NavegacionController {
     private ListView<Persona> lstDetalleMiembros;
     @FXML
     private TableView<Expediente> tvOrden;
+    private Boolean editar;
+    private int idReunion;
 
     private ObservableList<Persona> listaMiembros = FXCollections.observableArrayList();
     private ObservableList<Expediente> listaExpedientes = FXCollections.observableArrayList();
 
 
     public void initialize() {
+        editar = false;
         this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.personaServicio = new PersonaServicio(this.repositorio);
         this.minutaServicio = new MinutaServicio(this.repositorio);
@@ -163,6 +168,13 @@ public class ReunionController extends NavegacionController {
         colDetalleInicio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHoraInicio().toString()));
         colDetalleLugar.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDetalles().toString()));
         colDetalleEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado()));
+        colAsiste.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAsisteString()));
+
+        colMiembroAsistencia.setCellValueFactory(cellData -> {
+            String nombre = cellData.getValue().getMiembro().getNombre();
+            String apellido = cellData.getValue().getMiembro().getApellido();
+            return new SimpleStringProperty(nombre + " " + apellido);
+        });
         rellenarTablas();
 
         //CargarComboBoxes
@@ -416,13 +428,7 @@ public class ReunionController extends NavegacionController {
 
 
     @FXML
-    public void cargarReunion(ActionEvent event) {
-        //Instanciar una reunion
-        Reunion reunion = new Reunion();
-        //Establecer el estado de la reunion en "Abierto"
-        reunion.setEstado(true);
-
-        //verificar lista expedientes
+    public void cargarReunion(ActionEvent event) {//verificar lista expedientes
         if (listaExpedientes.size() < 1) {
             ventana.mostrarError("Error al cargar la reunion, debe añadir al menos 1 expediente.");
             return;
@@ -465,26 +471,56 @@ public class ReunionController extends NavegacionController {
             return;
         }
 
-        //Establecer la fecha de la reunion
-        reunion.setFecha(dpFecha.getValue());
-        //Establecer la hora de inicio
-        reunion.setHoraInicio(cmbHoraInicio.getValue().toString());
-        //Establecer la hora de finalizacion
-        reunion.setHoraFin(cmbHoraFin.getValue().toString());
-        //Establecer el lugar de la reunion
-        reunion.setLugar(txtLugar.getText().trim().replaceAll("\\s+", " "));
-        //Establecer los detalles de la reunion
-        reunion.setDetalles(taDetalles.getText().trim().replaceAll("\\s+", " "));
-        //Establecer miembros
-        reunion.setMiembros(lstMiembros.getItems());
-        //Establecer la lista de expedientes
-        reunion.setOrden(lstExpedientes.getItems());
-        reunionServicio.agregarReunion(reunion);
+        if (editar == true) {
+            Reunion reunionEditada = reunionServicio.buscarPorId(idReunion);
+            //Establecer el estado de la reunion en "Abierto"
+            reunionEditada.setEstado(true);
+            //Establecer la fecha de la reunion
+            reunionEditada.setFecha(dpFecha.getValue());
+            //Establecer la hora de inicio
+            reunionEditada.setHoraInicio(cmbHoraInicio.getValue().toString());
+            //Establecer la hora de finalizacion
+            reunionEditada.setHoraFin(cmbHoraFin.getValue().toString());
+            //Establecer el lugar de la reunion
+            reunionEditada.setLugar(txtLugar.getText().trim().replaceAll("\\s+", " "));
+            //Establecer los detalles de la reunion
+            reunionEditada.setDetalles(taDetalles.getText().trim().replaceAll("\\s+", " "));
+            //Establecer miembros
+            reunionEditada.setMiembros(lstMiembros.getItems());
+            //Establecer la lista de expedientes
+            reunionEditada.setOrden(lstExpedientes.getItems());
+            reunionServicio.editarReunion(reunionEditada);
+            ventana.mostrarExito("La Reunion fue editada con exito!");
+            limpiarCampos();
+            initialize();
+            editar = false;
+
+        } else {
+            //Instanciar una reunion
+            Reunion reunion = new Reunion();
+            //Establecer el estado de la reunion en "Abierto"
+            reunion.setEstado(true);
+            //Establecer la fecha de la reunion
+            reunion.setFecha(dpFecha.getValue());
+            //Establecer la hora de inicio
+            reunion.setHoraInicio(cmbHoraInicio.getValue().toString());
+            //Establecer la hora de finalizacion
+            reunion.setHoraFin(cmbHoraFin.getValue().toString());
+            //Establecer el lugar de la reunion
+            reunion.setLugar(txtLugar.getText().trim().replaceAll("\\s+", " "));
+            //Establecer los detalles de la reunion
+            reunion.setDetalles(taDetalles.getText().trim().replaceAll("\\s+", " "));
+            //Establecer miembros
+            reunion.setMiembros(lstMiembros.getItems());
+            //Establecer la lista de expedientes
+            reunion.setOrden(lstExpedientes.getItems());
+            reunionServicio.agregarReunion(reunion);
 
 
-        ventana.mostrarExito("La Reunion fue cargada con exito!");
-        limpiarCampos();
-        initialize();
+            ventana.mostrarExito("La Reunion fue cargada con exito!");
+            limpiarCampos();
+            initialize();
+        }
     }
 
     @FXML
@@ -524,7 +560,6 @@ public class ReunionController extends NavegacionController {
         }
     }
 
-
     //limpiar campos
     @FXML
     public void limpiarCampos() {
@@ -540,8 +575,56 @@ public class ReunionController extends NavegacionController {
     }
 
     @FXML
-    public void modificar(ActionEvent event) {
+    public void editarReunion() {
+        editar = true;
+        Reunion reunionSeleccionada = tvReunion.getSelectionModel().getSelectedItem();
+        idReunion = tvReunion.getSelectionModel().getSelectedItem().getId();
+        List<Persona> miembros = reunionSeleccionada.getMiembros();
+        List<Expediente> expedientes = reunionSeleccionada.getOrden();
+        if (reunionSeleccionada != null) {
 
+            cmbMiembros.getSelectionModel().clearSelection();
+            cmbExpedientes.getSelectionModel().clearSelection();
+            lstMiembros.getSelectionModel().clearSelection();
+            lstExpedientes.getSelectionModel().clearSelection();
+
+
+            listaMiembros = FXCollections.observableArrayList(miembros);
+            listaExpedientes = FXCollections.observableArrayList(expedientes);
+            cmbHoraInicio.getSelectionModel().select(reunionSeleccionada.getHoraInicio());
+            cmbHoraFin.getSelectionModel().select(reunionSeleccionada.getHoraFin());
+            lstMiembros.setItems(listaMiembros);
+            lstMiembros.setCellFactory(lv -> new ListCell<Persona>() {
+                @Override
+                protected void updateItem(Persona persona, boolean empty) {
+                    super.updateItem(persona, empty);
+                    if (empty || persona == null) {
+                        setText(null);
+                    } else {
+                        setText(persona.getNombre() + " " + persona.getApellido());
+                    }
+                }
+            });
+            dpFecha.setValue(reunionSeleccionada.getFecha());
+            txtLugar.setText(reunionSeleccionada.getLugar());
+            taDetalles.setText(reunionSeleccionada.getDetalles());
+            lstExpedientes.setItems(listaExpedientes);
+            lstExpedientes.setCellFactory(lv -> new ListCell<Expediente>() {
+                @Override
+                protected void updateItem(Expediente expediente, boolean empty) {
+                    super.updateItem(expediente, empty);
+                    if (empty || expediente == null) {
+                        setText(null);
+                    } else {
+                        setText(expediente.getTitulo());
+                    }
+                }
+            });
+
+
+        } else {
+            ventana.mostrarError("Debe seleccionar una Reunion para poder editarla");
+        }
     }
 
     //eliminar registro
@@ -564,13 +647,16 @@ public class ReunionController extends NavegacionController {
 
             //Obtener Asistencias
             List<Asistencia> asistencia = reunionSeleccionada.getAsistencia();
+            ObservableList<Asistencia> listaAsistencia = FXCollections.observableArrayList(asistencia);
+            tvMiembroAsistencia.setItems(listaAsistencia);
             //Si la Reunion no tiene asistencia cargada, habilitar el RadioButton de Asistencia
-            if (asistencia == null) {
-
+            if (asistencia.isEmpty()) {
+                btnAsignar.setDisable(false);
                 rbPresente.setDisable(false);
                 rbAusente.setDisable(false);
 
             } else {
+                btnAsignar.setDisable(true);
                 rbPresente.setDisable(true);
                 rbAusente.setDisable(true);
                 // Convertir la lista de Asistencias a ObservableList
@@ -624,17 +710,25 @@ public class ReunionController extends NavegacionController {
 
     }
 
+    private void rellenarListaAsistencia(List<Persona> miembros, Reunion reunion) {
+
+
+    }
+
     @FXML
-    public void cargarAsistencia(MouseEvent event) {
-        if (lstMiembrosAsistencia.getSelectionModel().getSelectedItem() != null) {
-
-
+    public void cargarAsistencia() {
+        Reunion reunionSeleccionada = tvReunionAsistencia.getSelectionModel().getSelectedItem();
+        if (reunionSeleccionada != null) {
+            if (reunionSeleccionada.getAsistencia().isEmpty()) {
+                List<Persona> miembros = reunionSeleccionada.getMiembros();
+                // Aquí puedes llamar a un método para mostrar una interfaz donde el usuario pueda indicar la asistencia.
+                rellenarListaAsistencia(miembros, reunionSeleccionada);
+            } else {
+                ventana.mostrarError("La reunión seleccionada ya tiene cargada las asistencias");
+            }
         } else {
-            ventana.mostrarError("Debe seleccionar un miembro para ver los detalles.");
-            return;
+            ventana.mostrarError("Debe seleccionar una reunión que no tenga asistencia para cargar su asistencia.");
         }
-
-
     }
 }
 

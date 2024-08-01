@@ -68,4 +68,12 @@ public class Asistencia {
     public void setMiembro(final Persona miembro) {
         this.miembro = miembro;
     }
+
+    public String getAsisteString() {
+        if (asistio) {
+            return "Presente";
+        } else {
+            return "Ausente";
+        }
+    }
 }
