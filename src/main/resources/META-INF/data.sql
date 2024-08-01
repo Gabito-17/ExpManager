@@ -69,10 +69,19 @@ VALUES
     (3, (SELECT dni FROM persona WHERE esmiembro = true AND dni NOT IN (SELECT miembro_id FROM reunion_miembro WHERE reunion_id = 9) ORDER BY random() LIMIT 1)),
     (4, (SELECT dni FROM persona WHERE esmiembro = true AND dni NOT IN (SELECT miembro_id FROM reunion_miembro WHERE reunion_id = 9) ORDER BY random() LIMIT 1));
 
--- Insertar asistencia de los miembros a las reuniones con valores aleatorios para 'asiste'
-INSERT INTO asistencia (asiste, reunion_id, miembro_id)
+-- Insertar acciones adicionales relacionadas con los expedientes
+INSERT INTO accion (fecha, Titulo, Accion, expediente_id)
+VALUES
+    (CURRENT_DATE - INTERVAL '10' DAY, 'Revisión del Proyecto de Desarrollo', 'Revisar los avances del proyecto de desarrollo de software.', 1),
+    (CURRENT_DATE - INTERVAL '20' DAY, 'Análisis del Estudio Social', 'Analizar los datos recolectados en el estudio social.', 2),
+    (CURRENT_DATE - INTERVAL '30' DAY, 'Planificación de la Estrategia de Marketing', 'Planificar la estrategia de marketing para el nuevo producto.', 3),
+    (CURRENT_DATE - INTERVAL '15' DAY, 'Evaluación del Medicamento', 'Evaluar los resultados del medicamento en los pacientes.', 4),
+    (CURRENT_DATE - INTERVAL '5' DAY, 'Revisión del Proyecto de Ingeniería', 'Revisar el diseño del puente para la conectividad vial.', 5);
+-- Insertar asistencia de los miembros a las reuniones con el estado fuecargado como true
+INSERT INTO asistencia (asiste, fuecargado, reunion_id, miembro_id)
 SELECT
     CASE WHEN random() < 0.5 THEN true ELSE false END AS asiste,
+    true AS fuecargado,
     reunion_id,
     miembro_id
 FROM

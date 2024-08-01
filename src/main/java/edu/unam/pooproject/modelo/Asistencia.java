@@ -70,10 +70,9 @@ public class Asistencia {
     }
 
     public String getAsisteString() {
-        if (asistio) {
-            return "Presente";
-        } else {
-            return "Ausente";
+        if (asistio == null) {
+            return "Cargar";
         }
+        return asistio ? "Presente" : "Ausente";
     }
 }

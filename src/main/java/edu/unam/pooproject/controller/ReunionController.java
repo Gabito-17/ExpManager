@@ -22,6 +22,7 @@ import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -710,10 +711,6 @@ public class ReunionController extends NavegacionController {
 
     }
 
-    private void rellenarListaAsistencia(List<Persona> miembros, Reunion reunion) {
-
-
-    }
 
     @FXML
     public void cargarAsistencia() {
@@ -721,8 +718,24 @@ public class ReunionController extends NavegacionController {
         if (reunionSeleccionada != null) {
             if (reunionSeleccionada.getAsistencia().isEmpty()) {
                 List<Persona> miembros = reunionSeleccionada.getMiembros();
-                // Aquí puedes llamar a un método para mostrar una interfaz donde el usuario pueda indicar la asistencia.
-                rellenarListaAsistencia(miembros, reunionSeleccionada);
+                List<Asistencia> asistencias = new ArrayList<>();
+                System.out.println(miembros);
+
+                for (Persona miembro : miembros) {
+                    Asistencia asistencia = new Asistencia();
+                    asistencia.setMiembro(miembro);
+                    asistencia.setReunion(reunionSeleccionada);
+
+                    // Establecer otros valores predeterminados para asistencia si es necesario
+                    asistencias.add(asistencia);
+                }
+                asistenciaServicio.crearAsistencia(reunionSeleccionada, miembros);
+
+                reunionSeleccionada.setAsistencia(asistencias);
+
+                
+                ventana.mostrarExito("Se han creado las asistencias para la reunión seleccionada.");
+
             } else {
                 ventana.mostrarError("La reunión seleccionada ya tiene cargada las asistencias");
             }
