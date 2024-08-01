@@ -221,25 +221,18 @@ public class ReunionController extends NavegacionController {
     }
 
     private void rellenarComboBoxExpedientes() {
-
-        // Crear lista a partir de los expedientes registradss
         List<Expediente> expedientes = repositorio.obtenerTodos(Expediente.class);
-
-        ObservableList<Expediente> opcionesExpedientes = FXCollections.observableArrayList(expedientes);
-
-        // Asignar la lista observable al ComboBoxIniciantes
+        List<Expediente> expedientesFiltrados = expedientes.stream()
+                .filter(expediente -> expediente.getEstado())
+                .toList();
+        ObservableList<Expediente> opcionesExpedientes = FXCollections.observableArrayList(expedientesFiltrados);
         cmbExpedientes.setItems(opcionesExpedientes);
         cmbExpedientes.setConverter(new StringConverter<Expediente>() {
             public String toString(Expediente expediente) {
-                if (expediente != null) {
-                    return expediente.getTitulo();
-                } else {
-                    return "";
-                }
+                return expediente != null ? expediente.getTitulo() : "";
             }
 
             public Expediente fromString(String string) {
-                // No se usa en este caso
                 return null;
             }
         });
