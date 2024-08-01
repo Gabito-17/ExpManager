@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unam.pooproject.controller.PersonaController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unam.pooproject.controller.PersonaController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="582.0" prefWidth="214.0" spacing="10" BorderPane.alignment="CENTER">
@@ -76,40 +76,6 @@
                 </VBox.margin>
             </Button>
             <Button fx:id="btnMenuReuniones" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuReunion" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="REUNIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
-                <font>
-                    <Font name="Cambria" size="18.0" />
-                </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-                <effect>
-                    <Blend mode="DARKEN" />
-                </effect>
-                <padding>
-                    <Insets bottom="5.0" top="5.0" />
-                </padding>
-                <VBox.margin>
-                    <Insets top="-6.0" />
-                </VBox.margin>
-            </Button>
-            <Button fx:id="btnMenuAsistencia" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuAcciones" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="ACCIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
-                <font>
-                    <Font name="Cambria" size="18.0" />
-                </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-                <effect>
-                    <Blend mode="DARKEN" />
-                </effect>
-                <padding>
-                    <Insets bottom="5.0" top="5.0" />
-                </padding>
-                <VBox.margin>
-                    <Insets top="-6.0" />
-                </VBox.margin>
-            </Button>
-            <Button fx:id="btnMenuMinutas" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMinuta" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="MINUTAS" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
                     <Font name="Cambria" size="18.0" />
                 </font>

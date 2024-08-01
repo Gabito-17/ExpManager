@@ -92,7 +92,7 @@ public class MinutaController extends NavegacionController {
             String resumen = taResumen.getText();
 
             // Validar que los campos no estén vacíos antes de guardar
-            if (tema.isEmpty() || resumen.isEmpty()) {
+            if (tema == null || resumen == null || tema.isEmpty() || resumen.isEmpty()) {
                 ventanaEmergente.mostrarError("Campos vacío, por favor, llena todos los campos antes de cargar la minuta.");
                 return;
             }

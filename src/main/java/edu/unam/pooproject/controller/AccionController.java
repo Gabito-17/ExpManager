@@ -111,6 +111,7 @@ public class AccionController extends NavegacionController {
         actualizarExpediente();
         actualizarTabla();
         limpiarCampos();
+        initialize();
     }
 
     @FXML
@@ -200,6 +201,7 @@ public class AccionController extends NavegacionController {
         fechaAccion.setValue(null);
         txtTituloAccion.clear();
         taAccion.clear();
+        idAccion = null;
     }
 
     private boolean verificarCamposAccion() {
@@ -212,11 +214,11 @@ public class AccionController extends NavegacionController {
         }
         String titulo = txtTituloAccion.getText().trim();
         String accion = taAccion.getText().trim();
-        if (titulo.isEmpty() || accion.isEmpty()) {
+        if (titulo == null || accion == null || titulo.isEmpty() || accion.isEmpty()) {
             ventana.mostrarError("Por favor ingrese texto en los campos.");
             return false;
         }
-        if (!titulo.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") || !accion.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+        if (!titulo.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ,.() ]+") || !accion.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ,.() ]+")) {
             ventana.mostrarError("El titulo o la accion no pueden contener símbolos ni números.");
             return false;
         }

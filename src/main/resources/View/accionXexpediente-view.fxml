@@ -41,7 +41,7 @@
                     <Insets />
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuExpedientes" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuExpediente" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="EXPEDIENTES" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuExpedientes" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuExpediente" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #73aaaa;" text="EXPEDIENTES" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
                     <Font name="Cambria" size="18.0" />
                 </font>
@@ -76,40 +76,6 @@
                 </VBox.margin>
             </Button>
             <Button fx:id="btnMenuReuniones" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuReunion" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="REUNIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
-                <font>
-                    <Font name="Cambria" size="18.0" />
-                </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-                <effect>
-                    <Blend mode="DARKEN" />
-                </effect>
-                <padding>
-                    <Insets bottom="5.0" top="5.0" />
-                </padding>
-                <VBox.margin>
-                    <Insets top="-6.0" />
-                </VBox.margin>
-            </Button>
-            <Button fx:id="btnMenuAsistencia" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuAcciones" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #73aaaa;" text="ACCIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
-                <font>
-                    <Font name="Cambria" size="18.0" />
-                </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-                <effect>
-                    <Blend mode="DARKEN" />
-                </effect>
-                <padding>
-                    <Insets bottom="5.0" top="5.0" />
-                </padding>
-                <VBox.margin>
-                    <Insets top="-6.0" />
-                </VBox.margin>
-            </Button>
-            <Button fx:id="btnMenuMinutas" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMinuta" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="MINUTAS" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
                     <Font name="Cambria" size="18.0" />
                 </font>

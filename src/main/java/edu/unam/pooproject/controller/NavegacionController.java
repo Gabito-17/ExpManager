@@ -23,19 +23,8 @@ public class NavegacionController {
     public void menuReunion(ActionEvent event) {
         Enrutador.cambiarVentana(event, "/View/reunion-view.fxml");
     }
-
-    //Ubicar en ventana "Acciones"
-    @FXML
-    public void menuAcciones(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/accionXexpediente-view.fxml");
-    }
-
-    //Ubicar en ventana "Minuta"
-    @FXML
-    public void menuMinuta(ActionEvent event) {
-        Enrutador.cambiarVentana(event, "/View/minuta-view.fxml");
-    }
-
+    
+    //Ubicar en ventana "Persona"
     @FXML
     public void menuPersona(ActionEvent event) {
         Enrutador.cambiarVentana(event, "/View/personas-view.fxml");
