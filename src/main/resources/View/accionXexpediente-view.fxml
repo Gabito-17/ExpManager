@@ -1,95 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unam.pooproject.controller.AccionController">
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="900.0"
+            style="-fx-background-color: #568c8d;" xmlns="http://javafx.com/javafx/18"
+            fx:controller="edu.unam.pooproject.controller.AccionController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="582.0" prefWidth="215.0" spacing="10" BorderPane.alignment="CENTER">
-            <Button fx:id="btnMenuInicio" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembro" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="MIEMBROS DEL CONSEJO" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuInicio" alignment="CENTER" contentDisplay="CENTER" minWidth="100"
+                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembro" prefHeight="50.0" prefWidth="250.0"
+                    style="-fx-background-color: #396f70;" text="MIEMBROS DEL CONSEJO" textFill="WHITE"
+                    VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0" />
+                    <Font name="Cambria" size="18.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN" />
+                    <Blend mode="DARKEN"/>
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets />
+                    <Insets/>
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuExpedientes" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuExpediente" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #73aaaa;" text="EXPEDIENTES" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuExpedientes" alignment="CENTER" contentDisplay="CENTER" minWidth="100"
+                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuExpediente" prefHeight="50.0" prefWidth="250.0"
+                    style="-fx-background-color: #73aaaa;" text="EXPEDIENTES" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0" />
+                    <Font name="Cambria" size="18.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN" />
+                    <Blend mode="DARKEN"/>
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0" />
+                    <Insets top="-6.0"/>
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuMiembros" alignment="CENTER" contentDisplay="CENTER" minWidth="100" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembro" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="PERSONAS" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuMiembros" alignment="CENTER" contentDisplay="CENTER" minWidth="100"
+                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuMiembro" prefHeight="50.0" prefWidth="250.0"
+                    style="-fx-background-color: #396f70;" text="PERSONAS" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0" />
+                    <Font name="Cambria" size="18.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN" />
+                    <Blend mode="DARKEN"/>
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0" />
+                    <Insets top="-6.0"/>
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnMenuReuniones" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#menuReunion" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #396f70;" text="REUNIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnMenuReuniones" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                    nodeOrientation="RIGHT_TO_LEFT" onAction="#menuReunion" prefHeight="50.0" prefWidth="250.0"
+                    style="-fx-background-color: #396f70;" text="REUNIONES" textFill="WHITE" VBox.vgrow="ALWAYS">
                 <font>
-                    <Font name="Cambria" size="18.0" />
+                    <Font name="Cambria" size="18.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
                 <effect>
-                    <Blend mode="DARKEN" />
+                    <Blend mode="DARKEN"/>
                 </effect>
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets top="-6.0" />
+                    <Insets top="-6.0"/>
                 </VBox.margin>
             </Button>
         </VBox>
@@ -97,85 +94,107 @@
     <top>
         <Label alignment="TOP_LEFT" text="DEPARTAMENTO DE INFORMATICA" BorderPane.alignment="CENTER">
             <font>
-                <Font name="Georgia" size="12.0" />
+                <Font name="Georgia" size="12.0"/>
             </font>
         </Label>
     </top>
     <bottom>
         <Label text="Todos los derechos reservados" BorderPane.alignment="CENTER">
             <font>
-                <Font name="System Italic" size="8.0" />
+                <Font name="System Italic" size="8.0"/>
             </font>
         </Label>
     </bottom>
     <center>
-        <AnchorPane prefHeight="573.0" prefWidth="540.0" style="-fx-background-color: #e5f4f4;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="573.0" prefWidth="540.0" style="-fx-background-color: #e5f4f4;"
+                    BorderPane.alignment="CENTER">
             <children>
-            <TabPane prefHeight="577.0" prefWidth="685.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab text="Acciones">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Label layoutX="62.0" layoutY="1.0" text="ABM Acciones del expediente:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TableView fx:id="tvAccionesPorExpediente" layoutX="26.0" layoutY="250.0" prefHeight="253.0" prefWidth="636.0">
-                                 <columns>
-                                    <TableColumn fx:id="colId" prefWidth="41.0" text="ID" />
-                                    <TableColumn fx:id="colFecha" prefWidth="109.0" text="Fecha" />
-                                    <TableColumn fx:id="colTitulo" prefWidth="139.0" text="Titulo" />
-                                    <TableColumn fx:id="colAccion" prefWidth="345.0" text="Accion" />
-                                 </columns>
-                              </TableView>
-                              <Button fx:id="btnEditarAccion" layoutX="26.0" layoutY="516.0" mnemonicParsing="false" onAction="#editarAccion" text="Editar Accion" />
-                              <Button fx:id="btnEliminarAccion" layoutX="127.0" layoutY="516.0" mnemonicParsing="false" onAction="#eliminarAccion" text="Eliminar Accion" />
-                              <GridPane layoutX="14.0" layoutY="49.0" prefHeight="159.0" prefWidth="345.0" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="326.0" AnchorPane.topAnchor="49.0">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="123.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="222.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints />
-                                    <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <TextField fx:id="txtTituloAccion" prefWidth="393.0" promptText="Ingrese el titulo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Label text="Fecha de la accion:" GridPane.rowIndex="1">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Titulo:" GridPane.rowIndex="2">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <DatePicker fx:id="fechaAccion" editable="false" promptText="Seleccione Fecha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 </children>
-                              </GridPane>
-                              <Button fx:id="btnCargar" layoutX="487.0" layoutY="221.0" mnemonicParsing="false" onAction="#cargarAccion" text="Cargar" />
-                              <Button fx:id="btnLimpiarCampos" layoutX="555.0" layoutY="221.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar Campos" />
-                              <Label fx:id="lbExpedienteTitulo" layoutX="302.0" layoutY="1.0" prefHeight="27.0" prefWidth="325.0" text="[Expediente.titulo]">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextArea fx:id="taAccion" layoutX="387.0" layoutY="70.0" prefHeight="138.0" prefWidth="270.0" promptText="Ingrese la accion a realizar" />
-                              <Label layoutX="387.0" layoutY="49.0" prefHeight="20.0" prefWidth="51.0" text="Accion:">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-              </tabs>
-            </TabPane>
+                <TabPane prefHeight="577.0" prefWidth="685.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Acciones">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <Label layoutX="62.0" layoutY="1.0" text="ABM Acciones del expediente:">
+                                            <font>
+                                                <Font size="18.0"/>
+                                            </font>
+                                        </Label>
+                                        <TableView fx:id="tvAccionesPorExpediente" layoutX="26.0" layoutY="250.0"
+                                                   prefHeight="253.0" prefWidth="636.0">
+                                            <columns>
+                                                <TableColumn fx:id="colId" prefWidth="41.0" text="ID"/>
+                                                <TableColumn fx:id="colFecha" prefWidth="109.0" text="Fecha"/>
+                                                <TableColumn fx:id="colTitulo" prefWidth="139.0" text="Titulo"/>
+                                                <TableColumn fx:id="colAccion" prefWidth="345.0" text="Accion"/>
+                                            </columns>
+                                        </TableView>
+                                        <Button fx:id="btnEditarAccion" layoutX="26.0" layoutY="516.0"
+                                                mnemonicParsing="false" onAction="#editarAccion" text="Editar Accion"/>
+                                        <Button fx:id="btnEliminarAccion" layoutX="127.0" layoutY="516.0"
+                                                mnemonicParsing="false" onAction="#eliminarAccion"
+                                                text="Eliminar Accion"/>
+                                        <GridPane layoutX="14.0" layoutY="49.0" prefHeight="159.0" prefWidth="345.0"
+                                                  AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="14.0"
+                                                  AnchorPane.rightAnchor="326.0" AnchorPane.topAnchor="49.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0"
+                                                                   prefWidth="123.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0"
+                                                                   prefWidth="222.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints/>
+                                                <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="36.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="39.0"
+                                                                vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <TextField fx:id="txtTituloAccion" prefWidth="393.0"
+                                                           promptText="Ingrese el titulo" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="2"/>
+                                                <Label text="Fecha de la accion:" GridPane.rowIndex="1">
+                                                    <font>
+                                                        <Font size="14.0"/>
+                                                    </font>
+                                                </Label>
+                                                <Label text="Titulo:" GridPane.rowIndex="2">
+                                                    <font>
+                                                        <Font size="14.0"/>
+                                                    </font>
+                                                </Label>
+                                                <DatePicker fx:id="fechaAccion" editable="false"
+                                                            promptText="Seleccione Fecha" GridPane.columnIndex="1"
+                                                            GridPane.rowIndex="1"/>
+                                            </children>
+                                        </GridPane>
+                                        <Button fx:id="btnCargar" layoutX="487.0" layoutY="221.0"
+                                                mnemonicParsing="false" onAction="#cargarAccion" text="Cargar"/>
+                                        <Button fx:id="btnLimpiarCampos" layoutX="555.0" layoutY="221.0"
+                                                mnemonicParsing="false" onAction="#limpiarCampos"
+                                                text="Limpiar Campos"/>
+                                        <Label fx:id="lbExpedienteTitulo" layoutX="302.0" layoutY="1.0"
+                                               prefHeight="27.0" prefWidth="325.0" text="[Expediente.titulo]">
+                                            <font>
+                                                <Font size="18.0"/>
+                                            </font>
+                                        </Label>
+                                        <TextArea fx:id="taAccion" layoutX="387.0" layoutY="70.0" prefHeight="138.0"
+                                                  prefWidth="270.0" promptText="Ingrese la accion a realizar"
+                                                  wrapText="true"/>
+                                        <Label layoutX="387.0" layoutY="49.0" prefHeight="20.0" prefWidth="51.0"
+                                               text="Accion:">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
             </children>
         </AnchorPane>
     </center>
