@@ -726,10 +726,7 @@ public class ReunionController extends NavegacionController {
                 ventana.mostrarError("Debe seleccionar una opción de asistencia (Presente o Ausente)");
                 return;
             }
-
-
         }
-
     }
 
     @FXML
@@ -754,8 +751,11 @@ public class ReunionController extends NavegacionController {
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             // Eliminar la reunion seleccionado
             ReunionServicio servicio = new ReunionServicio(repositorio);
-            servicio.eliminarReunion(reunionSeleccionada);
-
+            try {
+                servicio.eliminarReunion(reunionSeleccionada);
+            } catch (Exception e) {
+                ventana.mostrarError("Esta reunion tiene minutas o asistencias asociadas");
+            }
             // Actualizar la tabla
             rellenarTablas();
         }
