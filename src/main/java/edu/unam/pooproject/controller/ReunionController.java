@@ -685,6 +685,54 @@ public class ReunionController extends NavegacionController {
     }
 
     @FXML
+    public void presente() {
+        if (rbPresente.isSelected()) {
+            rbAusente.setSelected(false);
+            // Manejar la lógica cuando se selecciona "Presente"
+        }
+    }
+
+    @FXML
+    public void ausente() {
+        if (rbAusente.isSelected()) {
+            rbPresente.setSelected(false);
+            // Manejar la lógica cuando se selecciona "Ausente"
+        }
+    }
+
+    @FXML
+    public void asignarAsistencia() {
+        Asistencia asistenciaSeleccionada = tvMiembroAsistencia.getSelectionModel().getSelectedItem();
+        if (asistenciaSeleccionada.getFueCargado() == false) {
+            if (rbPresente.isSelected()) {
+                asistenciaSeleccionada.setFueCargado(true);
+                asistenciaSeleccionada.setAsistio(true);
+                asistenciaServicio.editarReunion(asistenciaSeleccionada);
+                ventana.mostrarExito("asistencia Cargada");
+                rbPresente.setDisable(true);
+                rbAusente.setDisable(true);
+                btnAsignar.setDisable(true);
+                tvMiembroAsistencia.refresh();
+            } else if (rbAusente.isSelected()) {
+                asistenciaSeleccionada.setFueCargado(true);
+                asistenciaSeleccionada.setAsistio(false);
+                asistenciaServicio.editarReunion(asistenciaSeleccionada);
+                ventana.mostrarExito("asistencia Cargada");
+                rbPresente.setDisable(true);
+                rbAusente.setDisable(true);
+                btnAsignar.setDisable(true);
+                tvMiembroAsistencia.refresh();
+            } else {
+                ventana.mostrarError("Debe seleccionar una opción de asistencia (Presente o Ausente)");
+                return;
+            }
+
+
+        }
+
+    }
+
+    @FXML
     public void eliminarReunion(ActionEvent event) {
 
         // Obtener la reunion seleccionada en la tabla

@@ -32,15 +32,9 @@ public class AsistenciaServicio {
 
     }
 
-    public void editarReunion(Reunion reunion) {
+    public void editarReunion(Asistencia asistencia) {
         this.repositorio.iniciarTransaccion();
-        this.repositorio.modificar(reunion);
-        this.repositorio.confirmarTransaccion();
-    }
-
-    public void eliminarReunion(Reunion reunion) {
-        this.repositorio.iniciarTransaccion();
-        this.repositorio.eliminar(reunion);
+        this.repositorio.modificar(asistencia);
         this.repositorio.confirmarTransaccion();
     }
 
