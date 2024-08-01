@@ -194,7 +194,7 @@ public class ExpedienteController extends NavegacionController {
     @FXML
     public void eliminarExpediente(ActionEvent event) {
         // Obtener el expediente seleccionado en la tabla
-        Expediente expedienteSeleccionado = tvExpedientes.getSelectionModel().getSelectedItem();
+        Expediente expedienteSeleccionado = tvExpedienteDetalle.getSelectionModel().getSelectedItem();
 
         // Verificar si hay algun expediente seleccionado
         if (expedienteSeleccionado == null) {
@@ -210,13 +210,21 @@ public class ExpedienteController extends NavegacionController {
 
         Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            // Eliminar el expediente seleccionado
-            expedienteServicio = new ExpedienteServicio(repositorio);
-            expedienteServicio.eliminarExpediente(expedienteSeleccionado);
+            try {
+                // Eliminar el expediente seleccionado
+                expedienteServicio = new ExpedienteServicio(repositorio);
 
-            // Actualizar la tabla
-            rellenarTabla();
+                // Eliminar el expediente
+                expedienteServicio.eliminarExpediente(expedienteSeleccionado);
+
+                // Actualizar la tabla
+                rellenarTabla();
+            } catch (Exception e) {
+                ventana.mostrarError("Error al eliminar el expediente: tiene Reuniones pendientes");
+
+            }
         }
+        initialize();
     }
 
     @FXML

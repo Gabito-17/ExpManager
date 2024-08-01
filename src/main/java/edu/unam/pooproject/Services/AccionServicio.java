@@ -15,6 +15,7 @@ public class AccionServicio {
         this.repositorio = p;
     }
 
+
     public void agregarAccion(Accion accion) {
         this.repositorio.iniciarTransaccion();
         this.repositorio.insertar(accion);
@@ -26,6 +27,7 @@ public class AccionServicio {
         this.repositorio.modificar(accion);
         this.repositorio.confirmarTransaccion();
     }
+
     public void eliminarAccion(Accion accion) {
         this.repositorio.iniciarTransaccion();
         this.repositorio.eliminar(accion);
@@ -51,17 +53,18 @@ public class AccionServicio {
         // Si hay resultados, devuelve el primero (debería ser único); de lo contrario, devuelve null
         return resultados.isEmpty() ? null : resultados.get(0);
     }
+
     public Expediente obtenerExpediente(Integer id) {
         // Iniciar una consulta JPA para obtener el expediente de una minuta por su ID
         TypedQuery<Expediente> query = repositorio.getEntityManager()
                 .createQuery("SELECT m.expediente FROM Accion m WHERE m.id = :id", Expediente.class);
-    
+
         // Establecer el parámetro de consulta para el ID de la minuta
         query.setParameter("id", id);
-    
+
         // Obtener el resultado de la consulta (debe ser único ya que el ID es único)
         List<Expediente> resultados = query.getResultList();
-    
+
         // Si hay resultados, devuelve el primero (debería ser único); de lo contrario, devuelve null
         return resultados.isEmpty() ? null : resultados.get(0);
     }

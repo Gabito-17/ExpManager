@@ -65,7 +65,7 @@ public class MinutaController extends NavegacionController {
     private TextField txtTema;
     private VentanaEmergente ventanaEmergente = new VentanaEmergente();
     private Minuta minutaSeleccionada = null;
-    private Integer idReunion;
+    private Reunion reunion;
     private String fechaReunion;
 
     public void initialize() {
@@ -82,7 +82,7 @@ public class MinutaController extends NavegacionController {
         tvMinutasDeLaReunion.setOnMouseClicked(this::seleccionarMinuta);
         // Bloquear inputs
         bloquearInputs(true);
-        System.out.println(idReunion);
+        rellenarTabla(reunion);
 
     }
 
@@ -116,7 +116,7 @@ public class MinutaController extends NavegacionController {
                 // Bloquear inputs
                 bloquearInputs(true);
 
-                rellenarTabla(idReunion);
+                initialize();
             }
         } else {
             // Mostrar mensaje de que no se puede editar una minuta ya cargada
@@ -135,20 +135,23 @@ public class MinutaController extends NavegacionController {
         this.fechaReunion = reunionFecha;
     }
 
-    public void setReunionId(int reunionId) {
-        this.idReunion = reunionId;
-        lbIdReunion.setText(idReunion.toString());
-        rellenarTabla(idReunion);
+    public void setReunion(Reunion reunion) {
+        this.reunion = reunion;
+        if (reunion != null) {
+            setFechaReunion(reunion.getFecha().toString());
+            lbIdReunion.setText(String.valueOf(reunion.getId()));
+            lbReunionFecha.setText(fechaReunion);
+        }
     }
 
-    private void rellenarTabla(int reunionId) {
-        Reunion reunion = reunionServicio.buscarPorId(reunionId);
-        setFechaReunion(reunion.getFecha().toString());
+    private void rellenarTabla(Reunion reunion) {
         if (reunion != null) {
             List<Minuta> minutas = reunion.getMinutas();
             ObservableList<Minuta> listaMinutas = FXCollections.observableArrayList(minutas);
             tvMinutasDeLaReunion.setItems(listaMinutas);
             System.out.println(listaMinutas);
+            System.out.println(reunion);
+
         }
     }
 
@@ -157,6 +160,7 @@ public class MinutaController extends NavegacionController {
         // Obtener la minuta seleccionada
         if (tvMinutasDeLaReunion.getSelectionModel().getSelectedItem() != null) {
             minutaSeleccionada = tvMinutasDeLaReunion.getSelectionModel().getSelectedItem();
+            System.out.println(minutaSeleccionada.getTema());
             lbIdMinuta.setText(String.valueOf(minutaSeleccionada.getId()));
             lbIdExpediente.setText(String.valueOf(minutaSeleccionada.getExpediente().getId()));
             lbReunionFecha.setText(fechaReunion);

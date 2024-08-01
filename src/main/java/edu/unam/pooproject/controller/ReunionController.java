@@ -497,7 +497,6 @@ public class ReunionController extends NavegacionController {
         reunion.setMinutas(listaMinutas);
         reunionServicio.editarReunion(reunion);
 
-        asistenciaServicio.crearAsistencia(reunion, lstMiembros.getItems());
         ventana.mostrarExito("La Reunion fue cargada con exito!");
         limpiarCampos();
         initialize();
@@ -511,8 +510,8 @@ public class ReunionController extends NavegacionController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/minuta-view.fxml"));
                 Parent root = loader.load();
                 MinutaController minutaController = loader.getController();
-                minutaController.setReunionId(reunionSeleccionada.getId());
-
+                minutaController.setReunion(reunionSeleccionada); // Pasar la reunión
+                System.out.println(reunionSeleccionada);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();

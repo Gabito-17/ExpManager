@@ -216,6 +216,7 @@
                                                 <Font size="11.0" />
                                             </font>
                                         </Label>
+                              <Button fx:id="btnEliminarExpediente" layoutX="16.0" layoutY="225.0" mnemonicParsing="false" onAction="#eliminarExpediente" text="Eliminar Expediente" />
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -311,7 +312,6 @@
                                         <Button fx:id="btnCargar" layoutX="620.0" layoutY="334.0" mnemonicParsing="false" onAction="#cargarExpediente" text="Cargar" />
                                         <Button fx:id="btnLimpiar" layoutX="436.0" layoutY="334.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar Campos" />
                                         <Button fx:id="btnEditar" layoutX="558.0" layoutY="334.0" mnemonicParsing="false" onAction="#editarExpediente" text="Editar" />
-                                        <Button fx:id="btnEliminarExpediente" layoutX="24.0" layoutY="334.0" mnemonicParsing="false" onAction="#eliminarExpediente" text="Eliminar Expediente" />
                                     </children>
                                 </AnchorPane>
                             </content>
