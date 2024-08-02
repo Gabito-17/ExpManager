@@ -73,10 +73,10 @@ public class MiembroController extends NavegacionController {
     }
 
     private void rellenarTabla() {
-        // Obtener todas las personas de la base de datos a través del servicio
+        // Obtener todos los miembros de la base de datos a través del servicio
         List<Persona> miembros = personaServicio.obtenerMiembros();
 
-        // Convertir la lista de personas en una ObservableList
+        // Convertir la lista de miembros en una ObservableList
         ObservableList<Persona> listamiembros = FXCollections.observableArrayList(miembros);
 
         // Asignar la lista de personas al TableView
