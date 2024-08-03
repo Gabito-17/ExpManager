@@ -1,4 +1,4 @@
-# PooProject
+# ExpManager
 
 ## Descripción
 ExpManager es una aplicación de gestión de expedientes, miembros de un consejo y reuniones, desarrollada en Java utilizando JavaFX para la interfaz gráfica y Hibernate para la conexión a una base de datos PostgreSQL. La aplicación permite registrar y gestionar expedientes, miembros, reuniones, minutas de reuniones y las acciones tomadas en los expedientes.
