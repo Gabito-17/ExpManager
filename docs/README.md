@@ -25,7 +25,7 @@ ExpManager es una aplicación de gestión de expedientes, miembros de un consejo
 ### Pasos
 1. Clona este repositorio:
     ```sh
-    git clone https://github.com/XGabito12/PooProject.git
+    git clone https://github.com/Gabito-17/ExpManager.gita
     ```
 2. Configura la base de datos PostgreSQL con las siguientes credenciales:
     - Usuario: `postgres`
